@@ -5,76 +5,40 @@
     <title>My Portfolio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     
-    <style>
-        /* Basic flexbox layout for the main container */
-        .container {
-            display: flex;
-            height: 100vh;
-        }
-
-        /* Styles for the left-side navigation menu */
-        .left-menu {
-            width: 250px;
-            padding: 20px;
-            background-color: #f0f0f0;
-        }
-
-        .left-menu h1 {
-            margin-top: 0;
-            margin-bottom: 20px;
-        }
-
-        .left-menu nav ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .left-menu nav ul li {
-            margin-bottom: 10px;
-        }
-
-        .left-menu nav ul li a {
-            text-decoration: none;
-            color: #333;
-        }
-
-        /* Styles for the right-side image content */
-        .right-content {
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .right-content img {
-            max-width: 100%;
-            height: auto;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="container">
+    <div id="wrapper">
         
-        <div class="left-menu">
-            <h1><a href="/">Logo</a></h1>
+        <div id="index">
+            <h1><a href="/">My Portfolio</a></h1>
             <nav>
                 <ul>
-                    <li><a href="#work">Work</a></li>
                     <li><a href="#about">About</a></li>
+                    <li><a href="#work">Work</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
         </div>
         
-        <div class="right-content">
-            <img src="https://drive.google.com/uc?export=download&id=1mEL2SsjMziiTJry9eE2bwNUgpCQFzX5H" alt="Sample Image">
+        <div id="exhibit">
+            <h2>About</h2>
+            <p>This is my new website based on the Indexhibit layout.</p>
+
+            <h3>My Work</h3>
+            <img src="https://images.unsplash.com/photo-1579783902674-c6a9926d21e3" alt="A photo of a person painting" style="max-width: 100%;">
+
+            <iframe width="560" height="315" src="YOUR_YOUTUBE_EMBED_LINK_HERE" frameborder="0" allowfullscreen></iframe>
         </div>
 
     </div>
+
+    <script src="script.js"></script>
 
 </body>
 </html>
