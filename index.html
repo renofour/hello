@@ -5,9 +5,10 @@
     <title>My Portfolio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" href="style.css">
-    
-    <style>
+        <style>
+        body {
+            margin: 0;
+        }
         /* Basic flexbox layout for the main container */
         .container {
             display: flex;
@@ -47,12 +48,12 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
-            box-sizing: border-box; /* Ensures padding is included in width */
+            box-sizing: border-box;
         }
 
         .video-wrapper {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            padding-bottom: 56.25%;
             height: 0;
             max-width: 100%;
         }
