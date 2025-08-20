@@ -1,0 +1,70 @@
+/* Basic flexbox layout for the main container */
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Styles for the left-side navigation menu */
+.left-menu {
+    width: 60px; /* Minimal width */
+    transition: width 0.3s ease; /* Smooth transition */
+    padding: 20px;
+    background-color: #ffffff;
+    overflow: hidden; /* Hide content that overflows when collapsed */
+    position: relative;
+}
+
+/* Active state for the menu */
+.left-menu.active {
+    width: 250px; /* Expanded width */
+}
+
+.left-menu h1,
+.left-menu nav {
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.left-menu h1 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.left-menu nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.left-menu nav ul li {
+    margin-bottom: 10px;
+}
+
+.left-menu nav ul li a {
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    align-items: center;
+}
+
+.menu-toggle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Styles for the right-side image content */
+.right-content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.right-content img {
+    max-width: 100%;
+    height: auto;
+}
