@@ -12,14 +12,15 @@
       height: 100vh;
     }
 
-    /* Sidebar */
+    /* Sidebar default (open) */
     .left-menu {
       width: 250px;
-      padding: 20px;
       background-color: #ffffff;
-      transition: width 0.3s ease, opacity 0.3s ease;
+      transition: width 0.3s ease, padding 0.3s ease, opacity 0.3s ease;
       overflow: hidden;
       position: relative;
+      padding: 20px;
+      box-sizing: border-box;
     }
 
     /* Collapsed = hidden */
@@ -58,7 +59,7 @@
       position: relative;
     }
 
-    /* Logo in main content */
+    /* Logo */
     .right-content .logo {
       margin-bottom: 20px;
     }
@@ -69,7 +70,7 @@
       display: block;
     }
 
-    /* Video embed */
+    /* Video */
     .right-content iframe {
       width: 100%;
       height: 600px;
@@ -151,4 +152,25 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const menu = document.getElementById('menu');
-      const menuToggle = document.getElementById('me
+      const menuToggle = document.getElementById('menuToggle');
+
+      function syncButton() {
+        if (menu.classList.contains('collapsed')) {
+          menuToggle.classList.remove('active'); // hamburger
+        } else {
+          menuToggle.classList.add('active'); // X
+        }
+      }
+
+      // Initial state
+      syncButton();
+
+      // Toggle on click
+      menuToggle.addEventListener('click', () => {
+        menu.classList.toggle('collapsed');
+        syncButton();
+      });
+    });
+  </script>
+</body>
+</html>
