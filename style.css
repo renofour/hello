@@ -45,6 +45,16 @@
     align-items: center;
 }
 
+/* Hide the full word by default */
+.left-menu nav ul li a span {
+    display: none;
+}
+
+/* Show the full word when the menu is active */
+.left-menu.active nav ul li a span {
+    display: inline;
+}
+
 .menu-toggle {
     position: absolute;
     top: 10px;
