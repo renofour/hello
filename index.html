@@ -20,6 +20,9 @@
       transition: width 0.3s ease;
       overflow: hidden;
       position: relative;
+
+      display: flex;
+      flex-direction: column;
     }
 
     .left-menu.collapsed {
@@ -27,6 +30,8 @@
     }
 
     .left-menu nav {
+      margin-top: auto;       /* pushes nav to the bottom */
+      margin-bottom: 40px;    /* optional: spacing from bottom */
       transition: opacity 0.3s ease;
     }
 
@@ -55,7 +60,7 @@
       flex-grow: 1;
       display: flex;
       flex-direction: column;
-      align-items: flex-start; /* align logo left */
+      align-items: flex-start; /* logo aligns left */
       padding: 20px;
       position: relative;
     }
@@ -114,43 +119,4 @@
   <div class="container">
     <!-- Hamburger -->
     <button class="menu-toggle" id="menuToggle">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </button>
-
-    <!-- Sidebar -->
-    <div class="left-menu" id="menu">
-      <nav>
-        <ul>
-          <li><a href="#work">Work</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-
-    <!-- Main content -->
-    <div class="right-content">
-      <div class="logo">
-        <a href="/">
-          <img src="NYXum_logo_blood2.png" alt="NYXum Logo">
-        </a>
-      </div>
-      <img class="main-image" src="https://hips.hearstapps.com/toc.h-cdn.co/assets/16/14/1459816624-1954-mercedes-300sl-gullwing-a.jpg?crop=0.9197461739455021xw:1xh;center,top&resize=2048:*" alt="Sample Image">
-    </div>
-  </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const menu = document.getElementById('menu');
-      const menuToggle = document.getElementById('menuToggle');
-
-      menuToggle.addEventListener('click', () => {
-        menu.classList.toggle('collapsed');
-        menuToggle.classList.toggle('active');
-      });
-    });
-  </script>
-</body>
-</html>
+      <span class="b
