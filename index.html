@@ -1,188 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   <title>My Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    /* Layout */
-    .container {
-      display: flex;
-      height: 100vh;
+    :root{
+      --menu-open: 250px;
+      --menu-collapsed: 60px;
+      --pad: 20px;
     }
+
+    /* Layout */
+    .container{ display:flex; height:100vh; }
 
     /* Sidebar */
-    .left-menu {
-      width: 60px; /* closed by default */
-      padding: 20px 10px;
-      background-color: #ffffff;
-      transition: width 0.3s ease;
-      overflow: hidden;
-      position: relative;
+    .left-menu{
+      width: var(--menu-collapsed);      /* closed by default */
+      padding: var(--pad) 10px;          /* slim strip under hamburger */
+      background:#fff;
+      transition: width .3s ease, padding .3s ease;
+      overflow:hidden;
+      position:relative;
+      box-sizing:border-box;
+    }
+    .left-menu.expanded{
+      width: var(--menu-open);
+      padding: var(--pad);
     }
 
-    .left-menu.expanded {
-      width: 250px;
-      padding: 20px;
+    /* Hide nav when closed */
+    .left-menu nav{
+      margin-top:100px;
+      opacity:0;
+      display:none;
+      transition: opacity .2s ease;
+    }
+    .left-menu.expanded nav{
+      display:block;
+      opacity:1;
     }
 
-    .left-menu nav {
-      transition: opacity 0.3s ease;
-      margin-top: 100px; /* push links lower */
+    .left-menu ul{ list-style:none; padding:0; margin:0; }
+    .left-menu li{ margin-bottom:10px; }
+
+    /* Buttons as menu items (no navigation) */
+    .menu-btn{
+      background:none; border:none; padding:5px 0; width:100%;
+      text-align:left; cursor:pointer; color:#333; font:inherit; display:inline-block;
+      user-select:none;
     }
 
-    .left-menu nav ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .left-menu nav ul li {
-      margin-bottom: 10px;
-    }
-
-    .left-menu nav ul li a {
-      text-decoration: none;
-      color: #333;
-      cursor: pointer;
-    }
-
-    /* Dropdown */
-    .dropdown {
-      display: none;
-      margin-top: 5px;
-      font-size: 14px;
-      line-height: 1.4;
-      color: #555;
-    }
-
-    .has-dropdown.open .dropdown {
-      display: block;
-    }
-
-    /* Chevron indicator for dropdowns */
-    .has-dropdown .menu-btn::after {
-      content: "▸";
-      display: inline-block;
-      margin-left: 3px; /* closer to word */
+    /* Chevron right next to text */
+    .has-dropdown .menu-btn::after{
+      content:"▸";
+      display:inline-block;
+      margin-left:3px;       /* close to word */
       transition: transform .2s ease;
     }
-    .has-dropdown.open .menu-btn::after {
-      transform: rotate(90deg);
+    .has-dropdown.open .menu-btn::after{ transform: rotate(90deg); }
+
+    /* Dropdown content */
+    .dropdown{
+      display:none;
+      margin-top:6px;
+      padding-left:10px;
+      font-size:13px; line-height:1.4; color:#444;
     }
+    .has-dropdown.open .dropdown{ display:block; }
 
     /* Main content */
-    .right-content {
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 20px;
-      position: relative;
-      margin-right: 60px; /* match closed sidebar space */
+    .right-content{
+      flex-grow:1; display:flex; flex-direction:column; align-items:flex-start;
+      padding:20px; position:relative;
+      margin-right: var(--menu-collapsed);   /* balance with closed strip */
+      box-sizing:border-box; overflow-y:auto;
     }
+    .right-content .logo{ margin-bottom:20px; }
+    .right-content .logo img{ width:100px; height:auto; display:block; }
+    .right-content iframe{ width:100%; height:600px; border:none; }
 
-    /* Logo in main content */
-    .right-content .logo {
-      margin-bottom: 20px;
+    /* Hamburger */
+    .menu-toggle{
+      position:absolute; top:20px; left:20px;
+      background:none; border:none; cursor:pointer; padding:10px; z-index:1000;
     }
-
-    .right-content .logo img {
-      width: 100px;
-      height: auto;
-      display: block;
+    .menu-toggle .bar{
+      display:block; width:25px; height:3px; background:#333; margin:5px 0; transition:.4s;
     }
-
-    /* Video embed */
-    .right-content iframe {
-      width: 100%;
-      height: 600px;
-      border: none;
-    }
-
-    /* Hamburger button */
-    .menu-toggle {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 10px;
-      z-index: 1000;
-    }
-
-    .menu-toggle .bar {
-      display: block;
-      width: 25px;
-      height: 3px;
-      background-color: #333;
-      margin: 5px 0;
-      transition: 0.4s;
-    }
-
-    /* Animate hamburger → X */
-    .menu-toggle.active .bar:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-    .menu-toggle.active .bar:nth-child(2) {
-      opacity: 0;
-    }
-    .menu-toggle.active .bar:nth-child(3) {
-      transform: rotate(-45deg) translate(6px, -6px);
-    }
+    /* Hamburger → X */
+    .menu-toggle.active .bar:nth-child(1){ transform: rotate(45deg) translate(5px,5px); }
+    .menu-toggle.active .bar:nth-child(2){ opacity:0; }
+    .menu-toggle.active .bar:nth-child(3){ transform: rotate(-45deg) translate(6px,-6px); }
   </style>
 </head>
 <body>
-
   <div class="container">
     <!-- Hamburger -->
-    <button class="menu-toggle" id="menuToggle">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
     </button>
 
-    <!-- Sidebar -->
-    <div class="left-menu" id="menu">
+    <!-- Sidebar (closed by default) -->
+    <aside class="left-menu" id="menu">
       <nav>
         <ul>
-          <li><a href="#work">Work</a></li>
+          <li><button type="button" class="menu-btn" id="workBtn">Work</button></li>
 
           <li class="has-dropdown" id="aboutItem">
-            <a class="menu-btn" id="aboutBtn">About</a>
-            <div class="dropdown" id="aboutDropdown">
+            <button type="button" class="menu-btn" aria-expanded="false">About</button>
+            <div class="dropdown">
               Shohei Shohei Shigematsu is a partner at OMA based out of the New York office, who leads the firm’s diverse portfolio in the Americas and Japan. Sho is responsible for delivering a number of cultural projects across North America, including Milstein Hall, an extension to the College of Architecture, Art and Planning at Cornell University; a new museum for the Musée national des beaux-arts du Québec; the Faena Forum, a multi-purpose venue in Miami Beach; the renovation and reimagination of Sotheby’s Headquarters in New York; the recently completed Audrey Irmas Pavilion, a new event and gathering space extension for the Wilshire Boulevard Temple in Los Angeles; and new design galleries and studio for the Denver Art Museum.
             </div>
           </li>
 
           <li class="has-dropdown" id="contactItem">
-            <a class="menu-btn" id="contactBtn">Contact</a>
-            <div class="dropdown" id="contactDropdown">
+            <button type="button" class="menu-btn" aria-expanded="false">Contact</button>
+            <div class="dropdown">
               Shohei Shohei Shigematsu is a partner at OMA based out of the New York office, who leads the firm’s diverse portfolio in the Americas and Japan. Sho is responsible for delivering a number of cultural projects across North America, including Milstein Hall, an extension to the College of Architecture, Art and Planning at Cornell University; a new museum for the Musée national des beaux-arts du Québec; the Faena Forum, a multi-purpose venue in Miami Beach; the renovation and reimagination of Sotheby’s Headquarters in New York; the recently completed Audrey Irmas Pavilion, a new event and gathering space extension for the Wilshire Boulevard Temple in Los Angeles; and new design galleries and studio for the Denver Art Museum.
             </div>
           </li>
         </ul>
       </nav>
-    </div>
+    </aside>
 
     <!-- Main content -->
-    <div class="right-content">
+    <main class="right-content">
       <div class="logo">
-        <a href="/">
-          <img src="NYXum_logo_blood2.png" alt="NYXum Logo">
-        </a>
+        <a href="/"><img src="NYXum_logo_blood2.png" alt="NYXum Logo" /></a>
       </div>
-
-      <!-- Embedded YouTube video -->
-      <iframe 
-        src="https://www.youtube.com/embed/g_qWhdxiR7k" 
-        title="YouTube video player" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen>
-      </iframe>
-    </div>
+      <iframe
+        src="https://www.youtube.com/embed/g_qWhdxiR7k"
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    </main>
   </div>
 
   <script>
@@ -190,18 +142,50 @@
       const menu = document.getElementById('menu');
       const menuToggle = document.getElementById('menuToggle');
 
-      // open/close sidebar
+      function setExpanded(isExpanded){
+        menu.classList.toggle('expanded', isExpanded);
+        menuToggle.classList.toggle('active', isExpanded);
+        menuToggle.setAttribute('aria-expanded', String(isExpanded));
+
+        // When closing the menu, also close any open dropdowns
+        if (!isExpanded){
+          menu.querySelectorAll('.has-dropdown').forEach(li => li.classList.remove('open'));
+          menu.querySelectorAll('.has-dropdown .menu-btn').forEach(btn => btn.setAttribute('aria-expanded','false'));
+        }
+      }
+
+      // Start collapsed
+      setExpanded(false);
+
+      // Toggle sidebar
       menuToggle.addEventListener('click', () => {
-        menu.classList.toggle('expanded');
-        menuToggle.classList.toggle('active');
+        const isOpen = menu.classList.contains('expanded');
+        setExpanded(!isOpen);
       });
 
-      // dropdown toggles
-      const dropdownButtons = document.querySelectorAll('.has-dropdown .menu-btn');
-      dropdownButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          btn.parentElement.classList.toggle('open');
+      // Dropdown toggles (only when menu is open)
+      menu.addEventListener('click', (e) => {
+        const btn = e.target.closest('.has-dropdown .menu-btn');
+        if (!btn) return;
+
+        // ensure menu is open
+        if (!menu.classList.contains('expanded')) {
+          setExpanded(true);
+        }
+
+        const item = btn.closest('.has-dropdown');
+        const willOpen = !item.classList.contains('open');
+
+        // close others
+        menu.querySelectorAll('.has-dropdown').forEach(li => {
+          li.classList.remove('open');
+          const b = li.querySelector('.menu-btn');
+          if (b) b.setAttribute('aria-expanded','false');
         });
+
+        // toggle clicked
+        item.classList.toggle('open', willOpen);
+        btn.setAttribute('aria-expanded', String(willOpen));
       });
     });
   </script>
