@@ -6,60 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" href="style.css">
-    
-    <style>
-        /* Basic flexbox layout for the main container */
-        .container {
-            display: flex;
-            height: 100vh;
-        }
-
-        /* Styles for the left-side navigation menu */
-        .left-menu {
-            width: 250px;
-            padding: 20px;
-            background-color: #ffffff;
-        }
-
-        .left-menu h1 {
-            margin-top: 0;
-            margin-bottom: 20px;
-        }
-
-        .left-menu nav ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .left-menu nav ul li {
-            margin-bottom: 10px;
-        }
-
-        .left-menu nav ul li a {
-            text-decoration: none;
-            color: #333;
-        }
-
-        /* Styles for the right-side image content */
-        .right-content {
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .right-content img {
-            max-width: 100%;
-            height: auto;
-        }
-    </style>
 </head>
 <body>
 
     <div class="container">
         
-        <div class="left-menu">
+        <div class="left-menu" id="side-menu">
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
             <h1><a href="/">
                 <img src="NYXum_logo_blood2.png" alt="NYXum Logo" width="150" style="max-width: 100%;">
             </a></h1>
@@ -78,5 +31,6 @@
 
     </div>
 
+    <script src="script.js"></script>
 </body>
 </html>
