@@ -16,16 +16,15 @@
     .left-menu {
       width: 250px;
       background-color: #ffffff;
-      transition: width 0.3s ease;
-      overflow: hidden;
+      transition: width 0.3s ease, padding 0.3s ease;
+      overflow-x: hidden;
       position: relative;
       box-sizing: border-box;
       padding: 20px;
     }
 
-    /* Collapsed = slim white strip */
     .left-menu.collapsed {
-      width: 60px;   /* keep white space under hamburger */
+      width: 60px;
       padding: 20px 5px;
     }
 
@@ -48,11 +47,29 @@
 
     .left-menu nav ul li {
       margin-bottom: 10px;
+      position: relative;
     }
 
     .left-menu nav ul li a {
       text-decoration: none;
       color: #333;
+      cursor: pointer;
+      display: block;
+      padding: 5px 0;
+    }
+
+    /* Dropdown content inside menu */
+    .dropdown {
+      display: none;
+      font-size: 13px;
+      color: #444;
+      padding-left: 10px;
+      margin-top: 5px;
+      line-height: 1.4;
+    }
+
+    .dropdown.active {
+      display: block;
     }
 
     /* Main content */
@@ -63,8 +80,9 @@
       align-items: flex-start;
       padding: 20px;
       position: relative;
-      margin-right: 60px; /* balance space on right side */
+      margin-right: 60px; /* balance right side */
       box-sizing: border-box;
+      overflow-y: auto;
     }
 
     .right-content .logo {
@@ -128,54 +146,3 @@
 
     <!-- Sidebar (collapsed by default) -->
     <div class="left-menu collapsed" id="menu">
-      <nav>
-        <ul>
-          <li><a href="#work">Work</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-
-    <!-- Main content -->
-    <div class="right-content">
-      <div class="logo">
-        <a href="/">
-          <img src="NYXum_logo_blood2.png" alt="NYXum Logo">
-        </a>
-      </div>
-
-      <iframe 
-        src="https://www.youtube.com/embed/g_qWhdxiR7k" 
-        title="YouTube video player" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen>
-      </iframe>
-    </div>
-  </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const menu = document.getElementById('menu');
-      const menuToggle = document.getElementById('menuToggle');
-
-      function syncButton() {
-        if (menu.classList.contains('collapsed')) {
-          menuToggle.classList.remove('active'); // hamburger
-        } else {
-          menuToggle.classList.add('active'); // X
-        }
-      }
-
-      // Start collapsed → hamburger
-      syncButton();
-
-      // Toggle on click
-      menuToggle.addEventListener('click', () => {
-        menu.classList.toggle('collapsed');
-        syncButton();
-      });
-    });
-  </script>
-</body>
-</html>
