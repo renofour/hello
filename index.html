@@ -14,22 +14,22 @@
 
     /* Sidebar */
     .left-menu {
-      width: 250px;
-      padding: 20px;
+      width: 60px; /* closed by default */
+      padding: 20px 10px;
       background-color: #ffffff;
-      transition: width 0.3s ease, padding 0.3s ease;
-      overflow-y: auto;
+      transition: width 0.3s ease;
+      overflow: hidden;
       position: relative;
     }
 
-    .left-menu.collapsed {
-      width: 60px;
-      padding: 20px 10px;
+    .left-menu.expanded {
+      width: 250px;
+      padding: 20px;
     }
 
     .left-menu nav {
       transition: opacity 0.3s ease;
-      margin-top: 100px; /* push links a bit lower */
+      margin-top: 100px; /* push links lower */
     }
 
     .left-menu nav ul {
@@ -48,15 +48,16 @@
       cursor: pointer;
     }
 
-    /* Dropdown content */
+    /* Dropdown */
     .dropdown {
       display: none;
-      font-size: 0.9em;
-      color: #444;
-      margin: 8px 0 12px 10px;
+      margin-top: 5px;
+      font-size: 14px;
+      line-height: 1.4;
+      color: #555;
     }
 
-    .dropdown.open {
+    .has-dropdown.open .dropdown {
       display: block;
     }
 
@@ -64,7 +65,7 @@
     .has-dropdown .menu-btn::after {
       content: "▸";
       display: inline-block;
-      margin-left: 6px; /* closer to the word */
+      margin-left: 3px; /* closer to word */
       transition: transform .2s ease;
     }
     .has-dropdown.open .menu-btn::after {
@@ -76,10 +77,10 @@
       flex-grow: 1;
       display: flex;
       flex-direction: column;
-      align-items: flex-start; /* align logo left */
+      align-items: flex-start;
       padding: 20px;
       position: relative;
-      margin-right: 60px; /* match collapsed sidebar width */
+      margin-right: 60px; /* match closed sidebar space */
     }
 
     /* Logo in main content */
@@ -88,7 +89,7 @@
     }
 
     .right-content .logo img {
-      width: 100px;  /* adjust as needed */
+      width: 100px;
       height: auto;
       display: block;
     }
@@ -96,7 +97,7 @@
     /* Video embed */
     .right-content iframe {
       width: 100%;
-      height: 600px; /* adjust height as needed */
+      height: 600px;
       border: none;
     }
 
@@ -144,20 +145,20 @@
     </button>
 
     <!-- Sidebar -->
-    <div class="left-menu collapsed" id="menu">
+    <div class="left-menu" id="menu">
       <nav>
         <ul>
           <li><a href="#work">Work</a></li>
 
           <li class="has-dropdown" id="aboutItem">
-            <a class="menu-btn">About</a>
+            <a class="menu-btn" id="aboutBtn">About</a>
             <div class="dropdown" id="aboutDropdown">
               Shohei Shohei Shigematsu is a partner at OMA based out of the New York office, who leads the firm’s diverse portfolio in the Americas and Japan. Sho is responsible for delivering a number of cultural projects across North America, including Milstein Hall, an extension to the College of Architecture, Art and Planning at Cornell University; a new museum for the Musée national des beaux-arts du Québec; the Faena Forum, a multi-purpose venue in Miami Beach; the renovation and reimagination of Sotheby’s Headquarters in New York; the recently completed Audrey Irmas Pavilion, a new event and gathering space extension for the Wilshire Boulevard Temple in Los Angeles; and new design galleries and studio for the Denver Art Museum.
             </div>
           </li>
 
           <li class="has-dropdown" id="contactItem">
-            <a class="menu-btn">Contact</a>
+            <a class="menu-btn" id="contactBtn">Contact</a>
             <div class="dropdown" id="contactDropdown">
               Shohei Shohei Shigematsu is a partner at OMA based out of the New York office, who leads the firm’s diverse portfolio in the Americas and Japan. Sho is responsible for delivering a number of cultural projects across North America, including Milstein Hall, an extension to the College of Architecture, Art and Planning at Cornell University; a new museum for the Musée national des beaux-arts du Québec; the Faena Forum, a multi-purpose venue in Miami Beach; the renovation and reimagination of Sotheby’s Headquarters in New York; the recently completed Audrey Irmas Pavilion, a new event and gathering space extension for the Wilshire Boulevard Temple in Los Angeles; and new design galleries and studio for the Denver Art Museum.
             </div>
@@ -189,20 +190,17 @@
       const menu = document.getElementById('menu');
       const menuToggle = document.getElementById('menuToggle');
 
-      // Hamburger toggle
+      // open/close sidebar
       menuToggle.addEventListener('click', () => {
-        menu.classList.toggle('collapsed');
+        menu.classList.toggle('expanded');
         menuToggle.classList.toggle('active');
       });
 
-      // Dropdowns
-      document.querySelectorAll('.has-dropdown .menu-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          const parent = btn.parentElement;
-          parent.classList.toggle('open');
-          const dropdown = parent.querySelector('.dropdown');
-          dropdown.classList.toggle('open');
+      // dropdown toggles
+      const dropdownButtons = document.querySelectorAll('.has-dropdown .menu-btn');
+      dropdownButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          btn.parentElement.classList.toggle('open');
         });
       });
     });
