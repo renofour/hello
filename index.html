@@ -1,136 +1,150 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>My Portfolio</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="stylesheet" href="style.css">
-    
-    <style>
-        /* Basic flexbox layout for the main container */
-        .container {
-            display: flex;
-            height: 100vh;
-        }
+  <meta charset="utf-8">
+  <title>My Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        /* Styles for the left-side navigation menu */
-        .left-menu {
-            width: 250px;
-            padding: 20px;
-            background-color: #ffffff;
-            transition: width 0.3s ease; /* Adds a smooth transition */
-            overflow: hidden;
-        }
+  <style>
+    /* Basic flexbox layout */
+    .container {
+      display: flex;
+      height: 100vh;
+    }
 
-        .left-menu.collapsed {
-            width: 60px; /* Smaller width when collapsed */
-        }
+    /* Sidebar */
+    .left-menu {
+      width: 250px;
+      padding: 20px;
+      background-color: #ffffff;
+      transition: width 0.3s ease;
+      overflow: hidden;
+      position: relative;
+    }
 
-        .left-menu h1,
-        .left-menu nav {
-            transition: opacity 0.3s ease;
-            opacity: 1;
-        }
+    .left-menu.collapsed {
+      width: 60px;
+    }
 
-        .left-menu.collapsed h1,
-        .left-menu.collapsed nav {
-            opacity: 0; /* Hides text when collapsed */
-        }
+    .left-menu h1,
+    .left-menu nav {
+      transition: opacity 0.3s ease;
+    }
 
-        .left-menu h1 {
-            margin-top: 0;
-            margin-bottom: 20px;
-        }
+    .left-menu.collapsed h1,
+    .left-menu.collapsed nav {
+      opacity: 0;
+      pointer-events: none;
+    }
 
-        .left-menu nav ul {
-            list-style: none;
-            padding: 0;
-        }
+    .left-menu h1 {
+      margin: 0 0 20px;
+    }
 
-        .left-menu nav ul li {
-            margin-bottom: 10px;
-        }
+    .left-menu nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
 
-        .left-menu nav ul li a {
-            text-decoration: none;
-            color: #333;
-        }
+    .left-menu nav ul li {
+      margin-bottom: 10px;
+    }
 
-        /* Styles for the right-side image content */
-        .right-content {
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+    .left-menu nav ul li a {
+      text-decoration: none;
+      color: #333;
+    }
 
-        .right-content img {
-            max-width: 100%;
-            height: auto;
-        }
-        
-        /* New styles for the hamburger button */
-        .menu-toggle {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            z-index: 10;
-        }
+    /* Content */
+    .right-content {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
 
-        .menu-toggle .bar {
-            display: block;
-            width: 25px;
-            height: 3px;
-            background-color: #333;
-            margin: 5px 0;
-            transition: 0.4s;
-        }
-    </style>
+    .right-content img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Hamburger button */
+    .menu-toggle {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      z-index: 1000;
+    }
+
+    .menu-toggle .bar {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background-color: #333;
+      margin: 5px 0;
+      transition: 0.4s;
+    }
+
+    /* Animate hamburger → X */
+    .menu-toggle.active .bar:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .menu-toggle.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle.active .bar:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+  </style>
 </head>
 <body>
 
-    <div class="container">
-        <button class="menu-toggle">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </button>
-        
-        <div class="left-menu collapsed" id="menu">
-            <h1><a href="/">
-                <img src="NYXum_logo_blood2.png" alt="NYXum Logo" width="150" style="max-width: 100%;">
-            </a></h1>
-            <nav>
-                <ul>
-                    <li><a href="#work">Work</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-        
-        <div class="right-content">
-            <img src="https://hips.hearstapps.com/toc.h-cdn.co/assets/16/14/1459816624-1954-mercedes-300sl-gullwing-a.jpg?crop=0.9197461739455021xw:1xh;center,top&resize=2048:*" alt="Sample Image">
-        </div>
+  <div class="container">
+    <!-- Hamburger button -->
+    <button class="menu-toggle" id="menuToggle">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
 
-    </div>
+    <!-- Sidebar -->
+    <div class="left-menu" id="menu">
+      <h1>
+        <a href="/">
+          <img src="NYXum_logo_blood2.png" alt="NYXum Logo" width="150" style="max-width:100%;">
+        </a>
+      </h1>
+      <nav>
+        <ul>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const menu = document.getElementById('menu');
-            const menuToggle = document.querySelector('.menu-toggle');
+    <!-- Main content -->
+    <div class="right-content">
+      <img src="https://hips.hearstapps.com/toc.h-cdn.co/assets/16/14/1459816624-1954-mercedes-300sl-gullwing-a.jpg?crop=0.9197461739455021xw:1xh;center,top&resize=2048:*" alt="Sample Image">
+    </div>
+  </div>
 
-            menuToggle.addEventListener('click', () => {
-                menu.classList.toggle('collapsed');
-            });
-        });
-    </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const menu = document.getElementById('menu');
+      const menuToggle = document.getElementById('menuToggle');
 
+      menuToggle.addEventListener('click', () => {
+        menu.classList.toggle('collapsed');
+        menuToggle.classList.toggle('active');
+      });
+    });
+  </script>
 </body>
 </html>
