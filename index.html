@@ -88,6 +88,9 @@
     .video-container {
       width: 100%;
       height: 600px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .video-container iframe {
@@ -99,17 +102,33 @@
     /* Work gallery */
     .work-gallery {
       display: flex;
-      justify-content: space-between;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 20px;
+      width: 100%;
       height: 100%;
     }
 
     .work-gallery img {
       object-fit: cover;
-      width: 100%;
-      max-width: 32%;
+      flex: 1 1 calc(33.333% - 20px);
+      max-width: calc(33.333% - 20px);
       height: 100%;
       border-radius: 8px;
+    }
+
+    /* Responsive: stack images on smaller screens */
+    @media (max-width: 900px) {
+      .work-gallery img {
+        flex: 1 1 calc(50% - 20px);
+        max-width: calc(50% - 20px);
+      }
+    }
+    @media (max-width: 600px) {
+      .work-gallery img {
+        flex: 1 1 100%;
+        max-width: 100%;
+      }
     }
 
     /* Hamburger button */
