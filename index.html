@@ -17,23 +17,20 @@
       width: 250px;
       padding: 20px;
       background-color: #ffffff;
-      transition: width 0.3s ease;
+      transition: width 0.3s ease, opacity 0.3s ease;
       overflow: hidden;
       position: relative;
     }
 
+    /* Collapsed = hidden */
     .left-menu.collapsed {
-      width: 60px;
+      width: 0;
+      padding: 0;
+      opacity: 0;
     }
 
     .left-menu nav {
-      transition: opacity 0.3s ease;
       margin-top: 100px; /* push links lower */
-    }
-
-    .left-menu.collapsed nav {
-      opacity: 0;
-      pointer-events: none;
     }
 
     .left-menu nav ul {
@@ -56,7 +53,7 @@
       flex-grow: 1;
       display: flex;
       flex-direction: column;
-      align-items: flex-start; /* align logo left */
+      align-items: flex-start;
       padding: 20px;
       position: relative;
     }
@@ -154,26 +151,4 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const menu = document.getElementById('menu');
-      const menuToggle = document.getElementById('menuToggle');
-
-      // Sync button state with menu
-      function syncButton() {
-        if (menu.classList.contains('collapsed')) {
-          menuToggle.classList.remove('active'); // show hamburger
-        } else {
-          menuToggle.classList.add('active'); // show X
-        }
-      }
-
-      // Initial sync (menu starts collapsed → hamburger)
-      syncButton();
-
-      // Toggle on click
-      menuToggle.addEventListener('click', () => {
-        menu.classList.toggle('collapsed');
-        syncButton();
-      });
-    });
-  </script>
-</body>
-</html>
+      const menuToggle = document.getElementById('me
