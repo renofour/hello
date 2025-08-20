@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
-    /* Basic flexbox layout */
+    /* Layout */
     .container {
       display: flex;
       height: 100vh;
@@ -26,19 +26,13 @@
       width: 60px;
     }
 
-    .left-menu h1,
     .left-menu nav {
       transition: opacity 0.3s ease;
     }
 
-    .left-menu.collapsed h1,
     .left-menu.collapsed nav {
       opacity: 0;
       pointer-events: none;
-    }
-
-    .left-menu h1 {
-      margin: 0 0 20px;
     }
 
     .left-menu nav ul {
@@ -56,13 +50,17 @@
       color: #333;
     }
 
-    /* Content */
+    /* Main content */
     .right-content {
       flex-grow: 1;
       display: flex;
-      justify-content: center;
+      flex-direction: column; /* stack logo on top of image */
       align-items: center;
       padding: 20px;
+    }
+
+    .right-content h1 {
+      margin: 0 0 20px;
     }
 
     .right-content img {
@@ -106,7 +104,7 @@
 <body>
 
   <div class="container">
-    <!-- Hamburger button -->
+    <!-- Hamburger -->
     <button class="menu-toggle" id="menuToggle">
       <span class="bar"></span>
       <span class="bar"></span>
@@ -115,11 +113,6 @@
 
     <!-- Sidebar -->
     <div class="left-menu" id="menu">
-      <h1>
-        <a href="/">
-          <img src="NYXum_logo_blood2.png" alt="NYXum Logo" width="150" style="max-width:100%;">
-        </a>
-      </h1>
       <nav>
         <ul>
           <li><a href="#work">Work</a></li>
@@ -131,6 +124,11 @@
 
     <!-- Main content -->
     <div class="right-content">
+      <h1>
+        <a href="/">
+          <img src="NYXum_logo_blood2.png" alt="NYXum Logo" width="150" style="max-width:100%;">
+        </a>
+      </h1>
       <img src="https://hips.hearstapps.com/toc.h-cdn.co/assets/16/14/1459816624-1954-mercedes-300sl-gullwing-a.jpg?crop=0.9197461739455021xw:1xh;center,top&resize=2048:*" alt="Sample Image">
     </div>
   </div>
