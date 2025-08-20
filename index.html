@@ -5,97 +5,102 @@
   <title>My Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    :root{
+    :root {
       --menu-open: 250px;
       --menu-collapsed: 60px;
       --menu-pad: 20px;
     }
 
     /* Layout */
-    .container{ display:flex; height:100vh; }
+    .container { display: flex; height: 100vh; }
 
     /* Sidebar */
-    .left-menu{
+    .left-menu {
       width: var(--menu-open);
-      background:#fff;
+      background: #fff;
       transition: width .3s ease, padding .3s ease;
-      overflow:hidden;
-      position:relative;
-      box-sizing:border-box;
+      overflow: hidden;
+      position: relative;
+      box-sizing: border-box;
       padding: var(--menu-pad);
     }
-    .left-menu.collapsed{
+    .left-menu.collapsed {
       width: var(--menu-collapsed);
       padding: var(--menu-pad) 5px;
     }
 
-    .left-menu nav{ margin-top:100px; }
-    /* Hide the whole nav when collapsed so only the white strip shows */
-    .left-menu.collapsed nav{ display:none; }
-
-    .left-menu ul{ list-style:none; padding:0; margin:0; }
-    .left-menu li{ margin-bottom:10px; }
-
-    /* Details dropdowns in the menu */
-    .left-menu details{
-      background:transparent;
-      border-radius:8px;
-      padding:0;
+    .left-menu nav {
+      margin-top: 100px;
+      transition: opacity .2s ease;
     }
-    .left-menu summary{
-      list-style:none;
-      cursor:pointer;
-      padding:5px 0;
-      color:#333;
-      user-select:none;
+    /* Hide nav when collapsed so only white strip remains */
+    .left-menu.collapsed nav { display: none; }
+
+    .left-menu ul { list-style: none; padding: 0; margin: 0; }
+    .left-menu li { margin-bottom: 10px; position: relative; }
+
+    .menu-link {
+      text-decoration: none;
+      color: #333;
+      cursor: pointer;
+      display: block;
+      padding: 5px 0;
+      user-select: none;
     }
-    /* Remove default marker, add our own chevron */
-    .left-menu summary::-webkit-details-marker{ display:none; }
-    .left-menu summary::after{
-      content:"▸";
-      float:right;
+
+    /* Chevron indicator */
+    .has-dropdown .menu-link::after {
+      content: "▸";
+      float: right;
       transition: transform .2s ease;
     }
-    .left-menu details[open] summary::after{ transform: rotate(90deg); }
+    .has-dropdown.open .menu-link::after { transform: rotate(90deg); }
 
-    .dropdown{
-      font-size:13px;
-      color:#444;
-      padding-left:10px;
-      margin:5px 0 0;
-      line-height:1.4;
+    /* Dropdown content */
+    .dropdown {
+      font-size: 13px;
+      color: #444;
+      padding-left: 10px;
+      line-height: 1.4;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .3s ease;
+      margin-top: 5px;
+    }
+    .has-dropdown.open .dropdown {
+      max-height: 800px; /* big enough to reveal content */
     }
 
     /* Main content */
-    .right-content{
-      flex-grow:1;
-      display:flex;
-      flex-direction:column;
-      align-items:flex-start;
-      padding:20px;
-      position:relative;
-      margin-right: var(--menu-collapsed); /* balance right side with the collapsed width */
-      box-sizing:border-box;
-      overflow-y:auto;
+    .right-content {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 20px;
+      position: relative;
+      margin-right: var(--menu-collapsed); /* balance with collapsed strip */
+      box-sizing: border-box;
+      overflow-y: auto;
     }
-    .right-content .logo{ margin-bottom:20px; }
-    .right-content .logo img{ width:100px; height:auto; display:block; }
-    .right-content iframe{ width:100%; height:600px; border:none; }
+    .right-content .logo { margin-bottom: 20px; }
+    .right-content .logo img { width: 100px; height: auto; display: block; }
+    .right-content iframe { width: 100%; height: 600px; border: none; }
 
     /* Hamburger button */
-    .menu-toggle{
-      position:absolute;
-      top:20px; left:20px;
-      background:none; border:none; cursor:pointer;
-      padding:10px; z-index:1000;
+    .menu-toggle {
+      position: absolute;
+      top: 20px; left: 20px;
+      background: none; border: none; cursor: pointer;
+      padding: 10px; z-index: 1000;
     }
-    .menu-toggle .bar{
-      display:block; width:25px; height:3px; background:#333;
-      margin:5px 0; transition:.4s;
+    .menu-toggle .bar {
+      display: block; width: 25px; height: 3px; background: #333;
+      margin: 5px 0; transition: .4s;
     }
     /* Animate hamburger → X */
     .menu-toggle.active .bar:nth-child(1){ transform: rotate(45deg) translate(5px,5px); }
-    .menu-toggle.active .bar:nth-child(2){ opacity:0; }
+    .menu-toggle.active .bar:nth-child(2){ opacity: 0; }
     .menu-toggle.active .bar:nth-child(3){ transform: rotate(-45deg) translate(6px,-6px); }
   </style>
 </head>
@@ -110,24 +115,20 @@
     <aside class="left-menu collapsed" id="menu">
       <nav>
         <ul>
-          <li><a href="#work" style="text-decoration:none;color:#333;display:block;padding:5px 0;">Work</a></li>
+          <li><a href="#work" class="menu-link">Work</a></li>
 
-          <li>
-            <details>
-              <summary>About</summary>
-              <div class="dropdown">
-                Shohei Shohei Shigematsu is a partner at OMA based out of the New York office, who leads the firm’s diverse portfolio in the Americas and Japan. Sho is responsible for delivering a number of cultural projects across North America, including Milstein Hall, an extension to the College of Architecture, Art and Planning at Cornell University; a new museum for the Musée national des beaux-arts du Québec; the Faena Forum, a multi-purpose venue in Miami Beach; the renovation and reimagination of Sotheby’s Headquarters in New York; the recently completed Audrey Irmas Pavilion, a new event and gathering space extension for the Wilshire Boulevard Temple in Los Angeles; and new design galleries and studio for the Denver Art Museum.
-              </div>
-            </details>
+          <li class="has-dropdown" id="aboutItem">
+            <a href="#" class="menu-link" id="aboutBtn">About</a>
+            <div class="dropdown" id="aboutDropdown">
+              Shohei Shohei Shigematsu is a partner at OMA based out of the New York office, who leads the firm’s diverse portfolio in the Americas and Japan. Sho is responsible for delivering a number of cultural projects across North America, including Milstein Hall, an extension to the College of Architecture, Art and Planning at Cornell University; a new museum for the Musée national des beaux-arts du Québec; the Faena Forum, a multi-purpose venue in Miami Beach; the renovation and reimagination of Sotheby’s Headquarters in New York; the recently completed Audrey Irmas Pavilion, a new event and gathering space extension for the Wilshire Boulevard Temple in Los Angeles; and new design galleries and studio for the Denver Art Museum.
+            </div>
           </li>
 
-          <li>
-            <details>
-              <summary>Contact</summary>
-              <div class="dropdown">
-                Shohei Shohei Shigematsu is a partner at OMA based out of the New York office, who leads the firm’s diverse portfolio in the Americas and Japan. Sho is responsible for delivering a number of cultural projects across North America, including Milstein Hall, an extension to the College of Architecture, Art and Planning at Cornell University; a new museum for the Musée national des beaux-arts du Québec; the Faena Forum, a multi-purpose venue in Miami Beach; the renovation and reimagination of Sotheby’s Headquarters in New York; the recently completed Audrey Irmas Pavilion, a new event and gathering space extension for the Wilshire Boulevard Temple in Los Angeles; and new design galleries and studio for the Denver Art Museum.
-              </div>
-            </details>
+          <li class="has-dropdown" id="contactItem">
+            <a href="#" class="menu-link" id="contactBtn">Contact</a>
+            <div class="dropdown" id="contactDropdown">
+              Shohei Shohei Shigematsu is a partner at OMA based out of the New York office, who leads the firm’s diverse portfolio in the Americas and Japan. Sho is responsible for delivering a number of cultural projects across North America, including Milstein Hall, an extension to the College of Architecture, Art and Planning at Cornell University; a new museum for the Musée national des beaux-arts du Québec; the Faena Forum, a multi-purpose venue in Miami Beach; the renovation and reimagination of Sotheby’s Headquarters in New York; the recently completed Audrey Irmas Pavilion, a new event and gathering space extension for the Wilshire Boulevard Temple in Los Angeles; and new design galleries and studio for the Denver Art Museum.
+            </div>
           </li>
         </ul>
       </nav>
@@ -161,20 +162,43 @@
       // Start collapsed → hamburger
       syncButton();
 
-      // Toggle sidebar
+      // Toggle sidebar open/close
       menuToggle.addEventListener('click', () => {
         menu.classList.toggle('collapsed');
         syncButton();
       });
 
-      // Optional: only one dropdown open at a time
-      const details = menu.querySelectorAll('details');
-      details.forEach(d => {
-        d.addEventListener('toggle', () => {
-          if (d.open){
-            details.forEach(other => { if (other !== d) other.open = false; });
-          }
-        });
+      // Dropdown logic
+      const aboutItem = document.getElementById('aboutItem');
+      const contactItem = document.getElementById('contactItem');
+      const aboutBtn = document.getElementById('aboutBtn');
+      const contactBtn = document.getElementById('contactBtn');
+
+      function openMenuIfCollapsed() {
+        if (menu.classList.contains('collapsed')) {
+          menu.classList.remove('collapsed');
+          syncButton();
+        }
+      }
+
+      function toggleDropdown(item) {
+        const isOpen = item.classList.contains('open');
+        // close others
+        [aboutItem, contactItem].forEach(i => i.classList.remove('open'));
+        // toggle clicked
+        if (!isOpen) item.classList.add('open');
+      }
+
+      aboutBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openMenuIfCollapsed();
+        toggleDropdown(aboutItem);
+      });
+
+      contactBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openMenuIfCollapsed();
+        toggleDropdown(contactItem);
       });
     });
   </script>
