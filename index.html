@@ -26,7 +26,7 @@
     }
     .left-menu.collapsed {
       width: var(--menu-collapsed);
-      padding: var(--menu-pad) 5px; /* slim white strip under hamburger */
+      padding: var(--menu-pad) 5px;
     }
 
     .left-menu nav { margin-top: 100px; }
@@ -35,7 +35,6 @@
     .left-menu ul { list-style: none; padding: 0; margin: 0; }
     .left-menu li { margin-bottom: 10px; position: relative; }
 
-    /* Clickable menu items */
     .menu-btn {
       background: none;
       border: none;
@@ -49,15 +48,13 @@
       user-select: none;
     }
 
-    /* Chevron indicator for dropdowns */
     .has-dropdown .menu-btn::after {
       content: "▸";
-      margin-left: 6px;
+      float: right;
       transition: transform .2s ease;
     }
     .has-dropdown.open .menu-btn::after { transform: rotate(90deg); }
 
-    /* Dropdown content */
     .dropdown {
       font-size: 13px;
       color: #444;
@@ -85,25 +82,37 @@
     .right-content .logo { margin-bottom: 20px; }
     .right-content .logo img { width: 100px; height: auto; display: block; }
 
-    .video-container {
+    /* Responsive video */
+    .video-wrapper {
+      position: relative;
       width: 100%;
-      max-width: 100%;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
+      overflow: hidden;
     }
-    iframe { width: 100%; height: 600px; border: none; }
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
 
     /* Work gallery */
     .work-gallery {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 10px;
+      width: 100%;
+      box-sizing: border-box;
     }
     .work-gallery img {
       width: 100%;
-      max-width: 32%;
-      border-radius: 8px;
+      height: auto;
+      display: block;
     }
 
-    /* Hamburger button */
+    /* Hamburger */
     .menu-toggle {
       position: absolute;
       top: 20px; left: 20px;
@@ -117,10 +126,6 @@
     .menu-toggle.active .bar:nth-child(1){ transform: rotate(45deg) translate(5px,5px); }
     .menu-toggle.active .bar:nth-child(2){ opacity: 0; }
     .menu-toggle.active .bar:nth-child(3){ transform: rotate(-45deg) translate(6px,-6px); }
-
-    /* Hide/show sections */
-    .content { display: none; width: 100%; }
-    .content.active { display: block; }
   </style>
 </head>
 <body>
@@ -140,14 +145,14 @@
           <li class="has-dropdown" id="aboutItem">
             <button type="button" class="menu-btn" aria-expanded="false">About</button>
             <div class="dropdown">
-              Shohei Shohei Shigematsu is a partner at OMA based out of the New York office, who leads the firm’s diverse portfolio in the Americas and Japan. Sho is responsible for delivering a number of cultural projects across North America, including Milstein Hall, an extension to the College of Architecture, Art and Planning at Cornell University; a new museum for the Musée national des beaux-arts du Québec; the Faena Forum, a multi-purpose venue in Miami Beach; the renovation and reimagination of Sotheby’s Headquarters in New York; the recently completed Audrey Irmas Pavilion, a new event and gathering space extension for the Wilshire Boulevard Temple in Los Angeles; and new design galleries and studio for the Denver Art Museum.
+              Shohei Shohei Shigematsu is a partner at OMA based out of the New York office, who leads the firm’s diverse portfolio in the Americas and Japan.
             </div>
           </li>
 
           <li class="has-dropdown" id="contactItem">
             <button type="button" class="menu-btn" aria-expanded="false">Contact</button>
             <div class="dropdown">
-              Shohei Shohei Shigematsu is a partner at OMA based out of the New York office, who leads the firm’s diverse portfolio in the Americas and Japan. Sho is responsible for delivering a number of cultural projects across North America, including Milstein Hall, an extension to the College of Architecture, Art and Planning at Cornell University; a new museum for the Musée national des beaux-arts du Québec; the Faena Forum, a multi-purpose venue in Miami Beach; the renovation and reimagination of Sotheby’s Headquarters in New York; the recently completed Audrey Irmas Pavilion, a new event and gathering space extension for the Wilshire Boulevard Temple in Los Angeles; and new design galleries and studio for the Denver Art Museum.
+              Contact details and info here.
             </div>
           </li>
         </ul>
@@ -155,31 +160,16 @@
     </aside>
 
     <!-- Main content -->
-    <main class="right-content">
+    <main class="right-content" id="mainContent">
       <div class="logo">
         <a href="/"><img src="NYXum_logo_blood2.png" alt="NYXum Logo" /></a>
       </div>
-
-      <!-- Home Section -->
-      <div id="home" class="content active">
-        <div class="video-container">
-          <iframe
-            src="https://www.youtube.com/embed/g_qWhdxiR7k"
-            title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen></iframe>
-        </div>
-      </div>
-
-      <!-- Work Section -->
-      <div id="work" class="content">
-        <div class="video-container">
-          <div class="work-gallery">
-            <img src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1755183140-s7-AI211971233001_lifestyle.jpg?crop=1.00xw:0.796xh;0,0.111xh&resize=980:*" alt="Work 1">
-            <img src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1755183140-s7-AI211971233001_lifestyle.jpg?crop=1.00xw:0.796xh;0,0.111xh&resize=980:*" alt="Work 2">
-            <img src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1755183140-s7-AI211971233001_lifestyle.jpg?crop=1.00xw:0.796xh;0,0.111xh&resize=980:*" alt="Work 3">
-          </div>
-        </div>
+      <div class="video-wrapper">
+        <iframe
+          src="https://www.youtube.com/embed/g_qWhdxiR7k"
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
       </div>
     </main>
   </div>
@@ -188,6 +178,9 @@
     document.addEventListener('DOMContentLoaded', () => {
       const menu = document.getElementById('menu');
       const menuToggle = document.getElementById('menuToggle');
+      const mainContent = document.getElementById('mainContent');
+      const homeBtn = document.getElementById('homeBtn');
+      const workBtn = document.getElementById('workBtn');
 
       function syncButton(){
         const open = !menu.classList.contains('collapsed');
@@ -201,7 +194,6 @@
         syncButton();
       });
 
-      // Dropdowns
       const nav = menu.querySelector('nav');
       nav.addEventListener('click', (e) => {
         const btn = e.target.closest('.menu-btn');
@@ -225,22 +217,36 @@
         btn.setAttribute('aria-expanded', String(!isOpen));
       });
 
-      // Switch pages
-      const homeBtn = document.getElementById('homeBtn');
-      const workBtn = document.getElementById('workBtn');
-      const sections = document.querySelectorAll('.content');
+      // Switch to Home
+      homeBtn.addEventListener('click', () => {
+        mainContent.innerHTML = `
+          <div class="logo">
+            <a href="/"><img src="NYXum_logo_blood2.png" alt="NYXum Logo" /></a>
+          </div>
+          <div class="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/g_qWhdxiR7k"
+              title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+          </div>
+        `;
+      });
 
-      function showSection(id){
-        sections.forEach(sec => sec.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-      }
-
-      homeBtn.addEventListener('click', () => showSection('home'));
-      workBtn.addEventListener('click', () => showSection('work'));
+      // Switch to Work
+      workBtn.addEventListener('click', () => {
+        mainContent.innerHTML = `
+          <div class="logo">
+            <a href="/"><img src="NYXum_logo_blood2.png" alt="NYXum Logo" /></a>
+          </div>
+          <div class="work-gallery">
+            <img src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1755183140-s7-AI211971233001_lifestyle.jpg?crop=1.00xw:0.796xh;0,0.111xh&resize=980:*" alt="Work Image 1">
+            <img src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1755183140-s7-AI211971233001_lifestyle.jpg?crop=1.00xw:0.796xh;0,0.111xh&resize=980:*" alt="Work Image 2">
+            <img src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1755183140-s7-AI211971233001_lifestyle.jpg?crop=1.00xw:0.796xh;0,0.111xh&resize=980:*" alt="Work Image 3">
+          </div>
+        `;
+      });
     });
   </script>
 </body>
 </html>
-
-
-
