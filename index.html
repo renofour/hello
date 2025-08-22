@@ -79,7 +79,7 @@
       box-sizing: border-box;
       overflow-y: auto;
     }
-    .right-content .logo { margin-bottom: 20px; }
+    .right-content .logo { margin-bottom: 20px; cursor: pointer; }
     .right-content .logo img { width: 100px; height: auto; display: block; }
 
     /* Responsive video */
@@ -145,14 +145,14 @@
           <li class="has-dropdown" id="aboutItem">
             <button type="button" class="menu-btn" aria-expanded="false">About</button>
             <div class="dropdown">
-               Shohei Shohei Shigematsu is a partner at OMA based out of the New York office, who leads the firm’s diverse portfolio in the Americas and Japan. Sho is responsible for delivering a number of cultural projects across North America, including Milstein Hall, an extension to the College of Architecture, Art and Planning at Cornell University; a new museum for the Musée national des beaux-arts du Québec; the Faena Forum, a multi-purpose venue in Miami Beach; the renovation and reimagination of Sotheby’s Headquarters in New York; the recently completed Audrey Irmas Pavilion, a new event and gathering space extension for the Wilshire Boulevard Temple in Los Angeles; and new design galleries and studio for the Denver Art Museum.
+               Shohei Shohei Shigematsu is a partner at OMA based out of the New York office, who leads the firm’s diverse portfolio in the Americas and Japan...
             </div>
           </li>
 
           <li class="has-dropdown" id="contactItem">
             <button type="button" class="menu-btn" aria-expanded="false">Contact</button>
             <div class="dropdown">
-               Shohei Shohei Shigematsu is a partner at OMA based out of the New York office, who leads the firm’s diverse portfolio in the Americas and Japan. Sho is responsible for delivering a number of cultural projects across North America, including Milstein Hall, an extension to the College of Architecture, Art and Planning at Cornell University; a new museum for the Musée national des beaux-arts du Québec; the Faena Forum, a multi-purpose venue in Miami Beach; the renovation and reimagination of Sotheby’s Headquarters in New York; the recently completed Audrey Irmas Pavilion, a new event and gathering space extension for the Wilshire Boulevard Temple in Los Angeles; and new design galleries and studio for the Denver Art Museum.
+               Shohei Shohei Shigematsu is a partner at OMA based out of the New York office, who leads the firm’s diverse portfolio in the Americas and Japan...
             </div>
           </li>
         </ul>
@@ -161,12 +161,12 @@
 
     <!-- Main content -->
     <main class="right-content" id="mainContent">
-      <div class="logo">
-        <a href="/"><img src="NYXum_logo_blood2.png" alt="NYXum Logo" /></a>
+      <div class="logo" id="logoClick">
+        <img src="NYXum_logo_blood2.png" alt="NYXum Logo" />
       </div>
       <div class="video-wrapper">
           <iframe
-        src="https://www.youtube.com/embed/g_qWhdxiR7k"
+        src="https://www.youtube.com/embed/otYHF8jaLjw"
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen></iframe>
@@ -181,6 +181,7 @@
       const mainContent = document.getElementById('mainContent');
       const homeBtn = document.getElementById('homeBtn');
       const workBtn = document.getElementById('workBtn');
+      const logoClick = document.getElementById('logoClick');
 
       function syncButton(){
         const open = !menu.classList.contains('collapsed');
@@ -217,11 +218,10 @@
         btn.setAttribute('aria-expanded', String(!isOpen));
       });
 
-      // Switch to Home
-      homeBtn.addEventListener('click', () => {
+      function loadHome(){
         mainContent.innerHTML = `
-          <div class="logo">
-            <a href="/"><img src="NYXum_logo_blood2.png" alt="NYXum Logo" /></a>
+          <div class="logo" id="logoClick">
+            <img src="NYXum_logo_blood2.png" alt="NYXum Logo" />
           </div>
           <div class="video-wrapper">
             <iframe
@@ -231,13 +231,18 @@
               allowfullscreen></iframe>
           </div>
         `;
-      });
+        document.getElementById('logoClick').addEventListener('click', loadHome);
+      }
 
-      // Switch to Work
+      // Home button & Logo click both load same content
+      homeBtn.addEventListener('click', loadHome);
+      logoClick.addEventListener('click', loadHome);
+
+      // Work button loads gallery
       workBtn.addEventListener('click', () => {
         mainContent.innerHTML = `
-          <div class="logo">
-            <a href="/"><img src="NYXum_logo_blood2.png" alt="NYXum Logo" /></a>
+          <div class="logo" id="logoClick">
+            <img src="NYXum_logo_blood2.png" alt="NYXum Logo" />
           </div>
           <div class="work-gallery">
             <img src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1755183140-s7-AI211971233001_lifestyle.jpg?crop=1.00xw:0.796xh;0,0.111xh&resize=980:*" alt="Work Image Original">
@@ -248,6 +253,7 @@
             <img src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1755183863-imgi-1-nudie-jeans-blue-buddy-herringbone-chore-jacket-689dfaeede279.jpg?crop=1xw:1xh;center,top&resize=980:*" alt="Work Image 5">
           </div>
         `;
+        document.getElementById('logoClick').addEventListener('click', loadHome);
       });
     });
   </script>
