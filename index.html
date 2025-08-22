@@ -98,19 +98,21 @@
       border: none;
     }
 
-    /* Work gallery */
-    .work-gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 10px;
-      width: 100%;
-      box-sizing: border-box;
-    }
-    .work-gallery img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
+    /* Work gallery - Masonry style */
+.work-gallery {
+  column-count: 3; /* Number of columns */
+  column-gap: 10px; /* Gap between columns */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.work-gallery img {
+  width: 100%;
+  margin-bottom: 10px; /* Space between items */
+  display: block;
+  break-inside: avoid; /* Prevent image from breaking between columns */
+}
+
 
     /* Hamburger */
     .menu-toggle {
@@ -252,12 +254,11 @@
           <div class="logo">
             <a href="#" id="logoLink"><img src="NYXum_logo_blood2.png" alt="NYXum Logo" /></a>
           </div>
-      <div class="work-gallery">
+     <div class="work-gallery">
   <!-- 1. First Drive image -->
   <img
     src="https://drive.google.com/thumbnail?id=1KS_yxQ51nW9AnfmysBbYxzPaLG54wuYi&sz=w1200"
     alt="Work Image 1"
-    style="max-width:100%; height:auto;"
     loading="lazy"
     referrerpolicy="no-referrer"
     onerror="this.outerHTML =
@@ -267,7 +268,6 @@
   <img
     src="https://drive.google.com/thumbnail?id=1KewGTBxm7TuzwGh8NcHFi-MtO0XZusNF&sz=w1200"
     alt="Work Image 2"
-    style="max-width:100%; height:auto;"
     loading="lazy"
     referrerpolicy="no-referrer"
     onerror="this.outerHTML =
@@ -278,11 +278,10 @@
   <img src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1755184790-imgi-1-137102-517-41-689dfe8cb3af2.jpg?crop=1.00xw:0.872xh;0,0.128xh&resize=980:*" alt="Work Image 4">
   <img src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1755193918-Artboard2_65918cc4-7a23-46bd-b7b6-63246ebaaefb.jpg?crop=1xw:0.902xh;center,top&resize=980:*" alt="Work Image 5">
   
-  <!-- 6. New Drive image (with thumbnail + fallback) -->
+  <!-- 6. New Drive image -->
   <img
     src="https://drive.google.com/thumbnail?id=1PXKgsT4wJTHYtTM6AEO2JrviddGzrMlH&sz=w1200"
     alt="Work Image 6"
-    style="max-width:100%; height:auto;"
     loading="lazy"
     referrerpolicy="no-referrer"
     onerror="this.outerHTML =
