@@ -13,7 +13,14 @@
       --page-gutter: 20px;
     }
 
-    /* Layout */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      background: #fff;
+    }
+
     .container {
       display: flex;
       height: 100vh;
@@ -28,17 +35,28 @@
       position: relative;
       box-sizing: border-box;
       padding: var(--menu-pad);
+      border-right: 1px solid #ddd;
     }
     .left-menu.collapsed {
       width: var(--menu-collapsed);
       padding: var(--menu-pad) 5px;
     }
 
-    .left-menu nav { margin-top: 100px; }
-    .left-menu.collapsed nav { display: none; }
+    .left-menu nav {
+      margin-top: 100px;
+    }
+    .left-menu.collapsed nav {
+      display: none;
+    }
 
-    .left-menu ul { list-style: none; padding: 0; margin: 0; }
-    .left-menu li { margin-bottom: 6px; position: relative; }
+    .left-menu ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .left-menu li {
+      margin-bottom: 6px;
+    }
 
     .menu-btn {
       background: none;
@@ -50,7 +68,6 @@
       color: #333;
       font: inherit;
       display: block;
-      user-select: none;
     }
 
     .has-dropdown .menu-btn::after {
@@ -58,7 +75,9 @@
       float: right;
       transition: transform .2s ease;
     }
-    .has-dropdown.open .menu-btn::after { transform: rotate(90deg); }
+    .has-dropdown.open .menu-btn::after {
+      transform: rotate(90deg);
+    }
 
     .dropdown {
       font-size: 13px;
@@ -70,7 +89,9 @@
       transition: max-height .3s ease;
       margin-top: 5px;
     }
-    .has-dropdown.open .dropdown { max-height: 800px; }
+    .has-dropdown.open .dropdown {
+      max-height: 800px;
+    }
 
     /* Right content layout */
     .right-content {
@@ -90,7 +111,6 @@
       z-index: 100;
       position: sticky;
       top: 0;
-      padding: 0;
     }
     .header .align-wrapper {
       display: flex;
@@ -115,16 +135,15 @@
       box-sizing: border-box;
     }
 
-    /* Wrapper */
+    /* Consistent padding wrapper */
     .align-wrapper {
-      margin: 0 auto;
       width: 100%;
       box-sizing: border-box;
       padding-left: var(--page-gutter);
       padding-right: var(--page-gutter);
     }
 
-    /* Responsive video */
+    /* Video */
     .video-wrapper {
       position: relative;
       width: 100%;
@@ -134,19 +153,14 @@
     }
     .video-wrapper iframe {
       position: absolute;
-      top: 0; left: 0;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       border: none;
     }
 
     /* Work gallery */
-    .work-wrapper {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-    }
-
     .work-gallery {
       column-count: 3;
       column-gap: 10px;
@@ -159,28 +173,45 @@
       break-inside: avoid;
     }
 
-    /* Responsive columns */
     @media (max-width: 1024px) {
-      .work-gallery { column-count: 2; }
+      .work-gallery {
+        column-count: 2;
+      }
     }
     @media (max-width: 768px) {
-      .work-gallery { column-count: 1; }
+      .work-gallery {
+        column-count: 1;
+      }
     }
 
     /* Hamburger */
     .menu-toggle {
       position: absolute;
-      top: 20px; left: 20px;
-      background: none; border: none; cursor: pointer;
-      padding: 10px; z-index: 1000;
+      top: 20px;
+      left: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      z-index: 1000;
     }
     .menu-toggle .bar {
-      display: block; width: 25px; height: 3px; background: #333;
-      margin: 5px 0; transition: .4s;
+      display: block;
+      width: 25px;
+      height: 3px;
+      background: #333;
+      margin: 5px 0;
+      transition: .4s;
     }
-    .menu-toggle.active .bar:nth-child(1){ transform: rotate(45deg) translate(5px,5px); }
-    .menu-toggle.active .bar:nth-child(2){ opacity: 0; }
-    .menu-toggle.active .bar:nth-child(3){ transform: rotate(-45deg) translate(6px,-6px); }
+    .menu-toggle.active .bar:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .menu-toggle.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle.active .bar:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
   </style>
 </head>
 <body>
@@ -245,7 +276,7 @@
       const workBtn = document.getElementById('workBtn');
       const initialVideoURL = "https://www.youtube.com/embed/g_qWhdxiR7k";
 
-      function syncButton(){
+      function syncButton() {
         const open = !menu.classList.contains('collapsed');
         menuToggle.classList.toggle('active', open);
         menuToggle.setAttribute('aria-expanded', String(open));
@@ -297,16 +328,14 @@
       function loadWorkContent() {
         contentArea.innerHTML = `
           <div class="align-wrapper">
-            <div class="work-wrapper">
-              <div class="work-gallery">
-                <img src="https://drive.google.com/thumbnail?id=1KS_yxQ51nW9AnfmysBbYxzPaLG54wuYi&sz=w1200" alt="Work Image 1">
-                <img src="https://drive.google.com/thumbnail?id=1KewGTBxm7TuzwGh8NcHFi-MtO0XZusNF&sz=w1200" alt="Work Image 2">
-                <img src="https://drive.google.com/thumbnail?id=16K-hJ7YB3eKzZ0Fpc1QsKV0EnO8l8mUE&sz=w1200" alt="Work Image 3">
-                <img src="https://drive.google.com/thumbnail?id=1F9qZLOnde9gnx-i-fl_xfBNaQA9K6P9G&sz=w1200" alt="Work Image 4">
-                <img src="https://drive.google.com/thumbnail?id=1gaGdfaccHZWwBJw9yeNVh2mWeJ-VS3OE&sz=w1200" alt="Work Image 5">
-                <img src="https://drive.google.com/thumbnail?id=1PXKgsT4wJTHYtTM6AEO2JrviddGzrMlH&sz=w1200" alt="Work Image 6">
-                <img src="https://drive.google.com/thumbnail?id=1lsUV17h-65keB9IKgg_cJvifitwEC6Vi&sz=w1200" alt="Work Image 7">
-              </div>
+            <div class="work-gallery">
+              <img src="https://drive.google.com/thumbnail?id=1KS_yxQ51nW9AnfmysBbYxzPaLG54wuYi&sz=w1200" alt="Work Image 1">
+              <img src="https://drive.google.com/thumbnail?id=1KewGTBxm7TuzwGh8NcHFi-MtO0XZusNF&sz=w1200" alt="Work Image 2">
+              <img src="https://drive.google.com/thumbnail?id=16K-hJ7YB3eKzZ0Fpc1QsKV0EnO8l8mUE&sz=w1200" alt="Work Image 3">
+              <img src="https://drive.google.com/thumbnail?id=1F9qZLOnde9gnx-i-fl_xfBNaQA9K6P9G&sz=w1200" alt="Work Image 4">
+              <img src="https://drive.google.com/thumbnail?id=1gaGdfaccHZWwBJw9yeNVh2mWeJ-VS3OE&sz=w1200" alt="Work Image 5">
+              <img src="https://drive.google.com/thumbnail?id=1PXKgsT4wJTHYtTM6AEO2JrviddGzrMlH&sz=w1200" alt="Work Image 6">
+              <img src="https://drive.google.com/thumbnail?id=1lsUV17h-65keB9IKgg_cJvifitwEC6Vi&sz=w1200" alt="Work Image 7">
             </div>
           </div>
         `;
