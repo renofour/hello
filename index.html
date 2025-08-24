@@ -64,6 +64,19 @@
       margin-top: 5px;
     }
     .has-dropdown.open .dropdown { max-height: 800px; }
+    /* Dropdown buttons */
+    .dropdown .menu-btn {
+      font-size: 13px;
+      color: #444;
+      padding: 3px 0;
+      margin: 3px 0;
+      display: block;
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
     /* Right content layout */
     .right-content {
       flex-grow: 1;
@@ -217,10 +230,10 @@
           <li class="has-dropdown" id="workItem">
             <button type="button" class="menu-btn" aria-expanded="false">work</button>
             <div class="dropdown">
-              <button type="button" class="menu-btn" data-filter="all">All</button><br>
-              <button type="button" class="menu-btn" data-filter="print">Print</button><br>
-              <button type="button" class="menu-btn" data-filter="digital">Digital</button><br>
-              <button type="button" class="menu-btn" data-filter="3d">3D Design</button><br>
+              <button type="button" class="menu-btn" data-filter="all">All</button>
+              <button type="button" class="menu-btn" data-filter="print">Print</button>
+              <button type="button" class="menu-btn" data-filter="digital">Digital</button>
+              <button type="button" class="menu-btn" data-filter="3d">3D Design</button>
               <button type="button" class="menu-btn" data-filter="product">Product Design</button>
             </div>
           </li>
