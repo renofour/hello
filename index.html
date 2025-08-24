@@ -111,6 +111,11 @@
       padding-left: var(--page-gutter);
       padding-right: var(--page-gutter);
     }
+    /* For the work section only */
+    .content-area .align-wrapper {
+      padding-left: 20px; /* Reduce left padding for work section */
+      padding-right: 20px; /* Reduce right padding for work section */
+    }
     /* Video responsive */
     .video-wrapper {
       position: relative;
@@ -129,11 +134,12 @@
     }
     /* Work iframe wrapper */
     .work-iframe-wrapper {
-      width: 100%;
+      width: calc(100% + 40px); /* Extend width to fill the reduced padding space */
       height: calc(100vh - var(--header-height));
       border: none;
       overflow: hidden;
-      margin-left: -10px; /* Shift iframe slightly to the left */
+      margin-left: -20px; /* Expand to the left */
+      margin-right: -20px; /* Expand to the right */
     }
     .work-iframe-wrapper iframe {
       width: 100%;
