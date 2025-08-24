@@ -10,6 +10,7 @@
       --menu-collapsed: 60px;
       --menu-pad: 20px;
       --header-height: 80px;
+      --page-gutter: 20px; /* Shared left/right padding */
     }
 
     /* Layout */
@@ -84,13 +85,21 @@
     .header {
       display: flex;
       align-items: center;
-      justify-content: flex-start;
       height: var(--header-height);
-      padding: 0 20px;
       background: white;
       z-index: 100;
       position: sticky;
       top: 0;
+      padding: 0; /* Remove old padding */
+    }
+    .header .align-wrapper {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      padding-left: var(--page-gutter);
+      padding-right: var(--page-gutter);
+      width: 100%;
+      box-sizing: border-box;
     }
     .header img {
       width: 100px;
@@ -102,7 +111,7 @@
     .content-area {
       flex: 1;
       overflow-y: auto;
-      padding: 20px;
+      padding: 0; /* Remove default padding */
       box-sizing: border-box;
     }
 
@@ -112,6 +121,8 @@
       margin: 0 auto;
       width: 100%;
       box-sizing: border-box;
+      padding-left: var(--page-gutter);
+      padding-right: var(--page-gutter);
     }
 
     /* Responsive video */
@@ -200,7 +211,9 @@
     <main class="right-content">
       <!-- Header -->
       <div class="header">
-        <a href="#" id="logoLink"><img src="NYXum_logo_blood2.png" alt="NYXum Logo" /></a>
+        <div class="align-wrapper">
+          <a href="#" id="logoLink"><img src="NYXum_logo_blood2.png" alt="NYXum Logo" /></a>
+        </div>
       </div>
 
       <!-- Scrollable content -->
