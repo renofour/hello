@@ -13,7 +13,10 @@
     }
 
     /* Layout */
-    .container { display: flex; height: 100vh; }
+    .container {
+      display: flex;
+      height: 100vh;
+    }
 
     /* Sidebar */
     .left-menu {
@@ -68,48 +71,38 @@
     }
     .has-dropdown.open .dropdown { max-height: 800px; }
 
-    /* Main content */
+    /* Right content layout */
     .right-content {
       flex-grow: 1;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      margin-right: var(--menu-collapsed);
       position: relative;
-      overflow-y: auto;
+      overflow: hidden;
     }
 
-    /* Floating header inside right-content */
+    /* Header (floating) */
     .header {
-      position: fixed;
-      top: 0;
-      left: var(--menu-open); /* align after sidebar */
-      width: calc(100% - var(--menu-open));
-      height: var(--header-height);
-      background: #fff;
       display: flex;
       align-items: center;
-      justify-content: center;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      z-index: 1000;
-      transition: left 0.3s ease, width 0.3s ease;
+      justify-content: flex-start;
+      height: var(--header-height);
+      padding: 0 20px;
+      background: white;
+      z-index: 100;
+      position: sticky;
+      top: 0;
     }
-
-    /* Adjust when sidebar is collapsed */
-    .left-menu.collapsed ~ .right-content .header {
-      left: var(--menu-collapsed);
-      width: calc(100% - var(--menu-collapsed));
-    }
-
     .header img {
       width: 100px;
       height: auto;
+      display: block;
     }
 
     /* Scrollable content under header */
     .content-area {
-      width: 100%;
-      padding: calc(var(--header-height) + 20px) 20px 20px; /* Add top padding */
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
       box-sizing: border-box;
     }
 
@@ -117,7 +110,7 @@
     .video-wrapper {
       position: relative;
       width: 100%;
-      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      padding-bottom: 56.25%;
       height: 0;
       overflow: hidden;
     }
@@ -129,7 +122,7 @@
       border: none;
     }
 
-    /* Work gallery - Masonry style */
+    /* Work gallery - Masonry */
     .work-gallery {
       column-count: 3;
       column-gap: 10px;
@@ -155,7 +148,7 @@
       position: absolute;
       top: 20px; left: 20px;
       background: none; border: none; cursor: pointer;
-      padding: 10px; z-index: 1100;
+      padding: 10px; z-index: 1000;
     }
     .menu-toggle .bar {
       display: block; width: 25px; height: 3px; background: #333;
@@ -195,16 +188,15 @@
       </nav>
     </aside>
 
-    <!-- Main content -->
-    <main class="right-content" id="mainContent">
-      <!-- Floating Header -->
+    <!-- Right content -->
+    <main class="right-content">
+      <!-- Header -->
       <div class="header">
         <a href="#" id="logoLink"><img src="NYXum_logo_blood2.png" alt="NYXum Logo" /></a>
       </div>
 
       <!-- Scrollable content -->
       <div class="content-area" id="contentArea">
-        <!-- Default Home Content -->
         <div class="video-wrapper">
           <iframe
             src="https://www.youtube.com/embed/g_qWhdxiR7k"
@@ -288,7 +280,6 @@
 
       homeBtn.addEventListener('click', loadHomeContent);
       workBtn.addEventListener('click', loadWorkContent);
-
       document.getElementById('logoLink').addEventListener('click', (e) => {
         e.preventDefault();
         loadHomeContent();
