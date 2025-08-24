@@ -10,15 +10,13 @@
       --menu-collapsed: 60px;
       --menu-pad: 20px;
       --header-height: 80px;
-      --page-gutter: 40px; /* Wider padding for better balance */
+      --page-gutter: 40px;
     }
-
     /* Layout */
     .container {
       display: flex;
       height: 100vh;
     }
-
     /* Sidebar */
     .left-menu {
       width: var(--menu-open);
@@ -33,13 +31,10 @@
       width: var(--menu-collapsed);
       padding: var(--menu-pad) 5px;
     }
-
     .left-menu nav { margin-top: 100px; }
     .left-menu.collapsed nav { display: none; }
-
     .left-menu ul { list-style: none; padding: 0; margin: 0; }
     .left-menu li { margin-bottom: 6px; position: relative; }
-
     .menu-btn {
       background: none;
       border: none;
@@ -52,14 +47,12 @@
       display: block;
       user-select: none;
     }
-
     .has-dropdown .menu-btn::after {
       content: "▸";
       float: right;
       transition: transform .2s ease;
     }
     .has-dropdown.open .menu-btn::after { transform: rotate(90deg); }
-
     .dropdown {
       font-size: 13px;
       color: #444;
@@ -71,7 +64,6 @@
       margin-top: 5px;
     }
     .has-dropdown.open .dropdown { max-height: 800px; }
-
     /* Right content layout */
     .right-content {
       flex-grow: 1;
@@ -80,7 +72,6 @@
       position: relative;
       overflow: hidden;
     }
-
     /* Header */
     .header {
       display: flex;
@@ -106,7 +97,6 @@
       height: auto;
       display: block;
     }
-
     /* Content area */
     .content-area {
       flex: 1;
@@ -114,7 +104,6 @@
       padding: 0;
       box-sizing: border-box;
     }
-
     /* Align wrapper for sections */
     .align-wrapper {
       width: 100%;
@@ -122,7 +111,6 @@
       padding-left: var(--page-gutter);
       padding-right: var(--page-gutter);
     }
-
     /* Video responsive */
     .video-wrapper {
       position: relative;
@@ -138,28 +126,30 @@
       height: 100%;
       border: none;
     }
-
     /* Work gallery */
     .work-gallery {
       column-count: 3;
       column-gap: 10px;
       width: 100%;
       box-sizing: border-box;
+      padding: 0;
+      margin: 0;
     }
     .work-gallery img {
       width: 100%;
       margin-bottom: 10px;
       display: block;
       break-inside: avoid;
+      padding: 0;
+      margin-left: 0;
+      margin-right: 0;
     }
-
     @media (max-width: 1024px) {
       .work-gallery { column-count: 2; }
     }
     @media (max-width: 768px) {
       .work-gallery { column-count: 1; }
     }
-
     /* Hamburger */
     .menu-toggle {
       position: absolute;
@@ -182,7 +172,6 @@
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
       <span class="bar"></span><span class="bar"></span><span class="bar"></span>
     </button>
-
     <!-- Sidebar -->
     <aside class="left-menu collapsed" id="menu">
       <nav>
@@ -204,7 +193,6 @@
         </ul>
       </nav>
     </aside>
-
     <!-- Main content -->
     <main class="right-content">
       <div class="header">
@@ -225,7 +213,6 @@
       </div>
     </main>
   </div>
-
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const menu = document.getElementById('menu');
@@ -234,32 +221,26 @@
       const homeBtn = document.getElementById('homeBtn');
       const workBtn = document.getElementById('workBtn');
       const initialVideoURL = "https://www.youtube.com/embed/g_qWhdxiR7k";
-
       function syncButton(){
         const open = !menu.classList.contains('collapsed');
         menuToggle.classList.toggle('active', open);
         menuToggle.setAttribute('aria-expanded', String(open));
       }
       syncButton();
-
       menuToggle.addEventListener('click', () => {
         menu.classList.toggle('collapsed');
         syncButton();
       });
-
       const nav = menu.querySelector('nav');
       nav.addEventListener('click', (e) => {
         const btn = e.target.closest('.menu-btn');
         if (!btn) return;
-
         if (menu.classList.contains('collapsed')) {
           menu.classList.remove('collapsed');
           syncButton();
         }
-
         const item = btn.closest('.has-dropdown');
         if (!item) return;
-
         const isOpen = item.classList.contains('open');
         nav.querySelectorAll('.has-dropdown').forEach(li => {
           li.classList.remove('open');
@@ -269,7 +250,6 @@
         item.classList.toggle('open', !isOpen);
         btn.setAttribute('aria-expanded', String(!isOpen));
       });
-
       function loadHomeContent() {
         contentArea.innerHTML = `
           <div class="align-wrapper">
@@ -283,7 +263,6 @@
           </div>
         `;
       }
-
       function loadWorkContent() {
         contentArea.innerHTML = `
           <div class="align-wrapper">
@@ -299,7 +278,6 @@
           </div>
         `;
       }
-
       homeBtn.addEventListener('click', loadHomeContent);
       workBtn.addEventListener('click', loadWorkContent);
       document.getElementById('logoLink').addEventListener('click', (e) => {
@@ -310,5 +288,3 @@
   </script>
 </body>
 </html>
-
-
