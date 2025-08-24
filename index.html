@@ -68,8 +68,13 @@
 
     /* Work dropdown specific styling */
     #workItem .dropdown {
-      white-space: nowrap;
+      white-space: normal;
       padding-left: 0;
+      line-height: 1.4;
+    }
+    #workItem .dropdown .submenu-row {
+      display: block;
+      margin-bottom: 4px;
     }
     #workItem .dropdown .submenu-btn {
       background: none;
@@ -236,11 +241,15 @@
           <li class="has-dropdown" id="workItem">
             <button type="button" class="menu-btn" aria-expanded="false">work</button>
             <div class="dropdown">
-              <button type="button" class="submenu-btn" data-filter="all">All</button>
-              <button type="button" class="submenu-btn" data-filter="print">Print</button>
-              <button type="button" class="submenu-btn" data-filter="digital">Digital</button>
-              <button type="button" class="submenu-btn" data-filter="3d">3D Design</button>
-              <button type="button" class="submenu-btn" data-filter="product">Product Design</button>
+              <div class="submenu-row">
+                <button type="button" class="submenu-btn" data-filter="all">All</button>
+                <button type="button" class="submenu-btn" data-filter="print">Print</button>
+                <button type="button" class="submenu-btn" data-filter="digital">Digital</button>
+              </div>
+              <div class="submenu-row">
+                <button type="button" class="submenu-btn" data-filter="3d">3D Design</button>
+                <button type="button" class="submenu-btn" data-filter="product">Product Design</button>
+              </div>
             </div>
           </li>
           <li class="has-dropdown" id="aboutItem">
