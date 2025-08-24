@@ -10,7 +10,7 @@
       --menu-collapsed: 60px;
       --menu-pad: 20px;
       --header-height: 80px;
-      --page-gutter: 40px;
+      --page-gutter: 20px;
       --header-bg-rgb: 255, 255, 255;
       --header-bg-opacity: 0.5;
     }
@@ -56,14 +56,13 @@
     }
     .has-dropdown.open .menu-btn::after { transform: rotate(90deg); }
     .dropdown {
-      font-size: 13px;
-      color: #444;
-      padding-left: 10px;
-      line-height: 1.4;
+      font-size: 14px;
+      color: #333;
+      margin-top: 8px;
+      padding-left: 0;
       max-height: 0;
       overflow: hidden;
       transition: max-height .3s ease;
-      margin-top: 5px;
     }
     .has-dropdown.open .dropdown { max-height: 800px; }
 
@@ -71,26 +70,22 @@
     #workItem .dropdown {
       white-space: nowrap;
       padding-left: 0;
-      font-size: 12px;
-      line-height: 1.2;
     }
-    #workItem .dropdown .menu-btn-container {
-      display: inline-block;
-    }
-    #workItem .dropdown .menu-btn {
-      display: inline;
-      padding: 3px 0;
-      margin: 0;
-      font-size: 12px;
-      color: #444;
+    #workItem .dropdown .submenu-btn {
       background: none;
       border: none;
+      font-size: 14px;
+      padding: 0;
+      margin: 0;
       cursor: pointer;
+      color: #333;
+      display: inline;
     }
-    #workItem .dropdown .menu-btn:not(:last-child)::after {
-      content: "·";
-      margin-right: 5px;
-      color: #444;
+    #workItem .dropdown .submenu-btn:not(:last-child)::after {
+      content: "•";
+      margin-right: 8px;
+      margin-left: 8px;
+      color: #555;
     }
     /* Right content layout */
     .right-content {
@@ -125,7 +120,7 @@
       height: auto;
       display: block;
     }
-    /* Content area */
+    /* Scrollable content */
     .content-area {
       flex: 1;
       overflow-y: auto;
@@ -133,19 +128,13 @@
       box-sizing: border-box;
       background: transparent;
     }
-    /* Align wrapper for sections */
     .align-wrapper {
       width: 100%;
       box-sizing: border-box;
       padding-left: var(--page-gutter);
       padding-right: var(--page-gutter);
     }
-    /* For the work section only */
-    .content-area .align-wrapper {
-      padding-left: 20px;
-      padding-right: 20px;
-    }
-    /* Video responsive */
+    /* Video */
     .video-wrapper {
       position: relative;
       width: 100%;
@@ -176,7 +165,7 @@
       border: none;
       background: transparent;
     }
-    /* Work gallery */
+    /* Gallery */
     .work-gallery {
       column-count: 3;
       column-gap: 10px;
@@ -247,13 +236,11 @@
           <li class="has-dropdown" id="workItem">
             <button type="button" class="menu-btn" aria-expanded="false">work</button>
             <div class="dropdown">
-              <div class="menu-btn-container">
-                <button type="button" class="menu-btn" data-filter="all">All</button>
-                <button type="button" class="menu-btn" data-filter="print">Print</button>
-                <button type="button" class="menu-btn" data-filter="digital">Digital</button>
-                <button type="button" class="menu-btn" data-filter="3d">3D Design</button>
-                <button type="button" class="menu-btn" data-filter="product">Product Design</button>
-              </div>
+              <button type="button" class="submenu-btn" data-filter="all">All</button>
+              <button type="button" class="submenu-btn" data-filter="print">Print</button>
+              <button type="button" class="submenu-btn" data-filter="digital">Digital</button>
+              <button type="button" class="submenu-btn" data-filter="3d">3D Design</button>
+              <button type="button" class="submenu-btn" data-filter="product">Product Design</button>
             </div>
           </li>
           <li class="has-dropdown" id="aboutItem">
@@ -271,13 +258,15 @@
         </ul>
       </nav>
     </aside>
-    <!-- Main content -->
+    <!-- Right content -->
     <main class="right-content">
+      <!-- Header -->
       <div class="header">
         <div class="align-wrapper">
           <a href="#" id="logoLink"><img src="NYXum_logo_blood2.png" alt="NYXum Logo" /></a>
         </div>
       </div>
+      <!-- Scrollable content -->
       <div class="content-area" id="contentArea">
         <div class="align-wrapper">
           <div class="video-wrapper">
@@ -297,8 +286,6 @@
       const menuToggle = document.getElementById('menuToggle');
       const contentArea = document.getElementById('contentArea');
       const homeBtn = document.getElementById('homeBtn');
-      const workItem = document.getElementById('workItem');
-      const workBtn = workItem.querySelector('.menu-btn');
       const initialVideoURL = "https://www.youtube.com/embed/g_qWhdxiR7k";
 
       function syncButton() {
@@ -382,7 +369,6 @@
                 column-count: 3;
                 column-gap: 10px;
                 width: 100%;
-                background: white;
               }
               .work-gallery img {
                 width: 100%;
@@ -419,20 +405,16 @@
       }
 
       homeBtn.addEventListener('click', loadHomeContent);
-      workBtn.addEventListener('click', () => loadWorkContent('all'));
-
-      // Handle dropdown filter clicks
-      workItem.querySelectorAll('.dropdown .menu-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const filter = e.target.getAttribute('data-filter');
-          loadWorkContent(filter);
-        });
-      });
-
       document.getElementById('logoLink').addEventListener('click', (e) => {
         e.preventDefault();
         loadHomeContent();
+      });
+
+      document.querySelectorAll('#workItem .submenu-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const filter = btn.dataset.filter;
+          loadWorkContent(filter);
+        });
       });
     });
   </script>
