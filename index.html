@@ -128,8 +128,9 @@
     }
     /* Work gallery */
     .work-gallery {
-      column-count: 3;
-      column-gap: 10px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
       width: 100%;
       box-sizing: border-box;
       padding: 0;
@@ -137,18 +138,17 @@
     }
     .work-gallery img {
       width: 100%;
-      margin-bottom: 10px;
-      display: block;
-      break-inside: avoid;
+      height: auto;
+      object-fit: cover;
+      margin: 0;
       padding: 0;
-      margin-left: 0;
-      margin-right: 0;
+      display: block;
     }
     @media (max-width: 1024px) {
-      .work-gallery { column-count: 2; }
+      .work-gallery { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 768px) {
-      .work-gallery { column-count: 1; }
+      .work-gallery { grid-template-columns: 1fr; }
     }
     /* Hamburger */
     .menu-toggle {
