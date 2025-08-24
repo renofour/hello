@@ -133,6 +133,7 @@
       height: calc(100vh - var(--header-height));
       border: none;
       overflow: hidden;
+      margin-left: -2px; /* Shift iframe slightly to the left */
     }
     .work-iframe-wrapper iframe {
       width: 100%;
@@ -251,19 +252,16 @@
       const homeBtn = document.getElementById('homeBtn');
       const workBtn = document.getElementById('workBtn');
       const initialVideoURL = "https://www.youtube.com/embed/g_qWhdxiR7k";
-
       function syncButton() {
         const open = !menu.classList.contains('collapsed');
         menuToggle.classList.toggle('active', open);
         menuToggle.setAttribute('aria-expanded', String(open));
       }
       syncButton();
-
       menuToggle.addEventListener('click', () => {
         menu.classList.toggle('collapsed');
         syncButton();
       });
-
       const nav = menu.querySelector('nav');
       nav.addEventListener('click', (e) => {
         const btn = e.target.closest('.menu-btn');
@@ -283,7 +281,6 @@
         item.classList.toggle('open', !isOpen);
         btn.setAttribute('aria-expanded', String(!isOpen));
       });
-
       function loadHomeContent() {
         contentArea.innerHTML = `
           <div class="align-wrapper">
@@ -297,7 +294,6 @@
           </div>
         `;
       }
-
       function loadWorkContent() {
         const workHTML = `
           <!DOCTYPE html>
@@ -354,10 +350,8 @@
           </div>
         `;
       }
-
       homeBtn.addEventListener('click', loadHomeContent);
       workBtn.addEventListener('click', loadWorkContent);
-
       document.getElementById('logoLink').addEventListener('click', (e) => {
         e.preventDefault();
         loadHomeContent();
