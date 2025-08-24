@@ -9,6 +9,7 @@
       --menu-open: 250px;
       --menu-collapsed: 60px;
       --menu-pad: 20px;
+      --header-height: 80px;
     }
 
     /* Layout */
@@ -73,24 +74,43 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      padding: 20px;
-      position: relative;
       margin-right: var(--menu-collapsed);
-      box-sizing: border-box;
+      position: relative;
       overflow-y: auto;
     }
 
-    .section-container {
-      width: 100%;
+    /* Floating header inside right-content */
+    .header {
+      position: fixed;
+      top: 0;
+      left: var(--menu-open); /* align after sidebar */
+      width: calc(100% - var(--menu-open));
+      height: var(--header-height);
+      background: #fff;
       display: flex;
-      flex-direction: column;
-      gap: 20px;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      z-index: 1000;
+      transition: left 0.3s ease, width 0.3s ease;
     }
 
-    .section-container .logo img {
+    /* Adjust when sidebar is collapsed */
+    .left-menu.collapsed ~ .right-content .header {
+      left: var(--menu-collapsed);
+      width: calc(100% - var(--menu-collapsed));
+    }
+
+    .header img {
       width: 100px;
       height: auto;
-      display: block;
+    }
+
+    /* Scrollable content under header */
+    .content-area {
+      width: 100%;
+      padding: calc(var(--header-height) + 20px) 20px 20px; /* Add top padding */
+      box-sizing: border-box;
     }
 
     /* Responsive video */
@@ -135,7 +155,7 @@
       position: absolute;
       top: 20px; left: 20px;
       background: none; border: none; cursor: pointer;
-      padding: 10px; z-index: 1000;
+      padding: 10px; z-index: 1100;
     }
     .menu-toggle .bar {
       display: block; width: 25px; height: 3px; background: #333;
@@ -162,7 +182,7 @@
           <li class="has-dropdown" id="aboutItem">
             <button type="button" class="menu-btn" aria-expanded="false">about</button>
             <div class="dropdown">
-              Shohei Shohei Shigematsu is a partner at OMA based out of the New York office, who leads the firm’s diverse portfolio in the Americas and Japan. Sho is responsible for delivering a number of cultural projects across North America.
+              Shohei Shohei Shigematsu is a partner at OMA based out of the New York office, who leads the firm’s diverse portfolio in the Americas and Japan.
             </div>
           </li>
           <li class="has-dropdown" id="contactItem">
@@ -177,11 +197,14 @@
 
     <!-- Main content -->
     <main class="right-content" id="mainContent">
-      <!-- Default: Home Section -->
-      <div class="section-container" id="sectionContainer">
-        <div class="logo">
-          <a href="#" id="logoLink"><img src="NYXum_logo_blood2.png" alt="NYXum Logo" /></a>
-        </div>
+      <!-- Floating Header -->
+      <div class="header">
+        <a href="#" id="logoLink"><img src="NYXum_logo_blood2.png" alt="NYXum Logo" /></a>
+      </div>
+
+      <!-- Scrollable content -->
+      <div class="content-area" id="contentArea">
+        <!-- Default Home Content -->
         <div class="video-wrapper">
           <iframe
             src="https://www.youtube.com/embed/g_qWhdxiR7k"
@@ -197,7 +220,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       const menu = document.getElementById('menu');
       const menuToggle = document.getElementById('menuToggle');
-      const mainContent = document.getElementById('mainContent');
+      const contentArea = document.getElementById('contentArea');
       const homeBtn = document.getElementById('homeBtn');
       const workBtn = document.getElementById('workBtn');
       const initialVideoURL = "https://www.youtube.com/embed/g_qWhdxiR7k";
@@ -238,47 +261,29 @@
       });
 
       function loadHomeContent() {
-        mainContent.innerHTML = `
-          <div class="section-container">
-            <div class="logo">
-              <a href="#" id="logoLink"><img src="NYXum_logo_blood2.png" alt="NYXum Logo" /></a>
-            </div>
-            <div class="video-wrapper">
-              <iframe
-                src="${initialVideoURL}"
-                title="YouTube video player"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
-            </div>
+        contentArea.innerHTML = `
+          <div class="video-wrapper">
+            <iframe
+              src="${initialVideoURL}"
+              title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
           </div>
         `;
-        document.getElementById('logoLink').addEventListener('click', (e) => {
-          e.preventDefault();
-          loadHomeContent();
-        });
       }
 
       function loadWorkContent() {
-        mainContent.innerHTML = `
-          <div class="section-container">
-            <div class="logo">
-              <a href="#" id="logoLink"><img src="NYXum_logo_blood2.png" alt="NYXum Logo" /></a>
-            </div>
-            <div class="work-gallery">
-              <img src="https://drive.google.com/thumbnail?id=1KS_yxQ51nW9AnfmysBbYxzPaLG54wuYi&sz=w1200" alt="Work Image 1">
-              <img src="https://drive.google.com/thumbnail?id=1KewGTBxm7TuzwGh8NcHFi-MtO0XZusNF&sz=w1200" alt="Work Image 2">
-              <img src="https://drive.google.com/thumbnail?id=16K-hJ7YB3eKzZ0Fpc1QsKV0EnO8l8mUE&sz=w1200" alt="Work Image 3">
-              <img src="https://drive.google.com/thumbnail?id=1F9qZLOnde9gnx-i-fl_xfBNaQA9K6P9G&sz=w1200" alt="Work Image 4">
-              <img src="https://drive.google.com/thumbnail?id=1gaGdfaccHZWwBJw9yeNVh2mWeJ-VS3OE&sz=w1200" alt="Work Image 5">
-              <img src="https://drive.google.com/thumbnail?id=1PXKgsT4wJTHYtTM6AEO2JrviddGzrMlH&sz=w1200" alt="Work Image 6">
-              <img src="https://drive.google.com/thumbnail?id=1lsUV17h-65keB9IKgg_cJvifitwEC6Vi&sz=w1200" alt="Work Image 7">
-            </div>
+        contentArea.innerHTML = `
+          <div class="work-gallery">
+            <img src="https://drive.google.com/thumbnail?id=1KS_yxQ51nW9AnfmysBbYxzPaLG54wuYi&sz=w1200" alt="Work Image 1">
+            <img src="https://drive.google.com/thumbnail?id=1KewGTBxm7TuzwGh8NcHFi-MtO0XZusNF&sz=w1200" alt="Work Image 2">
+            <img src="https://drive.google.com/thumbnail?id=16K-hJ7YB3eKzZ0Fpc1QsKV0EnO8l8mUE&sz=w1200" alt="Work Image 3">
+            <img src="https://drive.google.com/thumbnail?id=1F9qZLOnde9gnx-i-fl_xfBNaQA9K6P9G&sz=w1200" alt="Work Image 4">
+            <img src="https://drive.google.com/thumbnail?id=1gaGdfaccHZWwBJw9yeNVh2mWeJ-VS3OE&sz=w1200" alt="Work Image 5">
+            <img src="https://drive.google.com/thumbnail?id=1PXKgsT4wJTHYtTM6AEO2JrviddGzrMlH&sz=w1200" alt="Work Image 6">
+            <img src="https://drive.google.com/thumbnail?id=1lsUV17h-65keB9IKgg_cJvifitwEC6Vi&sz=w1200" alt="Work Image 7">
           </div>
         `;
-        document.getElementById('logoLink').addEventListener('click', (e) => {
-          e.preventDefault();
-          loadHomeContent();
-        });
       }
 
       homeBtn.addEventListener('click', loadHomeContent);
