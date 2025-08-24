@@ -126,11 +126,22 @@
       height: 100%;
       border: none;
     }
-    /* Work gallery */
+    /* Work iframe wrapper */
+    .work-iframe-wrapper {
+      width: 100%;
+      height: calc(100vh - var(--header-height));
+      border: none;
+      overflow: hidden;
+    }
+    .work-iframe-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    /* Work gallery (for reference, not used in iframe) */
     .work-gallery {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
+      column-count: 3;
+      column-gap: 10px;
       width: 100%;
       box-sizing: border-box;
       padding: 0;
@@ -138,17 +149,18 @@
     }
     .work-gallery img {
       width: 100%;
-      height: auto;
-      object-fit: cover;
-      margin: 0;
-      padding: 0;
+      margin-bottom: 10px;
       display: block;
+      break-inside: avoid;
+      padding: 0;
+      margin-left: 0;
+      margin-right: 0;
     }
     @media (max-width: 1024px) {
-      .work-gallery { grid-template-columns: repeat(2, 1fr); }
+      .work-gallery { column-count: 2; }
     }
     @media (max-width: 768px) {
-      .work-gallery { grid-template-columns: 1fr; }
+      .work-gallery { column-count: 1; }
     }
     /* Hamburger */
     .menu-toggle {
@@ -221,16 +233,19 @@
       const homeBtn = document.getElementById('homeBtn');
       const workBtn = document.getElementById('workBtn');
       const initialVideoURL = "https://www.youtube.com/embed/g_qWhdxiR7k";
-      function syncButton(){
+
+      function syncButton() {
         const open = !menu.classList.contains('collapsed');
         menuToggle.classList.toggle('active', open);
         menuToggle.setAttribute('aria-expanded', String(open));
       }
       syncButton();
+
       menuToggle.addEventListener('click', () => {
         menu.classList.toggle('collapsed');
         syncButton();
       });
+
       const nav = menu.querySelector('nav');
       nav.addEventListener('click', (e) => {
         const btn = e.target.closest('.menu-btn');
@@ -250,6 +265,7 @@
         item.classList.toggle('open', !isOpen);
         btn.setAttribute('aria-expanded', String(!isOpen));
       });
+
       function loadHomeContent() {
         contentArea.innerHTML = `
           <div class="align-wrapper">
@@ -263,23 +279,64 @@
           </div>
         `;
       }
+
       function loadWorkContent() {
-        contentArea.innerHTML = `
-          <div class="align-wrapper">
+        // Create a data URL for the work content to embed in the iframe
+        const workHTML = `
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <style>
+              body, html {
+                margin: 0;
+                padding: 20px;
+                box-sizing: border-box;
+                font-family: inherit;
+              }
+              .work-gallery {
+                column-count: 3;
+                column-gap: 10px;
+              }
+              .work-gallery img {
+                width: 100%;
+                margin-bottom: 10px;
+                display: block;
+                break-inside: avoid;
+              }
+              @media (max-width: 1024px) {
+                .work-gallery { column-count: 2; }
+              }
+              @media (max-width: 768px) {
+                .work-gallery { column-count: 1; }
+              }
+            </style>
+          </head>
+          <body>
             <div class="work-gallery">
               <img src="https://drive.google.com/thumbnail?id=1KS_yxQ51nW9AnfmysBbYxzPaLG54wuYi&sz=w1200" alt="Work Image 1">
               <img src="https://drive.google.com/thumbnail?id=1KewGTBxm7TuzwGh8NcHFi-MtO0XZusNF&sz=w1200" alt="Work Image 2">
               <img src="https://drive.google.com/thumbnail?id=16K-hJ7YB3eKzZ0Fpc1QsKV0EnO8l8mUE&sz=w1200" alt="Work Image 3">
-              <img src="https://drive.google.com/thumbnail?id=1F9qZLOnde9gnx-i-fl_xfBNaQA9K6P9G&sz=w1200" alt="Work Image 4">
+              <img src="https://drive.google.com/thumbnail?id=1F9qZLOonde9gnx-i-fl_xfBNaQA9K6P9G&sz=w1200" alt="Work Image 4">
               <img src="https://drive.google.com/thumbnail?id=1gaGdfaccHZWwBJw9yeNVh2mWeJ-VS3OE&sz=w1200" alt="Work Image 5">
               <img src="https://drive.google.com/thumbnail?id=1PXKgsT4wJTHYtTM6AEO2JrviddGzrMlH&sz=w1200" alt="Work Image 6">
               <img src="https://drive.google.com/thumbnail?id=1lsUV17h-65keB9IKgg_cJvifitwEC6Vi&sz=w1200" alt="Work Image 7">
             </div>
+          </body>
+          </html>
+        `;
+        const workDataURL = "data:text/html;charset=utf-8," + encodeURIComponent(workHTML);
+        contentArea.innerHTML = `
+          <div class="align-wrapper">
+            <div class="work-iframe-wrapper">
+              <iframe src="${workDataURL}" frameborder="0"></iframe>
+            </div>
           </div>
         `;
       }
+
       homeBtn.addEventListener('click', loadHomeContent);
       workBtn.addEventListener('click', loadWorkContent);
+
       document.getElementById('logoLink').addEventListener('click', (e) => {
         e.preventDefault();
         loadHomeContent();
