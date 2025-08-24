@@ -10,7 +10,7 @@
       --menu-collapsed: 60px;
       --menu-pad: 20px;
       --header-height: 80px;
-      --page-gutter: 40px; /* Wider padding for better balance */
+      --page-gutter: 20px;
     }
 
     /* Layout */
@@ -107,7 +107,7 @@
       display: block;
     }
 
-    /* Content area */
+    /* Scrollable content */
     .content-area {
       flex: 1;
       overflow-y: auto;
@@ -115,15 +115,16 @@
       box-sizing: border-box;
     }
 
-    /* Align wrapper for sections */
+    /* Wrapper */
     .align-wrapper {
+      margin: 0 auto;
       width: 100%;
       box-sizing: border-box;
       padding-left: var(--page-gutter);
       padding-right: var(--page-gutter);
     }
 
-    /* Video responsive */
+    /* Responsive video */
     .video-wrapper {
       position: relative;
       width: 100%;
@@ -140,11 +141,16 @@
     }
 
     /* Work gallery */
+    .work-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
     .work-gallery {
       column-count: 3;
       column-gap: 10px;
       width: 100%;
-      box-sizing: border-box;
     }
     .work-gallery img {
       width: 100%;
@@ -153,6 +159,7 @@
       break-inside: avoid;
     }
 
+    /* Responsive columns */
     @media (max-width: 1024px) {
       .work-gallery { column-count: 2; }
     }
@@ -205,13 +212,16 @@
       </nav>
     </aside>
 
-    <!-- Main content -->
+    <!-- Right content -->
     <main class="right-content">
+      <!-- Header -->
       <div class="header">
         <div class="align-wrapper">
           <a href="#" id="logoLink"><img src="NYXum_logo_blood2.png" alt="NYXum Logo" /></a>
         </div>
       </div>
+
+      <!-- Scrollable content -->
       <div class="content-area" id="contentArea">
         <div class="align-wrapper">
           <div class="video-wrapper">
@@ -287,14 +297,16 @@
       function loadWorkContent() {
         contentArea.innerHTML = `
           <div class="align-wrapper">
-            <div class="work-gallery">
-              <img src="https://drive.google.com/thumbnail?id=1KS_yxQ51nW9AnfmysBbYxzPaLG54wuYi&sz=w1200" alt="Work Image 1">
-              <img src="https://drive.google.com/thumbnail?id=1KewGTBxm7TuzwGh8NcHFi-MtO0XZusNF&sz=w1200" alt="Work Image 2">
-              <img src="https://drive.google.com/thumbnail?id=16K-hJ7YB3eKzZ0Fpc1QsKV0EnO8l8mUE&sz=w1200" alt="Work Image 3">
-              <img src="https://drive.google.com/thumbnail?id=1F9qZLOnde9gnx-i-fl_xfBNaQA9K6P9G&sz=w1200" alt="Work Image 4">
-              <img src="https://drive.google.com/thumbnail?id=1gaGdfaccHZWwBJw9yeNVh2mWeJ-VS3OE&sz=w1200" alt="Work Image 5">
-              <img src="https://drive.google.com/thumbnail?id=1PXKgsT4wJTHYtTM6AEO2JrviddGzrMlH&sz=w1200" alt="Work Image 6">
-              <img src="https://drive.google.com/thumbnail?id=1lsUV17h-65keB9IKgg_cJvifitwEC6Vi&sz=w1200" alt="Work Image 7">
+            <div class="work-wrapper">
+              <div class="work-gallery">
+                <img src="https://drive.google.com/thumbnail?id=1KS_yxQ51nW9AnfmysBbYxzPaLG54wuYi&sz=w1200" alt="Work Image 1">
+                <img src="https://drive.google.com/thumbnail?id=1KewGTBxm7TuzwGh8NcHFi-MtO0XZusNF&sz=w1200" alt="Work Image 2">
+                <img src="https://drive.google.com/thumbnail?id=16K-hJ7YB3eKzZ0Fpc1QsKV0EnO8l8mUE&sz=w1200" alt="Work Image 3">
+                <img src="https://drive.google.com/thumbnail?id=1F9qZLOnde9gnx-i-fl_xfBNaQA9K6P9G&sz=w1200" alt="Work Image 4">
+                <img src="https://drive.google.com/thumbnail?id=1gaGdfaccHZWwBJw9yeNVh2mWeJ-VS3OE&sz=w1200" alt="Work Image 5">
+                <img src="https://drive.google.com/thumbnail?id=1PXKgsT4wJTHYtTM6AEO2JrviddGzrMlH&sz=w1200" alt="Work Image 6">
+                <img src="https://drive.google.com/thumbnail?id=1lsUV17h-65keB9IKgg_cJvifitwEC6Vi&sz=w1200" alt="Work Image 7">
+              </div>
             </div>
           </div>
         `;
