@@ -214,7 +214,16 @@
       <nav>
         <ul>
           <li><button type="button" class="menu-btn" id="homeBtn">hello</button></li>
-          <li><button type="button" class="menu-btn" id="workBtn">work</button></li>
+          <li class="has-dropdown" id="workItem">
+            <button type="button" class="menu-btn" aria-expanded="false">work</button>
+            <div class="dropdown">
+              <button type="button" class="menu-btn" data-filter="all">All</button><br>
+              <button type="button" class="menu-btn" data-filter="print">Print</button><br>
+              <button type="button" class="menu-btn" data-filter="digital">Digital</button><br>
+              <button type="button" class="menu-btn" data-filter="3d">3D Design</button><br>
+              <button type="button" class="menu-btn" data-filter="product">Product Design</button>
+            </div>
+          </li>
           <li class="has-dropdown" id="aboutItem">
             <button type="button" class="menu-btn" aria-expanded="false">about</button>
             <div class="dropdown">
@@ -256,18 +265,22 @@
       const menuToggle = document.getElementById('menuToggle');
       const contentArea = document.getElementById('contentArea');
       const homeBtn = document.getElementById('homeBtn');
-      const workBtn = document.getElementById('workBtn');
+      const workItem = document.getElementById('workItem');
+      const workBtn = workItem.querySelector('.menu-btn');
       const initialVideoURL = "https://www.youtube.com/embed/g_qWhdxiR7k";
+
       function syncButton() {
         const open = !menu.classList.contains('collapsed');
         menuToggle.classList.toggle('active', open);
         menuToggle.setAttribute('aria-expanded', String(open));
       }
       syncButton();
+
       menuToggle.addEventListener('click', () => {
         menu.classList.toggle('collapsed');
         syncButton();
       });
+
       const nav = menu.querySelector('nav');
       nav.addEventListener('click', (e) => {
         const btn = e.target.closest('.menu-btn');
@@ -287,6 +300,7 @@
         item.classList.toggle('open', !isOpen);
         btn.setAttribute('aria-expanded', String(!isOpen));
       });
+
       function loadHomeContent() {
         contentArea.innerHTML = `
           <div class="align-wrapper">
@@ -300,7 +314,8 @@
           </div>
         `;
       }
-      function loadWorkContent() {
+
+      function loadWorkContent(filter = 'all') {
         const workHTML = `
           <!DOCTYPE html>
           <html>
@@ -336,13 +351,13 @@
           </head>
           <body>
             <div class="work-gallery">
-              <img src="https://drive.google.com/thumbnail?id=1KS_yxQ51nW9AnfmysBbYxzPaLG54wuYi&sz=w1200" alt="Work Image 1">
-              <img src="https://drive.google.com/thumbnail?id=1KewGTBxm7TuzwGh8NcHFi-MtO0XZusNF&sz=w1200" alt="Work Image 2">
-              <img src="https://drive.google.com/thumbnail?id=16K-hJ7YB3eKzZ0Fpc1QsKV0EnO8l8mUE&sz=w1200" alt="Work Image 3">
-              <img src="https://via.placeholder.com/1200x800?text=Work+Image+4" alt="Work Image 4">
-              <img src="https://drive.google.com/thumbnail?id=1gaGdfaccHZWwBJw9yeNVh2mWeJ-VS3OE&sz=w1200" alt="Work Image 5">
-              <img src="https://drive.google.com/thumbnail?id=1PXKgsT4wJTHYtTM6AEO2JrviddGzrMlH&sz=w1200" alt="Work Image 6">
-              <img src="https://drive.google.com/thumbnail?id=1lsUV17h-65keB9IKgg_cJvifitwEC6Vi&sz=w1200" alt="Work Image 7">
+              <img src="https://drive.google.com/thumbnail?id=1KS_yxQ51nW9AnfmysBbYxzPaLG54wuYi&sz=w1200" alt="Work Image 1" data-category="print, digital">
+              <img src="https://drive.google.com/thumbnail?id=1KewGTBxm7TuzwGh8NcHFi-MtO0XZusNF&sz=w1200" alt="Work Image 2" data-category="3d, product">
+              <img src="https://drive.google.com/thumbnail?id=16K-hJ7YB3eKzZ0Fpc1QsKV0EnO8l8mUE&sz=w1200" alt="Work Image 3" data-category="digital, 3d">
+              <img src="https://via.placeholder.com/1200x800?text=Work+Image+4" alt="Work Image 4" data-category="print, product">
+              <img src="https://drive.google.com/thumbnail?id=1gaGdfaccHZWwBJw9yeNVh2mWeJ-VS3OE&sz=w1200" alt="Work Image 5" data-category="digital">
+              <img src="https://drive.google.com/thumbnail?id=1PXKgsT4wJTHYtTM6AEO2JrviddGzrMlH&sz=w1200" alt="Work Image 6" data-category="3d">
+              <img src="https://drive.google.com/thumbnail?id=1lsUV17h-65keB9IKgg_cJvifitwEC6Vi&sz=w1200" alt="Work Image 7" data-category="product">
             </div>
           </body>
           </html>
@@ -356,8 +371,19 @@
           </div>
         `;
       }
+
       homeBtn.addEventListener('click', loadHomeContent);
-      workBtn.addEventListener('click', loadWorkContent);
+      workBtn.addEventListener('click', () => loadWorkContent('all'));
+
+      // Handle dropdown filter clicks
+      workItem.querySelectorAll('.dropdown .menu-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const filter = e.target.getAttribute('data-filter');
+          loadWorkContent(filter);
+        });
+      });
+
       document.getElementById('logoLink').addEventListener('click', (e) => {
         e.preventDefault();
         loadHomeContent();
