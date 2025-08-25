@@ -200,7 +200,7 @@
     .lightbox {
       display: none;
       position: fixed;
-      z-index: 1000;
+      z-index: 2000;
       left: 0;
       top: 0;
       width: 100%;
@@ -418,7 +418,25 @@
           : images.filter(img => img.categories.includes(filter));
 
         const imagesHTML = filteredImages.map((img, index) =>
-          `<img src="${img.src}" alt="${img.alt}" data-category="${img.categories.join(',')}" ${index === 0 ? 'class="lightbox-trigger"' : ''}>`).join('');
+          `<img src="${img.src}" alt="${img.alt}" data-category="${img.categories.join(',')}" ${index === 0 ? 'class="lightbox-trigger" data-index="' + index + '"' : ''}>`).join('');
+
+        const iframeScript = `
+          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              const images = document.querySelectorAll('.work-gallery img');
+              images.forEach((img, index) => {
+                img.addEventListener('click', function() {
+                  if (this.classList.contains('lightbox-trigger')) {
+                    window.parent.postMessage({
+                      type: 'openLightbox',
+                      src: this.src
+                    }, '*');
+                  }
+                });
+              });
+            });
+          <\/script>
+        `;
 
         const workHTML = `
           <!DOCTYPE html>
@@ -458,17 +476,7 @@
             <div class="work-gallery">
               ${imagesHTML}
             </div>
-            <script>
-              document.addEventListener('DOMContentLoaded', function() {
-                const lightboxTrigger = document.querySelector('.lightbox-trigger');
-                if (lightboxTrigger) {
-                  lightboxTrigger.onclick = function() {
-                    window.parent.document.getElementById('lightbox').style.display = 'block';
-                    window.parent.document.getElementById('lightbox-img-1').src = this.src;
-                  };
-                }
-              });
-            <\/script>
+            ${iframeScript}
           </body>
           </html>
         `;
@@ -483,10 +491,12 @@
         `;
       }
 
-      homeBtn.addEventListener('click', loadHomeContent);
-      document.getElementById('logoLink').addEventListener('click', (e) => {
-        e.preventDefault();
-        loadHomeContent();
+      // Handle messages from iframe
+      window.addEventListener('message', function(event) {
+        if (event.data.type === 'openLightbox') {
+          lightboxImg1.src = event.data.src;
+          lightbox.style.display = 'block';
+        }
       });
 
       lightboxClose.onclick = function() {
@@ -498,6 +508,12 @@
           lightbox.style.display = 'none';
         }
       };
+
+      homeBtn.addEventListener('click', loadHomeContent);
+      document.getElementById('logoLink').addEventListener('click', (e) => {
+        e.preventDefault();
+        loadHomeContent();
+      });
 
       document.querySelectorAll('#workItem .submenu-btn').forEach(btn => {
         btn.addEventListener('click', () => {
