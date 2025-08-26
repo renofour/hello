@@ -206,33 +206,42 @@
       width: 100%;
       height: 100%;
       background-color: rgba(0, 0, 0, 0.9);
-      overflow: auto;
+      overflow: hidden;
     }
     .lightbox-container {
       display: flex;
-      max-width: 900px; /* 75% of 1200px */
+      max-width: 900px;
       margin: 50px auto;
       position: relative;
       width: 75%;
+      height: calc(100vh - 100px);
     }
-    .lightbox-content {
-      display: flex;
-      background: white;
-      padding: 0;
-      width: 100%;
+    .lightbox-images-container {
+      flex: 1;
+      overflow-y: auto;
+      padding-right: 20px;
+      height: 100%;
     }
     .lightbox-images {
-      flex: 1;
       padding: 20px;
       display: flex;
       flex-direction: column;
       gap: 20px;
+      background: white;
+      min-height: 100%;
     }
     .lightbox-text {
-      background: white;
-      padding: 20px;
       width: 200px;
+      padding: 20px;
+      background: white;
+      position: sticky;
+      top: 50px;
+      align-self: flex-start;
       border-left: 1px solid #eee;
+      height: fit-content;
+    }
+    .lightbox-text-inner {
+      display: inline;
     }
     .lightbox-img {
       max-width: 100%;
@@ -390,12 +399,14 @@
         <span class="bar"></span>
       </button>
       <div class="lightbox-container">
-        <div class="lightbox-content">
+        <div class="lightbox-images-container">
           <div class="lightbox-images">
             <img id="lightbox-img-1" class="lightbox-img" src="" alt="">
             <img id="lightbox-img-2" class="lightbox-img" src="https://drive.google.com/thumbnail?id=1RyzMQq0e5dyYPf3EZDkVFuIYATfpSeDD&sz=w1200" alt="">
           </div>
-          <div class="lightbox-text">
+        </div>
+        <div class="lightbox-text">
+          <div class="lightbox-text-inner">
             Shohei Shohei Shigematsu is a partner at OMA based out of the New York office, who leads the firm's diverse portfolio in the Americas and Japan.
           </div>
         </div>
