@@ -208,11 +208,34 @@
       background-color: rgba(0, 0, 0, 0.9);
       overflow: auto;
     }
-    .lightbox-content {
-      width: 80%;
+    .lightbox-container {
+      display: flex;
       max-width: 1200px;
       margin: 50px auto;
       position: relative;
+      width: 75%; /* Reduced width by 25% */
+    }
+    .lightbox-images {
+      background: white;
+      padding: 20px;
+      flex: 1;
+    }
+    .lightbox-text {
+      background: white;
+      padding: 20px;
+      width: 200px; /* Narrow width like the dropdown */
+      position: sticky;
+      top: 50px;
+      align-self: flex-start;
+    }
+    .lightbox-img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin-bottom: 20px;
+    }
+    .lightbox-img:last-child {
+      margin-bottom: 0;
     }
     .lightbox-close {
       position: fixed;
@@ -233,6 +256,7 @@
       background: #fff;
       position: absolute;
       left: 0;
+      transition: 0.3s;
     }
     .lightbox-close .bar:nth-child(1) {
       top: 14px;
@@ -244,18 +268,6 @@
     .lightbox-close .bar:nth-child(3) {
       top: 14px;
       transform: rotate(-45deg);
-    }
-    .lightbox-images {
-      background: white;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-    .lightbox-img {
-      max-width: 100%;
-      height: auto;
-      display: block;
     }
     /* Hamburger */
     .menu-toggle {
@@ -371,10 +383,13 @@
         <span class="bar"></span>
         <span class="bar"></span>
       </button>
-      <div class="lightbox-content">
+      <div class="lightbox-container">
         <div class="lightbox-images">
           <img id="lightbox-img-1" class="lightbox-img" src="" alt="">
           <img id="lightbox-img-2" class="lightbox-img" src="https://drive.google.com/thumbnail?id=1RyzMQq0e5dyYPf3EZDkVFuIYATfpSeDD&sz=w1200" alt="">
+        </div>
+        <div class="lightbox-text">
+          Shohei Shohei Shigematsu is a partner at OMA based out of the New York office, who leads the firm's diverse portfolio in the Americas and Japan.
         </div>
       </div>
     </div>
