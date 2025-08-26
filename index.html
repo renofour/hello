@@ -219,16 +219,31 @@
     }
     .lightbox-close {
       position: fixed;
-      top: 15px;
-      right: 35px;
-      color: #f1f1f1;
-      font-size: 40px;
-      font-weight: bold;
-      transition: 0.3s;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
       cursor: pointer;
+      padding: 10px;
+      z-index: 2001;
     }
-    .lightbox-close:hover {
-      color: #bbb;
+    .lightbox-close .bar {
+      display: block;
+      width: 35px;
+      height: 3px;
+      background: #fff;
+      margin: 5px 0;
+      transition: .4s;
+      position: absolute;
+    }
+    .lightbox-close .bar:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .lightbox-close .bar:nth-child(2) {
+      opacity: 0;
+    }
+    .lightbox-close .bar:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
     }
     .lightbox-img-container {
       display: flex;
@@ -236,6 +251,12 @@
       justify-content: center;
       align-items: center;
       gap: 20px;
+    }
+    .lightbox-img-wrapper {
+      background: white;
+      padding: 20px;
+      border-radius: 4px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
     .lightbox-img {
       max-width: 100%;
@@ -337,11 +358,19 @@
 
     <!-- Lightbox -->
     <div id="lightbox" class="lightbox">
-      <span class="lightbox-close">&times;</span>
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close lightbox">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
       <div class="lightbox-content">
         <div class="lightbox-img-container">
-          <img id="lightbox-img-1" class="lightbox-img" src="" alt="">
-          <img id="lightbox-img-2" class="lightbox-img" src="https://drive.google.com/thumbnail?id=1RyzMQq0e5dyYPf3EZDkVFuIYATfpSeDD&sz=w1200" alt="">
+          <div class="lightbox-img-wrapper">
+            <img id="lightbox-img-1" class="lightbox-img" src="" alt="">
+          </div>
+          <div class="lightbox-img-wrapper">
+            <img id="lightbox-img-2" class="lightbox-img" src="https://drive.google.com/thumbnail?id=1RyzMQq0e5dyYPf3EZDkVFuIYATfpSeDD&sz=w1200" alt="">
+          </div>
         </div>
       </div>
     </div>
@@ -353,7 +382,7 @@
       const contentArea = document.getElementById('contentArea');
       const homeBtn = document.getElementById('homeBtn');
       const lightbox = document.getElementById('lightbox');
-      const lightboxClose = document.querySelector('.lightbox-close');
+      const lightboxClose = document.getElementById('lightboxClose');
       const lightboxImg1 = document.getElementById('lightbox-img-1');
       const initialVideoURL = "https://framerusercontent.com/assets/CtSYQwWgD3v3HDe3HMRPnHbvGOk.mp4";
 
