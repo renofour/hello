@@ -209,13 +209,11 @@
       overflow: auto;
     }
     .lightbox-content {
-      margin: auto;
-      display: block;
-      width: 80%;
+      width: 100%;
       max-width: 1200px;
-      position: relative;
-      top: 50px;
-      transform: none;
+      margin: 0 auto;
+      padding: 40px 20px;
+      box-sizing: border-box;
     }
     .lightbox-close {
       position: fixed;
@@ -226,42 +224,42 @@
       cursor: pointer;
       padding: 10px;
       z-index: 2001;
+      width: 30px;
+      height: 30px;
     }
     .lightbox-close .bar {
       display: block;
-      width: 35px;
+      width: 100%;
       height: 3px;
       background: #fff;
-      margin: 5px 0;
-      transition: .4s;
       position: absolute;
+      left: 0;
+      transition: 0.3s;
     }
     .lightbox-close .bar:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
+      top: 0;
+      transform: rotate(45deg);
     }
     .lightbox-close .bar:nth-child(2) {
+      top: 14px;
       opacity: 0;
     }
     .lightbox-close .bar:nth-child(3) {
-      transform: rotate(-45deg) translate(6px, -6px);
+      top: 28px;
+      transform: rotate(-45deg);
     }
-    .lightbox-img-container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-    }
-    .lightbox-img-wrapper {
+    .lightbox-images {
       background: white;
       padding: 20px;
-      border-radius: 4px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
     .lightbox-img {
       max-width: 100%;
       max-height: 70vh;
       display: block;
+      margin-bottom: 20px;
+    }
+    .lightbox-img:last-child {
+      margin-bottom: 0;
     }
     /* Hamburger */
     .menu-toggle {
@@ -273,23 +271,37 @@
       cursor: pointer;
       padding: 10px;
       z-index: 1000;
+      width: 30px;
+      height: 30px;
     }
     .menu-toggle .bar {
       display: block;
-      width: 25px;
+      width: 100%;
       height: 3px;
       background: #333;
-      margin: 5px 0;
-      transition: .4s;
+      position: absolute;
+      left: 0;
+      transition: 0.3s;
+    }
+    .menu-toggle .bar:nth-child(1) {
+      top: 0;
+    }
+    .menu-toggle .bar:nth-child(2) {
+      top: 14px;
+    }
+    .menu-toggle .bar:nth-child(3) {
+      top: 28px;
     }
     .menu-toggle.active .bar:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
+      transform: rotate(45deg);
+      top: 14px;
     }
     .menu-toggle.active .bar:nth-child(2) {
       opacity: 0;
     }
     .menu-toggle.active .bar:nth-child(3) {
-      transform: rotate(-45deg) translate(6px, -6px);
+      transform: rotate(-45deg);
+      top: 14px;
     }
   </style>
 </head>
@@ -364,13 +376,9 @@
         <span class="bar"></span>
       </button>
       <div class="lightbox-content">
-        <div class="lightbox-img-container">
-          <div class="lightbox-img-wrapper">
-            <img id="lightbox-img-1" class="lightbox-img" src="" alt="">
-          </div>
-          <div class="lightbox-img-wrapper">
-            <img id="lightbox-img-2" class="lightbox-img" src="https://drive.google.com/thumbnail?id=1RyzMQq0e5dyYPf3EZDkVFuIYATfpSeDD&sz=w1200" alt="">
-          </div>
+        <div class="lightbox-images">
+          <img id="lightbox-img-1" class="lightbox-img" src="" alt="">
+          <img id="lightbox-img-2" class="lightbox-img" src="https://drive.google.com/thumbnail?id=1RyzMQq0e5dyYPf3EZDkVFuIYATfpSeDD&sz=w1200" alt="">
         </div>
       </div>
     </div>
