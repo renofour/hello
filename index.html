@@ -209,11 +209,10 @@
       overflow: auto;
     }
     .lightbox-content {
-      width: 100%;
+      width: 80%;
       max-width: 1200px;
-      margin: 0 auto;
-      padding: 40px 20px;
-      box-sizing: border-box;
+      margin: 50px auto;
+      position: relative;
     }
     .lightbox-close {
       position: fixed;
@@ -234,32 +233,29 @@
       background: #fff;
       position: absolute;
       left: 0;
-      transition: 0.3s;
     }
     .lightbox-close .bar:nth-child(1) {
-      top: 0;
+      top: 14px;
       transform: rotate(45deg);
     }
     .lightbox-close .bar:nth-child(2) {
-      top: 14px;
       opacity: 0;
     }
     .lightbox-close .bar:nth-child(3) {
-      top: 28px;
+      top: 14px;
       transform: rotate(-45deg);
     }
     .lightbox-images {
       background: white;
       padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
     }
     .lightbox-img {
       max-width: 100%;
-      max-height: 70vh;
+      height: auto;
       display: block;
-      margin-bottom: 20px;
-    }
-    .lightbox-img:last-child {
-      margin-bottom: 0;
     }
     /* Hamburger */
     .menu-toggle {
@@ -455,7 +451,7 @@
           : images.filter(img => img.categories.includes(filter));
 
         const imagesHTML = filteredImages.map((img, index) =>
-          `<img src="${img.src}" alt="${img.alt}" data-category="${img.categories.join(',')}" ${index === 0 ? 'class="lightbox-trigger" data-index="' + index + '"' : ''}>`).join('');
+          `<img src="${img.src}" alt="${img.alt}" data-category="${img.categories.join(',')}" ${index === 0 ? 'class="lightbox-trigger"' : ''}>`).join('');
 
         const iframeScript = `
           <script>
