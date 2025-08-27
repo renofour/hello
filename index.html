@@ -221,11 +221,11 @@
       overflow-y: auto;
       padding-right: 20px;
       height: 100%;
-      scrollbar-width: none; /* Firefox */
-      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;
+      -ms-overflow-style: none;
     }
     .lightbox-images-container::-webkit-scrollbar {
-      display: none; /* Chrome, Safari, Opera */
+      display: none;
     }
     .lightbox-images {
       padding: 20px;
@@ -423,6 +423,7 @@
       const menuToggle = document.getElementById('menuToggle');
       const contentArea = document.getElementById('contentArea');
       const homeBtn = document.getElementById('homeBtn');
+      const workBtn = document.querySelector('#workItem .menu-btn');
       const lightbox = document.getElementById('lightbox');
       const lightboxClose = document.getElementById('lightboxClose');
       const lightboxImg1 = document.getElementById('lightbox-img-1');
@@ -444,18 +445,31 @@
       nav.addEventListener('click', (e) => {
         const btn = e.target.closest('.menu-btn');
         if (!btn) return;
+
+        const item = btn.closest('.has-dropdown');
+        if (!item) return;
+
+        // If the work button is clicked, automatically open with 'all' filter
+        if (btn === workBtn) {
+          loadWorkContent('all');
+          // Open the dropdown
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+          return;
+        }
+
         if (menu.classList.contains('collapsed')) {
           menu.classList.remove('collapsed');
           syncButton();
         }
-        const item = btn.closest('.has-dropdown');
-        if (!item) return;
+
         const isOpen = item.classList.contains('open');
         nav.querySelectorAll('.has-dropdown').forEach(li => {
           li.classList.remove('open');
           const b = li.querySelector('.menu-btn');
           if (b) b.setAttribute('aria-expanded', 'false');
         });
+
         item.classList.toggle('open', !isOpen);
         btn.setAttribute('aria-expanded', String(!isOpen));
       });
