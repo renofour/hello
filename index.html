@@ -65,7 +65,6 @@
       transition: max-height .3s ease;
     }
     .has-dropdown.open .dropdown { max-height: 800px; }
-
     /* Work dropdown specific styling */
     #workItem .dropdown {
       white-space: normal;
@@ -264,7 +263,7 @@
       background: none;
       border: none;
       cursor: pointer;
-      padding: 5px;
+      padding: 10px;
       z-index: 2001;
       width: 30px;
       height: 30px;
@@ -279,14 +278,14 @@
       transition: 0.3s;
     }
     .lightbox-close .bar:nth-child(1) {
-      top: 8px;
+      top: 14px;
       transform: rotate(45deg);
     }
     .lightbox-close .bar:nth-child(2) {
       opacity: 0;
     }
     .lightbox-close .bar:nth-child(3) {
-      top: 8px;
+      top: 14px;
       transform: rotate(-45deg);
     }
     /* Hamburger */
@@ -297,7 +296,7 @@
       background: none;
       border: none;
       cursor: pointer;
-      padding: 5px;
+      padding: 10px;
       z-index: 1000;
       width: 30px;
       height: 30px;
@@ -312,13 +311,13 @@
       transition: 0.3s;
     }
     .menu-toggle .bar:nth-child(1) {
-      top: 8px;
+      top: 0;
     }
     .menu-toggle .bar:nth-child(2) {
       top: 14px;
     }
     .menu-toggle .bar:nth-child(3) {
-      top: 20px;
+      top: 28px;
     }
     .menu-toggle.active .bar:nth-child(1) {
       transform: rotate(45deg);
@@ -446,13 +445,11 @@
         const btn = e.target.closest('.menu-btn');
         if (!btn) return;
 
-        const item = btn.closest('.has-dropdown');
-        if (!item) return;
-
-        // If the work button is clicked, automatically open with 'all' filter
+        // If the work button itself is clicked (not a submenu item), load all images
         if (btn === workBtn) {
           loadWorkContent('all');
           // Open the dropdown
+          const item = btn.closest('.has-dropdown');
           item.classList.add('open');
           btn.setAttribute('aria-expanded', 'true');
           return;
@@ -462,6 +459,9 @@
           menu.classList.remove('collapsed');
           syncButton();
         }
+
+        const item = btn.closest('.has-dropdown');
+        if (!item) return;
 
         const isOpen = item.classList.contains('open');
         nav.querySelectorAll('.has-dropdown').forEach(li => {
@@ -479,7 +479,7 @@
           <div class="align-wrapper">
             <div class="video-wrapper">
               <video autoplay muted loop>
-                <source src="\${initialVideoURL}" type="video/mp4">
+                <source src="${initialVideoURL}" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
             </div>
@@ -561,7 +561,7 @@
           </head>
           <body>
             <div class="work-gallery">
-              \${imagesHTML}
+              ${imagesHTML}
             </div>
             ${iframeScript}
           </body>
@@ -606,4 +606,20 @@
       document.getElementById('logoLink').addEventListener('click', (e) => {
         e.preventDefault();
         loadHomeContent();
-     
+      });
+
+      // Add click event for the work button itself
+      workBtn.addEventListener('click', () => {
+        loadWorkContent('all');
+      });
+
+      document.querySelectorAll('#workItem .submenu-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const filter = btn.dataset.filter;
+          loadWorkContent(filter);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
