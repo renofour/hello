@@ -390,7 +390,6 @@
         </div>
       </div>
     </main>
-
     <!-- Lightbox -->
     <div id="lightbox" class="lightbox">
       <button class="lightbox-close" id="lightboxClose" aria-label="Close lightbox">
@@ -412,7 +411,7 @@
         </div>
       </div>
     </div>
-
+  </div>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const menu = document.getElementById('menu');
@@ -563,6 +562,12 @@
         if (event.data.type === 'openLightbox') {
           lightboxImg1.src = event.data.src;
           lightbox.style.display = 'block';
+
+          // Reset scroll position to top
+          const imagesContainer = document.querySelector('.lightbox-images-container');
+          if (imagesContainer) {
+            imagesContainer.scrollTop = 0;
+          }
         }
       });
 
