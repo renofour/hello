@@ -221,6 +221,11 @@
       overflow-y: auto;
       padding-right: 20px;
       height: 100%;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none;  /* IE and Edge */
+    }
+    .lightbox-images-container::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
     }
     .lightbox-images {
       padding: 20px;
