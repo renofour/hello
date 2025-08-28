@@ -171,8 +171,9 @@
     }
     /* Gallery - Updated for ordered masonry */
     .work-gallery {
-      column-count: 3;
-      column-gap: 10px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
       width: 100%;
       box-sizing: border-box;
       padding: 20px;
@@ -180,25 +181,24 @@
       background: white;
     }
     .gallery-item {
-      display: inline-block;
+      display: block;
       width: 100%;
-      break-inside: avoid;
-      margin-bottom: 10px;
     }
-    .work-gallery img {
+    .gallery-item img {
       width: 100%;
       height: auto;
       display: block;
+      margin: 0;
       cursor: pointer;
     }
     @media (max-width: 1024px) {
       .work-gallery {
-        column-count: 2;
+        grid-template-columns: repeat(2, 1fr);
       }
     }
     @media (max-width: 768px) {
       .work-gallery {
-        column-count: 1;
+        grid-template-columns: 1fr;
       }
     }
     /* Lightbox */
@@ -213,7 +213,129 @@
       background-color: rgba(0, 0, 0, 0.9);
       overflow: hidden;
     }
-    /* Rest of your lightbox styles */
+    .lightbox-container {
+      display: flex;
+      max-width: 900px;
+      margin: 50px auto;
+      position: relative;
+      width: 75%;
+      height: calc(100vh - 100px);
+    }
+    .lightbox-images-container {
+      flex: 1;
+      overflow-y: auto;
+      padding-right: 20px;
+      height: 100%;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .lightbox-images-container::-webkit-scrollbar {
+      display: none;
+    }
+    .lightbox-images {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      background: white;
+      min-height: 100%;
+    }
+    .lightbox-text {
+      width: 200px;
+      padding: 20px;
+      background: white;
+      position: sticky;
+      top: 50px;
+      align-self: flex-start;
+      border-left: 1px solid #eee;
+      height: fit-content;
+    }
+    .lightbox-text-inner {
+      display: inline;
+    }
+    .lightbox-img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin-bottom: 20px;
+    }
+    .lightbox-img:last-child {
+      margin-bottom: 0;
+    }
+    .lightbox-close {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      z-index: 2001;
+      width: 30px;
+      height: 30px;
+    }
+    .lightbox-close .bar {
+      display: block;
+      width: 100%;
+      height: 3px;
+      background: #fff;
+      position: absolute;
+      left: 0;
+      transition: 0.3s;
+    }
+    .lightbox-close .bar:nth-child(1) {
+      top: 14px;
+      transform: rotate(45deg);
+    }
+    .lightbox-close .bar:nth-child(2) {
+      opacity: 0;
+    }
+    .lightbox-close .bar:nth-child(3) {
+      top: 14px;
+      transform: rotate(-45deg);
+    }
+    /* Hamburger */
+    .menu-toggle {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      z-index: 1000;
+      width: 30px;
+      height: 30px;
+    }
+    .menu-toggle .bar {
+      display: block;
+      width: 100%;
+      height: 3px;
+      background: #333;
+      position: absolute;
+      left: 0;
+      transition: 0.3s;
+    }
+    .menu-toggle .bar:nth-child(1) {
+      top: 0;
+    }
+    .menu-toggle .bar:nth-child(2) {
+      top: 14px;
+    }
+    .menu-toggle .bar:nth-child(3) {
+      top: 28px;
+    }
+    .menu-toggle.active .bar:nth-child(1) {
+      transform: rotate(45deg);
+      top: 14px;
+    }
+    .menu-toggle.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle.active .bar:nth-child(3) {
+      transform: rotate(-45deg);
+      top: 14px;
+    }
   </style>
 </head>
 <body>
@@ -424,7 +546,7 @@
 
         // Create HTML with explicit ordering
         const imagesHTML = filteredImages.map((img, index) =>
-          `<div class="gallery-item" style="order: ${index}">
+          `<div class="gallery-item">
             <img src="${img.src}" alt="${img.alt}" data-category="${img.categories.join(',')}" ${index === 0 ? 'class="lightbox-trigger"' : ''}>
           </div>`).join('');
 
@@ -459,30 +581,30 @@
                 background: white;
               }
               .work-gallery {
-                column-count: 3;
-                column-gap: 10px;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
                 width: 100%;
               }
               .gallery-item {
-                display: inline-block;
+                display: block;
                 width: 100%;
-                break-inside: avoid;
-                margin-bottom: 10px;
               }
-              .work-gallery img {
+              .gallery-item img {
                 width: 100%;
                 height: auto;
                 display: block;
+                margin: 0;
                 cursor: pointer;
               }
               @media (max-width: 1024px) {
                 .work-gallery {
-                  column-count: 2;
+                  grid-template-columns: repeat(2, 1fr);
                 }
               }
               @media (max-width: 768px) {
                 .work-gallery {
-                  column-count: 1;
+                  grid-template-columns: 1fr;
                 }
               }
             </style>
