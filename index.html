@@ -13,6 +13,7 @@
       --page-gutter: 20px;
       --header-bg-rgb: 255, 255, 255;
       --header-bg-opacity: 0.5;
+      --gallery-gap: 10px;
     }
     /* Layout */
     .container {
@@ -169,11 +170,11 @@
       border: none;
       background: transparent;
     }
-    /* Gallery - Updated for strict ordering with masonry effect */
+    /* Gallery - Updated for consistent spacing */
     .work-gallery {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
+      gap: var(--gallery-gap);
       width: 100%;
       box-sizing: border-box;
       padding: 20px;
@@ -183,7 +184,6 @@
     .gallery-item {
       display: block;
       width: 100%;
-      margin-bottom: 10px;
     }
     .gallery-item img {
       width: 100%;
@@ -545,7 +545,7 @@
           ? images
           : images.filter(img => img.categories.includes(filter) || img.categories.length === 0);
 
-        // Create HTML with explicit ordering
+        // Create HTML with consistent spacing
         const imagesHTML = filteredImages.map((img, index) =>
           `<div class="gallery-item">
             <img src="${img.src}" alt="${img.alt}" data-category="${img.categories.join(',')}" ${index === 0 ? 'class="lightbox-trigger"' : ''}>
@@ -584,13 +584,12 @@
               .work-gallery {
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
-                gap: 10px;
+                gap: var(--gallery-gap);
                 width: 100%;
               }
               .gallery-item {
                 display: block;
                 width: 100%;
-                margin-bottom: 10px;
               }
               .gallery-item img {
                 width: 100%;
