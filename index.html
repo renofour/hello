@@ -169,37 +169,31 @@
       border: none;
       background: transparent;
     }
-    /* Gallery - Updated for ordered masonry */
+    /* Gallery */
     .work-gallery {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
+      column-count: 3;
+      column-gap: 10px;
       width: 100%;
       box-sizing: border-box;
       padding: 20px;
       margin: 0;
       background: white;
     }
-    .gallery-item {
-      display: block;
+    .work-gallery img {
       width: 100%;
-    }
-    .gallery-item img {
-      width: 100%;
-      height: auto;
+      margin-bottom: 10px;
       display: block;
-      margin: 0;
+      break-inside: avoid;
+      padding: 0;
+      margin-left: 0;
+      margin-right: 0;
       cursor: pointer;
     }
     @media (max-width: 1024px) {
-      .work-gallery {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      .work-gallery { column-count: 2; }
     }
     @media (max-width: 768px) {
-      .work-gallery {
-        grid-template-columns: 1fr;
-      }
+      .work-gallery { column-count: 1; }
     }
     /* Lightbox */
     .lightbox {
@@ -451,8 +445,10 @@
         const btn = e.target.closest('.menu-btn');
         if (!btn) return;
 
+        // If the work button itself is clicked (not a submenu item), load all images
         if (btn === workBtn) {
           loadWorkContent('all');
+          // Open the dropdown
           const item = btn.closest('.has-dropdown');
           item.classList.add('open');
           btn.setAttribute('aria-expanded', 'true');
@@ -492,8 +488,7 @@
       }
 
       function loadWorkContent(filter = 'all') {
-        const images = [
-          // Images 1-44 in your exact preferred order
+       const images = [
           { src: "https://drive.google.com/thumbnail?id=1KS_yxQ51nW9AnfmysBbYxzPaLG54wuYi&sz=w1200", alt: "Work Image 1", categories: ["print", "digital"] },
           { src: "https://drive.google.com/thumbnail?id=1KewGTBxm7TuzwGh8NcHFi-MtO0XZusNF&sz=w1200", alt: "Work Image 2", categories: ["3d", "product"] },
           { src: "https://drive.google.com/thumbnail?id=16K-hJ7YB3eKzZ0Fpc1QsKV0EnO8l8mUE&sz=w1200", alt: "Work Image 3", categories: ["digital", "3d"] },
@@ -518,7 +513,7 @@
           { src: "https://drive.google.com/thumbnail?id=1tmNtf3fpuG35aQY_B20jX5zFuJYbZn9t&sz=w1200", alt: "Work Image 22", categories: ["3d"] },
           { src: "https://drive.google.com/thumbnail?id=1N83Oq3gnYUEp_c-ch77YdMlexB1KemMm&sz=w1200", alt: "Work Image 23", categories: ["3d"] },
           { src: "https://drive.google.com/thumbnail?id=1TEum58CVrfp_w70fZ69TzJMpz8-Vb5bA&sz=w1200", alt: "Work Image 24", categories: ["3d"] },
-          { src: "https://drive.google.com/thumbnail?id=1TEum58CVrfp_w70fZ69TzJMpz8-Vb5bA&sz=w1200", alt: "Work Image 25", categories: [] },
+          { src: "https://drive.google.com/thumbnail?id=1TEum58CVrfp_w70fZ69TzJMpz8-Vb5bA&sz=w1200", alt: "Work Image 25", categories: [] }, // Marked as 'x' in your list
           { src: "https://drive.google.com/thumbnail?id=17Dci5Cge7fJ71zopRl_hpwU1IcnQFPm4&sz=w1200", alt: "Work Image 26", categories: ["3d"] },
           { src: "https://drive.google.com/thumbnail?id=1E_hDEfgAWbIXjYdfEAj3_9TEDuRbtTC2&sz=w1200", alt: "Work Image 27", categories: ["3d"] },
           { src: "https://drive.google.com/thumbnail?id=1nKObgZY-U4y4a81sacyipuSasX9zbqNH&sz=w1200", alt: "Work Image 28", categories: ["3d"] },
@@ -528,27 +523,24 @@
           { src: "https://drive.google.com/thumbnail?id=1jet7dWkYBvufxEfkwkkTrliGeVvoaqsx&sz=w1200", alt: "Work Image 32", categories: ["print"] },
           { src: "https://drive.google.com/thumbnail?id=1xrQtbZopFhhVC6qTfrLz-QN-9UCrOS7c&sz=w1200", alt: "Work Image 33", categories: ["print"] },
           { src: "https://drive.google.com/thumbnail?id=1GsOPy6yuFUl24n16hg7o_mZjd9kmH5kS&sz=w1200", alt: "Work Image 34", categories: ["print"] },
-          { src: "https://drive.google.com/thumbnail?id=11Go7f8kpf8HlTC096hoZR10I3qSdKo7j&sz=w1200", alt: "Work Image 35", categories: [] },
+          { src: "https://drive.google.com/thumbnail?id=11Go7f8kpf8HlTC096hoZR10I3qSdKo7j&sz=w1200", alt: "Work Image 35", categories: [] }, // Marked as 'x' in your list
           { src: "https://drive.google.com/thumbnail?id=1B9ORXIyUl-ex7XxIh33QvsVJz8b_Rh3V&sz=w1200", alt: "Work Image 36", categories: ["print"] },
           { src: "https://drive.google.com/thumbnail?id=1PJWWacnXxr_oMKHuyofx4jbUt8a1jRlx&sz=w1200", alt: "Work Image 37", categories: ["3d"] },
           { src: "https://drive.google.com/thumbnail?id=1WTPglGAVDTdMfkLsa2VsoT73u28Jbjje&sz=w1200", alt: "Work Image 38", categories: ["product"] },
           { src: "https://drive.google.com/thumbnail?id=1nUz7nIiWNDHeQMzinTPRCZbeWFe0jGxA&sz=w1200", alt: "Work Image 39", categories: ["print"] },
           { src: "https://drive.google.com/thumbnail?id=13uweX8X0Jo9ozIDf7svEOeDuJXK7sTQ3&sz=w1200", alt: "Work Image 40", categories: ["print"] },
           { src: "https://drive.google.com/thumbnail?id=15yqax_AF4CjMU_XIOq_brY7VsTGdEd2K&sz=w1200", alt: "Work Image 41", categories: ["print", "product"] },
-          { src: "https://drive.google.com/thumbnail?id=1ckbYcoB5DozcmEayv6JKjgzX17i29A2Q&sz=w1200", alt: "Work Image 42", categories: [] },
+          { src: "https://drive.google.com/thumbnail?id=1ckbYcoB5DozcmEayv6JKjgzX17i29A2Q&sz=w1200", alt: "Work Image 42", categories: [] }, // Marked as 'x' in your list
           { src: "https://drive.google.com/thumbnail?id=1OW9Ji8REZrci9urnVlcJpC3SN5efFrFG&sz=w1200", alt: "Work Image 43", categories: ["3d"] },
           { src: "https://drive.google.com/thumbnail?id=120WnTeptzS_lZM9t4LquSQpPUy2N_k3V&sz=w1200", alt: "Work Image 44", categories: ["3d"] }
         ];
 
         const filteredImages = filter === 'all'
           ? images
-          : images.filter(img => img.categories.includes(filter) || img.categories.length === 0);
+          : images.filter(img => img.categories.includes(filter));
 
-        // Create HTML with explicit ordering
         const imagesHTML = filteredImages.map((img, index) =>
-          `<div class="gallery-item">
-            <img src="${img.src}" alt="${img.alt}" data-category="${img.categories.join(',')}" ${index === 0 ? 'class="lightbox-trigger"' : ''}>
-          </div>`).join('');
+          `<img src="${img.src}" alt="${img.alt}" data-category="${img.categories.join(',')}" ${index === 0 ? 'class="lightbox-trigger"' : ''}>`).join('');
 
         const iframeScript = `
           <script>
@@ -581,31 +573,24 @@
                 background: white;
               }
               .work-gallery {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 10px;
+                column-count: 3;
+                column-gap: 10px;
                 width: 100%;
               }
-              .gallery-item {
-                display: block;
-                width: 100%;
-              }
-              .gallery-item img {
+              .work-gallery img {
                 width: 100%;
                 height: auto;
+                max-width: 100%;
+                margin: 0 0 10px 0;
                 display: block;
-                margin: 0;
+                break-inside: avoid;
                 cursor: pointer;
               }
               @media (max-width: 1024px) {
-                .work-gallery {
-                  grid-template-columns: repeat(2, 1fr);
-                }
+                .work-gallery { column-count: 2; }
               }
               @media (max-width: 768px) {
-                .work-gallery {
-                  grid-template-columns: 1fr;
-                }
+                .work-gallery { column-count: 1; }
               }
             </style>
           </head>
@@ -633,6 +618,8 @@
         if (event.data.type === 'openLightbox') {
           lightboxImg1.src = event.data.src;
           lightbox.style.display = 'block';
+
+          // Reset scroll position to top
           const imagesContainer = document.querySelector('.lightbox-images-container');
           if (imagesContainer) {
             imagesContainer.scrollTop = 0;
@@ -656,6 +643,7 @@
         loadHomeContent();
       });
 
+      // Add click event for the work button itself
       workBtn.addEventListener('click', () => {
         loadWorkContent('all');
       });
@@ -670,3 +658,5 @@
   </script>
 </body>
 </html>
+
+
