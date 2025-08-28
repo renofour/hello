@@ -13,7 +13,7 @@
       --page-gutter: 20px;
       --header-bg-rgb: 255, 255, 255;
       --header-bg-opacity: 0.5;
-      --gallery-gap: 10px;
+      --gallery-gap: 8px;
     }
     /* Layout */
     .container {
@@ -170,7 +170,7 @@
       border: none;
       background: transparent;
     }
-    /* Gallery - Updated for consistent spacing */
+    /* Gallery - Updated for equal spacing */
     .work-gallery {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -184,6 +184,8 @@
     .gallery-item {
       display: block;
       width: 100%;
+      padding: 0;
+      margin: 0;
     }
     .gallery-item img {
       width: 100%;
@@ -191,6 +193,7 @@
       display: block;
       margin: 0;
       cursor: pointer;
+      border: 1px solid transparent; /* Ensures consistent spacing */
     }
     @media (max-width: 1024px) {
       .work-gallery {
@@ -545,7 +548,7 @@
           ? images
           : images.filter(img => img.categories.includes(filter) || img.categories.length === 0);
 
-        // Create HTML with consistent spacing
+        // Create HTML with equal spacing on all sides
         const imagesHTML = filteredImages.map((img, index) =>
           `<div class="gallery-item">
             <img src="${img.src}" alt="${img.alt}" data-category="${img.categories.join(',')}" ${index === 0 ? 'class="lightbox-trigger"' : ''}>
@@ -590,6 +593,8 @@
               .gallery-item {
                 display: block;
                 width: 100%;
+                padding: 0;
+                margin: 0;
               }
               .gallery-item img {
                 width: 100%;
@@ -597,6 +602,7 @@
                 display: block;
                 margin: 0;
                 cursor: pointer;
+                border: 1px solid transparent; /* Ensures consistent spacing */
               }
               @media (max-width: 1024px) {
                 .work-gallery {
