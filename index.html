@@ -13,7 +13,6 @@
       --page-gutter: 20px;
       --header-bg-rgb: 255, 255, 255;
       --header-bg-opacity: 0.5;
-      --subheader-height: 50px;
     }
     /* Layout */
     .container {
@@ -30,58 +29,306 @@
       box-sizing: border-box;
       padding: var(--menu-pad);
     }
-    /* Rest of your existing CSS remains exactly the same */
-
-    /* Work iframe wrapper - adjusted for subheader */
+    .left-menu.collapsed {
+      width: var(--menu-collapsed);
+      padding: var(--menu-pad) 5px;
+    }
+    .left-menu nav { margin-top: 100px; }
+    .left-menu.collapsed nav { display: none; }
+    .left-menu ul { list-style: none; padding: 0; margin: 0; }
+    .left-menu li { margin-bottom: 6px; position: relative; }
+    .menu-btn {
+      background: none;
+      border: none;
+      padding: 5px 0;
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
+      color: #333;
+      font: inherit;
+      display: block;
+      user-select: none;
+    }
+    .has-dropdown .menu-btn::after {
+      content: "▸";
+      float: right;
+      transition: transform .2s ease;
+    }
+    .has-dropdown.open .menu-btn::after { transform: rotate(90deg); }
+    .dropdown {
+      font-size: 14px;
+      color: #333;
+      margin-top: 8px;
+      padding-left: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .3s ease;
+    }
+    .has-dropdown.open .dropdown { max-height: 800px; }
+    /* Work dropdown specific styling */
+    #workItem .dropdown {
+      white-space: normal;
+      padding-left: 0;
+      line-height: 1.4;
+    }
+    #workItem .dropdown .submenu-row {
+      display: block;
+      margin-bottom: 4px;
+    }
+    #workItem .dropdown .submenu-btn {
+      background: none;
+      border: none;
+      font-size: 14px;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+      color: #333;
+      display: inline;
+    }
+    #workItem .dropdown .submenu-btn:not(:last-child)::after {
+      content: "•";
+      margin-right: 8px;
+      margin-left: 8px;
+      color: #555;
+    }
+    /* Right content layout */
+    .right-content {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      height: var(--header-height);
+      background: rgba(var(--header-bg-rgb), var(--header-bg-opacity));
+      z-index: 100;
+      position: sticky;
+      top: 0;
+      padding: 0;
+    }
+    .header .align-wrapper {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      box-sizing: border-box;
+      padding-left: var(--page-gutter);
+      padding-right: var(--page-gutter);
+    }
+    .header img {
+      width: 100px;
+      height: auto;
+      display: block;
+    }
+    /* Scrollable content */
+    .content-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0;
+      box-sizing: border-box;
+      background: transparent;
+    }
+    .align-wrapper {
+      width: 100%;
+      box-sizing: border-box;
+      padding-left: var(--page-gutter);
+      padding-right: var(--page-gutter);
+    }
+    /* Video */
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+    }
+    .video-wrapper video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    /* Work iframe wrapper */
     .work-iframe-wrapper {
       width: calc(100% + 40px);
-      height: calc(100vh - var(--header-height) - var(--subheader-height));
+      height: calc(100vh - var(--header-height));
       border: none;
       overflow: hidden;
       margin-left: -20px;
       margin-right: -20px;
-      position: relative;
-      top: var(--subheader-height);
     }
-
-    /* New floating subheader */
-    .work-subheader {
-      position: sticky;
-      top: var(--header-height);
-      height: var(--subheader-height);
-      background: white;
-      z-index: 50;
-      width: calc(100% + 40px);
-      margin-left: -20px;
-      border-bottom: 1px solid #eee;
-      display: flex;
-      align-items: center;
-      padding: 0 20px;
+    .work-iframe-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: transparent;
+    }
+    /* Gallery */
+    .work-gallery {
+      column-count: 3;
+      column-gap: 10px;
+      width: 100%;
       box-sizing: border-box;
-      font-size: 14px;
-      color: #333;
+      padding: 20px;
+      margin: 0;
+      background: white;
     }
-
-    .subheader-content {
-      display: flex;
-      gap: 20px;
-    }
-
-    .subheader-item {
+    .work-gallery img {
+      width: 100%;
+      margin-bottom: 10px;
+      display: block;
+      break-inside: avoid;
+      padding: 0;
+      margin-left: 0;
+      margin-right: 0;
       cursor: pointer;
-      padding: 5px 0;
-      border-bottom: 2px solid transparent;
-      transition: all 0.2s ease;
     }
-
-    .subheader-item:not(:last-child)::after {
-      content: "•";
-      margin-left: 20px;
-      color: #ccc;
+    @media (max-width: 1024px) {
+      .work-gallery { column-count: 2; }
     }
-
-    .subheader-item.active {
-      border-bottom-color: #333;
+    @media (max-width: 768px) {
+      .work-gallery { column-count: 1; }
+    }
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      overflow: hidden;
+    }
+    .lightbox-container {
+      display: flex;
+      max-width: 900px;
+      margin: 50px auto;
+      position: relative;
+      width: 75%;
+      height: calc(100vh - 100px);
+    }
+    .lightbox-images-container {
+      flex: 1;
+      overflow-y: auto;
+      padding-right: 20px;
+      height: 100%;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .lightbox-images-container::-webkit-scrollbar {
+      display: none;
+    }
+    .lightbox-images {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      background: white;
+      min-height: 100%;
+    }
+    .lightbox-text {
+      width: 200px;
+      padding: 20px;
+      background: white;
+      position: sticky;
+      top: 50px;
+      align-self: flex-start;
+      border-left: 1px solid #eee;
+      height: fit-content;
+    }
+    .lightbox-text-inner {
+      display: inline;
+    }
+    .lightbox-img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin-bottom: 20px;
+    }
+    .lightbox-img:last-child {
+      margin-bottom: 0;
+    }
+    .lightbox-close {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      z-index: 2001;
+      width: 30px;
+      height: 30px;
+    }
+    .lightbox-close .bar {
+      display: block;
+      width: 100%;
+      height: 3px;
+      background: #fff;
+      position: absolute;
+      left: 0;
+      transition: 0.3s;
+    }
+    .lightbox-close .bar:nth-child(1) {
+      top: 14px;
+      transform: rotate(45deg);
+    }
+    .lightbox-close .bar:nth-child(2) {
+      opacity: 0;
+    }
+    .lightbox-close .bar:nth-child(3) {
+      top: 14px;
+      transform: rotate(-45deg);
+    }
+    /* Hamburger */
+    .menu-toggle {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      z-index: 1000;
+      width: 30px;
+      height: 30px;
+    }
+    .menu-toggle .bar {
+      display: block;
+      width: 100%;
+      height: 3px;
+      background: #333;
+      position: absolute;
+      left: 0;
+      transition: 0.3s;
+    }
+    .menu-toggle .bar:nth-child(1) {
+      top: 0;
+    }
+    .menu-toggle .bar:nth-child(2) {
+      top: 14px;
+    }
+    .menu-toggle .bar:nth-child(3) {
+      top: 28px;
+    }
+    .menu-toggle.active .bar:nth-child(1) {
+      transform: rotate(45deg);
+      top: 14px;
+    }
+    .menu-toggle.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle.active .bar:nth-child(3) {
+      transform: rotate(-45deg);
+      top: 14px;
     }
   </style>
 </head>
@@ -135,18 +382,6 @@
           <a href="#" id="logoLink"><img src="NYXum_logo_blood2.png" alt="NYXum Logo" /></a>
         </div>
       </div>
-
-      <!-- New floating subheader - appears only in work section -->
-      <div class="work-subheader" id="workSubheader" style="display: none;">
-        <div class="subheader-content">
-          <div class="subheader-item active" data-filter="all">All</div>
-          <div class="subheader-item" data-filter="print">Print</div>
-          <div class="subheader-item" data-filter="digital">Digital</div>
-          <div class="subheader-item" data-filter="3d">3D Design</div>
-          <div class="subheader-item" data-filter="product">Product Design</div>
-        </div>
-      </div>
-
       <!-- Scrollable content -->
       <div class="content-area" id="contentArea">
         <div class="align-wrapper">
@@ -191,7 +426,6 @@
       const lightbox = document.getElementById('lightbox');
       const lightboxClose = document.getElementById('lightboxClose');
       const lightboxImg1 = document.getElementById('lightbox-img-1');
-      const workSubheader = document.getElementById('workSubheader');
       const initialVideoURL = "https://framerusercontent.com/assets/CtSYQwWgD3v3HDe3HMRPnHbvGOk.mp4";
 
       function syncButton() {
@@ -211,9 +445,10 @@
         const btn = e.target.closest('.menu-btn');
         if (!btn) return;
 
+        // If the work button itself is clicked (not a submenu item), load all images
         if (btn === workBtn) {
           loadWorkContent('all');
-          workSubheader.style.display = 'block';
+          // Open the dropdown
           const item = btn.closest('.has-dropdown');
           item.classList.add('open');
           btn.setAttribute('aria-expanded', 'true');
@@ -240,7 +475,6 @@
       });
 
       function loadHomeContent() {
-        workSubheader.style.display = 'none';
         contentArea.innerHTML = `
           <div class="align-wrapper">
             <div class="video-wrapper">
@@ -254,18 +488,7 @@
       }
 
       function loadWorkContent(filter = 'all') {
-        workSubheader.style.display = 'block';
-
-        // Update active state in subheader
-        document.querySelectorAll('.subheader-item').forEach(item => {
-          item.classList.remove('active');
-          if (item.dataset.filter === filter) {
-            item.classList.add('active');
-          }
-        });
-
-        const images = [
-          // Your images array remains exactly the same
+       const images = [
           { src: "https://drive.google.com/thumbnail?id=1KS_yxQ51nW9AnfmysBbYxzPaLG54wuYi&sz=w1200", alt: "Work Image 1", categories: ["print", "digital"] },
           { src: "https://drive.google.com/thumbnail?id=1KewGTBxm7TuzwGh8NcHFi-MtO0XZusNF&sz=w1200", alt: "Work Image 2", categories: ["3d", "product"] },
           { src: "https://drive.google.com/thumbnail?id=16K-hJ7YB3eKzZ0Fpc1QsKV0EnO8l8mUE&sz=w1200", alt: "Work Image 3", categories: ["digital", "3d"] },
@@ -280,7 +503,7 @@
           { src: "https://drive.google.com/thumbnail?id=12yh7OmQPdnBEHswGDG6-6HqUXB12-zOM&sz=w1200", alt: "Work Image 12", categories: ["digital"] },
           { src: "https://drive.google.com/thumbnail?id=1OOpjoJiNmzZxttfIBpQ43xWlXKiMoDHz&sz=w1200", alt: "Work Image 13", categories: ["digital"] },
           { src: "https://drive.google.com/thumbnail?id=1F2-rWxNQC7JJAib07GLS7u2whIhXVWeZ&sz=w1200", alt: "Work Image 14", categories: ["digital"] },
-          { src: "https://drive.google.com/thumbnail?id=1AWHoYd-5GgWuHgjsATCY6zVg8YUCvtpU&sz=w1200", alt: "Work Image 15", categories: ["digital"] },
+          { src: "https://drive.google.com/thumbnail?id=1AWHoYd-5GgWuHgjsATCY6zVg8YUCvtpU&sz=w1200", alt: "Work Image 26", categories: ["digital"] },
           { src: "https://drive.google.com/thumbnail?id=1gVEbVpVpPA6vdmhLqFdM1TxhUngXT-kp&sz=w1200", alt: "Work Image 16", categories: ["3d"] },
           { src: "https://drive.google.com/thumbnail?id=1I7S1LB7e2FaIMDz9Zz6Fm5Ipwug2uqmF&sz=w1200", alt: "Work Image 17", categories: ["product"] },
           { src: "https://drive.google.com/thumbnail?id=1mqoGFLRHapYzaITMI1ysyVzlO1Rs0O1y&sz=w1200", alt: "Work Image 18", categories: ["3d"] },
@@ -290,8 +513,8 @@
           { src: "https://drive.google.com/thumbnail?id=1tmNtf3fpuG35aQY_B20jX5zFuJYbZn9t&sz=w1200", alt: "Work Image 22", categories: ["3d"] },
           { src: "https://drive.google.com/thumbnail?id=1N83Oq3gnYUEp_c-ch77YdMlexB1KemMm&sz=w1200", alt: "Work Image 23", categories: ["3d"] },
           { src: "https://drive.google.com/thumbnail?id=1TEum58CVrfp_w70fZ69TzJMpz8-Vb5bA&sz=w1200", alt: "Work Image 24", categories: ["3d"] },
-          { src: "https://drive.google.com/thumbnail?id=1TEum58CVrfp_w70fZ69TzJMpz8-Vb5bA&sz=w1200", alt: "Work Image 25", categories: [] },
-          { src: "https://drive.google.com/thumbnail?id=17Dci5Cge7fJ71zopRl_hpwU1IcnQFPm4&sz=w1200", alt: "Work Image 26", categories: ["3d"] },
+          { src: "https://drive.google.com/thumbnail?id=1TEum58CVrfp_w70fZ69TzJMpz8-Vb5bA&sz=w1200", alt: "Work Image 25", categories: [] }, // Marked as 'x' in your list
+          { src: "https://drive.google.com/thumbnail?id=17Dci5Cge7fJ71zopRl_hpwU1IcnQFPm4&sz=w1200", alt: "Work Image 15", categories: ["3d"] },
           { src: "https://drive.google.com/thumbnail?id=1E_hDEfgAWbIXjYdfEAj3_9TEDuRbtTC2&sz=w1200", alt: "Work Image 27", categories: ["3d"] },
           { src: "https://drive.google.com/thumbnail?id=1nKObgZY-U4y4a81sacyipuSasX9zbqNH&sz=w1200", alt: "Work Image 28", categories: ["3d"] },
           { src: "https://drive.google.com/thumbnail?id=1wZFHUc3GCmn3YmXXotewe7DV9ho6UaH8&sz=w1200", alt: "Work Image 29", categories: ["3d", "print"] },
@@ -300,21 +523,21 @@
           { src: "https://drive.google.com/thumbnail?id=1jet7dWkYBvufxEfkwkkTrliGeVvoaqsx&sz=w1200", alt: "Work Image 32", categories: ["print"] },
           { src: "https://drive.google.com/thumbnail?id=1xrQtbZopFhhVC6qTfrLz-QN-9UCrOS7c&sz=w1200", alt: "Work Image 33", categories: ["print"] },
           { src: "https://drive.google.com/thumbnail?id=1GsOPy6yuFUl24n16hg7o_mZjd9kmH5kS&sz=w1200", alt: "Work Image 34", categories: ["print"] },
-          { src: "https://drive.google.com/thumbnail?id=11Go7f8kpf8HlTC096hoZR10I3qSdKo7j&sz=w1200", alt: "Work Image 35", categories: [] },
+          { src: "https://drive.google.com/thumbnail?id=11Go7f8kpf8HlTC096hoZR10I3qSdKo7j&sz=w1200", alt: "Work Image 35", categories: [] }, // Marked as 'x' in your list
           { src: "https://drive.google.com/thumbnail?id=1B9ORXIyUl-ex7XxIh33QvsVJz8b_Rh3V&sz=w1200", alt: "Work Image 36", categories: ["print"] },
           { src: "https://drive.google.com/thumbnail?id=1PJWWacnXxr_oMKHuyofx4jbUt8a1jRlx&sz=w1200", alt: "Work Image 37", categories: ["3d"] },
           { src: "https://drive.google.com/thumbnail?id=1WTPglGAVDTdMfkLsa2VsoT73u28Jbjje&sz=w1200", alt: "Work Image 38", categories: ["product"] },
           { src: "https://drive.google.com/thumbnail?id=1nUz7nIiWNDHeQMzinTPRCZbeWFe0jGxA&sz=w1200", alt: "Work Image 39", categories: ["print"] },
           { src: "https://drive.google.com/thumbnail?id=13uweX8X0Jo9ozIDf7svEOeDuJXK7sTQ3&sz=w1200", alt: "Work Image 40", categories: ["print"] },
           { src: "https://drive.google.com/thumbnail?id=15yqax_AF4CjMU_XIOq_brY7VsTGdEd2K&sz=w1200", alt: "Work Image 41", categories: ["print", "product"] },
-          { src: "https://drive.google.com/thumbnail?id=1ckbYcoB5DozcmEayv6JKjgzX17i29A2Q&sz=w1200", alt: "Work Image 42", categories: [] },
+          { src: "https://drive.google.com/thumbnail?id=1ckbYcoB5DozcmEayv6JKjgzX17i29A2Q&sz=w1200", alt: "Work Image 42", categories: [] }, // Marked as 'x' in your list
           { src: "https://drive.google.com/thumbnail?id=1OW9Ji8REZrci9urnVlcJpC3SN5efFrFG&sz=w1200", alt: "Work Image 43", categories: ["3d"] },
           { src: "https://drive.google.com/thumbnail?id=120WnTeptzS_lZM9t4LquSQpPUy2N_k3V&sz=w1200", alt: "Work Image 44", categories: ["3d"] }
         ];
 
         const filteredImages = filter === 'all'
           ? images
-          : images.filter(img => img.categories.includes(filter) || img.categories.length === 0);
+          : images.filter(img => img.categories.includes(filter));
 
         const imagesHTML = filteredImages.map((img, index) =>
           `<img src="${img.src}" alt="${img.alt}" data-category="${img.categories.join(',')}" ${index === 0 ? 'class="lightbox-trigger"' : ''}>`).join('');
@@ -395,25 +618,13 @@
         if (event.data.type === 'openLightbox') {
           lightboxImg1.src = event.data.src;
           lightbox.style.display = 'block';
+
+          // Reset scroll position to top
           const imagesContainer = document.querySelector('.lightbox-images-container');
           if (imagesContainer) {
             imagesContainer.scrollTop = 0;
           }
         }
-      });
-
-      // Add click handlers for subheader
-      document.querySelectorAll('.subheader-item').forEach(item => {
-        item.addEventListener('click', function() {
-          const filter = this.dataset.filter;
-          loadWorkContent(filter);
-
-          // Update active state
-          document.querySelectorAll('.subheader-item').forEach(i => {
-            i.classList.remove('active');
-          });
-          this.classList.add('active');
-        });
       });
 
       lightboxClose.onclick = function() {
@@ -432,6 +643,7 @@
         loadHomeContent();
       });
 
+      // Add click event for the work button itself
       workBtn.addEventListener('click', () => {
         loadWorkContent('all');
       });
@@ -440,17 +652,11 @@
         btn.addEventListener('click', () => {
           const filter = btn.dataset.filter;
           loadWorkContent(filter);
-
-          // Update subheader active state
-          document.querySelectorAll('.subheader-item').forEach(item => {
-            item.classList.remove('active');
-            if (item.dataset.filter === filter) {
-              item.classList.add('active');
-            }
-          });
         });
       });
     });
   </script>
 </body>
 </html>
+
+
