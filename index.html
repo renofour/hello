@@ -124,6 +124,30 @@
       height: auto;
       display: block;
     }
+    /* Sub-header (floating filters) */
+    .sub-header {
+      position: sticky;
+      top: var(--header-height);
+      background: white;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 0;
+      border-bottom: 1px solid #ddd;
+      z-index: 99;
+      font-size: 16px;
+    }
+    .sub-header .filter-btn {
+      background: none;
+      border: none;
+      font-size: 16px;
+      color: #333;
+      cursor: pointer;
+      padding: 0;
+    }
+    .sub-header .dot {
+      color: #555;
+    }
     /* Scrollable content */
     .content-area {
       flex: 1;
@@ -157,7 +181,7 @@
     /* Work iframe wrapper */
     .work-iframe-wrapper {
       width: calc(100% + 40px);
-      height: calc(100vh - var(--header-height));
+      height: calc(100vh - var(--header-height) - 60px);
       border: none;
       overflow: hidden;
       margin-left: -20px;
@@ -382,6 +406,18 @@
           <a href="#" id="logoLink"><img src="NYXum_logo_blood2.png" alt="NYXum Logo" /></a>
         </div>
       </div>
+      <!-- Sub-header (floating filters) -->
+      <div class="sub-header">
+        <button class="filter-btn" data-filter="all">All</button>
+        <span class="dot">•</span>
+        <button class="filter-btn" data-filter="print">Print</button>
+        <span class="dot">•</span>
+        <button class="filter-btn" data-filter="digital">Digital</button>
+        <span class="dot">•</span>
+        <button class="filter-btn" data-filter="3d">3D Design</button>
+        <span class="dot">•</span>
+        <button class="filter-btn" data-filter="product">Product Design</button>
+      </div>
       <!-- Scrollable content -->
       <div class="content-area" id="contentArea">
         <div class="align-wrapper">
@@ -488,175 +524,6 @@
       }
 
       function loadWorkContent(filter = 'all') {
-       const images = [
+        const images = [
           { src: "https://drive.google.com/thumbnail?id=1KS_yxQ51nW9AnfmysBbYxzPaLG54wuYi&sz=w1200", alt: "Work Image 1", categories: ["print", "digital"] },
-          { src: "https://drive.google.com/thumbnail?id=1KewGTBxm7TuzwGh8NcHFi-MtO0XZusNF&sz=w1200", alt: "Work Image 2", categories: ["3d", "product"] },
-          { src: "https://drive.google.com/thumbnail?id=16K-hJ7YB3eKzZ0Fpc1QsKV0EnO8l8mUE&sz=w1200", alt: "Work Image 3", categories: ["digital", "3d"] },
-          { src: "https://drive.google.com/thumbnail?id=1-IfFsOem4_uFoWHL7x0gUz-Nkk8s-Bu8&sz=w1200", alt: "Work Image 4", categories: ["print"] },
-          { src: "https://drive.google.com/thumbnail?id=1gaGdfaccHZWwBJw9yeNVh2mWeJ-VS3OE&sz=w1200", alt: "Work Image 5", categories: ["digital"] },
-          { src: "https://drive.google.com/thumbnail?id=1PXKgsT4wJTHYtTM6AEO2JrviddGzrMlH&sz=w1200", alt: "Work Image 6", categories: ["3d"] },
-          { src: "https://drive.google.com/thumbnail?id=1lsUV17h-65keB9IKgg_cJvifitwEC6Vi&sz=w1200", alt: "Work Image 7", categories: ["product"] },
-          { src: "https://drive.google.com/thumbnail?id=1zUrGQs70B-vTUnw0fBHeXn4ocoe2qy5T&sz=w1200", alt: "Work Image 8", categories: ["product", "print"] },
-          { src: "https://drive.google.com/thumbnail?id=1IwnEtTHPZukFOMrXLGbCvk3ag429jFEM&sz=w1200", alt: "Work Image 9", categories: ["print"] },
-          { src: "https://drive.google.com/thumbnail?id=1ptX-VRuXA1tcAnu9SbpojjjCTAR7kPuT&sz=w1200", alt: "Work Image 10", categories: ["3d"] },
-          { src: "https://drive.google.com/thumbnail?id=1Ivmmh-MDWZw9BH8omaI9lDI5eBHOgmTp&sz=w1200", alt: "Work Image 11", categories: ["product", "print"] },
-          { src: "https://drive.google.com/thumbnail?id=12yh7OmQPdnBEHswGDG6-6HqUXB12-zOM&sz=w1200", alt: "Work Image 12", categories: ["digital"] },
-          { src: "https://drive.google.com/thumbnail?id=1OOpjoJiNmzZxttfIBpQ43xWlXKiMoDHz&sz=w1200", alt: "Work Image 13", categories: ["digital"] },
-          { src: "https://drive.google.com/thumbnail?id=1F2-rWxNQC7JJAib07GLS7u2whIhXVWeZ&sz=w1200", alt: "Work Image 14", categories: ["digital"] },
-          { src: "https://drive.google.com/thumbnail?id=1AWHoYd-5GgWuHgjsATCY6zVg8YUCvtpU&sz=w1200", alt: "Work Image 26", categories: ["digital"] },
-          { src: "https://drive.google.com/thumbnail?id=1gVEbVpVpPA6vdmhLqFdM1TxhUngXT-kp&sz=w1200", alt: "Work Image 16", categories: ["3d"] },
-          { src: "https://drive.google.com/thumbnail?id=1I7S1LB7e2FaIMDz9Zz6Fm5Ipwug2uqmF&sz=w1200", alt: "Work Image 17", categories: ["product"] },
-          { src: "https://drive.google.com/thumbnail?id=1mqoGFLRHapYzaITMI1ysyVzlO1Rs0O1y&sz=w1200", alt: "Work Image 18", categories: ["3d"] },
-          { src: "https://drive.google.com/thumbnail?id=1U4w5yifsei5eouYWFk2iwvpRSvDSUv1x&sz=w1200", alt: "Work Image 19", categories: ["3d"] },
-          { src: "https://drive.google.com/thumbnail?id=1F9qZLOnde9gnx-i-fl_xfBNaQA9K6P9G&sz=w1200", alt: "Work Image 20", categories: ["print"] },
-          { src: "https://drive.google.com/thumbnail?id=1EKKl8t-s9vOnkoE0i67R07sXAcHnJXOU&sz=w1200", alt: "Work Image 21", categories: ["3d"] },
-          { src: "https://drive.google.com/thumbnail?id=1tmNtf3fpuG35aQY_B20jX5zFuJYbZn9t&sz=w1200", alt: "Work Image 22", categories: ["3d"] },
-          { src: "https://drive.google.com/thumbnail?id=1N83Oq3gnYUEp_c-ch77YdMlexB1KemMm&sz=w1200", alt: "Work Image 23", categories: ["3d"] },
-          { src: "https://drive.google.com/thumbnail?id=1TEum58CVrfp_w70fZ69TzJMpz8-Vb5bA&sz=w1200", alt: "Work Image 24", categories: ["3d"] },
-          { src: "https://drive.google.com/thumbnail?id=1TEum58CVrfp_w70fZ69TzJMpz8-Vb5bA&sz=w1200", alt: "Work Image 25", categories: [] }, // Marked as 'x' in your list
-          { src: "https://drive.google.com/thumbnail?id=17Dci5Cge7fJ71zopRl_hpwU1IcnQFPm4&sz=w1200", alt: "Work Image 15", categories: ["3d"] },
-          { src: "https://drive.google.com/thumbnail?id=1E_hDEfgAWbIXjYdfEAj3_9TEDuRbtTC2&sz=w1200", alt: "Work Image 27", categories: ["3d"] },
-          { src: "https://drive.google.com/thumbnail?id=1nKObgZY-U4y4a81sacyipuSasX9zbqNH&sz=w1200", alt: "Work Image 28", categories: ["3d"] },
-          { src: "https://drive.google.com/thumbnail?id=1wZFHUc3GCmn3YmXXotewe7DV9ho6UaH8&sz=w1200", alt: "Work Image 29", categories: ["3d", "print"] },
-          { src: "https://drive.google.com/thumbnail?id=1Fa31QBfqsmU_gxcJ1oLIUOMMoF7xZvbq&sz=w1200", alt: "Work Image 30", categories: ["print", "digital"] },
-          { src: "https://drive.google.com/thumbnail?id=1O9GBM8ofceocw_7FKUUNalePqpRBecEV&sz=w1200", alt: "Work Image 31", categories: ["print", "digital"] },
-          { src: "https://drive.google.com/thumbnail?id=1jet7dWkYBvufxEfkwkkTrliGeVvoaqsx&sz=w1200", alt: "Work Image 32", categories: ["print"] },
-          { src: "https://drive.google.com/thumbnail?id=1xrQtbZopFhhVC6qTfrLz-QN-9UCrOS7c&sz=w1200", alt: "Work Image 33", categories: ["print"] },
-          { src: "https://drive.google.com/thumbnail?id=1GsOPy6yuFUl24n16hg7o_mZjd9kmH5kS&sz=w1200", alt: "Work Image 34", categories: ["print"] },
-          { src: "https://drive.google.com/thumbnail?id=11Go7f8kpf8HlTC096hoZR10I3qSdKo7j&sz=w1200", alt: "Work Image 35", categories: [] }, // Marked as 'x' in your list
-          { src: "https://drive.google.com/thumbnail?id=1B9ORXIyUl-ex7XxIh33QvsVJz8b_Rh3V&sz=w1200", alt: "Work Image 36", categories: ["print"] },
-          { src: "https://drive.google.com/thumbnail?id=1PJWWacnXxr_oMKHuyofx4jbUt8a1jRlx&sz=w1200", alt: "Work Image 37", categories: ["3d"] },
-          { src: "https://drive.google.com/thumbnail?id=1WTPglGAVDTdMfkLsa2VsoT73u28Jbjje&sz=w1200", alt: "Work Image 38", categories: ["product"] },
-          { src: "https://drive.google.com/thumbnail?id=1nUz7nIiWNDHeQMzinTPRCZbeWFe0jGxA&sz=w1200", alt: "Work Image 39", categories: ["print"] },
-          { src: "https://drive.google.com/thumbnail?id=13uweX8X0Jo9ozIDf7svEOeDuJXK7sTQ3&sz=w1200", alt: "Work Image 40", categories: ["print"] },
-          { src: "https://drive.google.com/thumbnail?id=15yqax_AF4CjMU_XIOq_brY7VsTGdEd2K&sz=w1200", alt: "Work Image 41", categories: ["print", "product"] },
-          { src: "https://drive.google.com/thumbnail?id=1ckbYcoB5DozcmEayv6JKjgzX17i29A2Q&sz=w1200", alt: "Work Image 42", categories: [] }, // Marked as 'x' in your list
-          { src: "https://drive.google.com/thumbnail?id=1OW9Ji8REZrci9urnVlcJpC3SN5efFrFG&sz=w1200", alt: "Work Image 43", categories: ["3d"] },
-          { src: "https://drive.google.com/thumbnail?id=120WnTeptzS_lZM9t4LquSQpPUy2N_k3V&sz=w1200", alt: "Work Image 44", categories: ["3d"] }
-        ];
-
-        const filteredImages = filter === 'all'
-          ? images
-          : images.filter(img => img.categories.includes(filter));
-
-        const imagesHTML = filteredImages.map((img, index) =>
-          `<img src="${img.src}" alt="${img.alt}" data-category="${img.categories.join(',')}" ${index === 0 ? 'class="lightbox-trigger"' : ''}>`).join('');
-
-        const iframeScript = `
-          <script>
-            document.addEventListener('DOMContentLoaded', function() {
-              const images = document.querySelectorAll('.work-gallery img');
-              images.forEach((img, index) => {
-                img.addEventListener('click', function() {
-                  if (this.classList.contains('lightbox-trigger')) {
-                    window.parent.postMessage({
-                      type: 'openLightbox',
-                      src: this.src
-                    }, '*');
-                  }
-                });
-              });
-            });
-          <\/script>
-        `;
-
-        const workHTML = `
-          <!DOCTYPE html>
-          <html>
-          <head>
-            <style>
-              body, html {
-                margin: 0;
-                padding: 20px;
-                box-sizing: border-box;
-                font-family: inherit;
-                background: white;
-              }
-              .work-gallery {
-                column-count: 3;
-                column-gap: 10px;
-                width: 100%;
-              }
-              .work-gallery img {
-                width: 100%;
-                height: auto;
-                max-width: 100%;
-                margin: 0 0 10px 0;
-                display: block;
-                break-inside: avoid;
-                cursor: pointer;
-              }
-              @media (max-width: 1024px) {
-                .work-gallery { column-count: 2; }
-              }
-              @media (max-width: 768px) {
-                .work-gallery { column-count: 1; }
-              }
-            </style>
-          </head>
-          <body>
-            <div class="work-gallery">
-              ${imagesHTML}
-            </div>
-            ${iframeScript}
-          </body>
-          </html>
-        `;
-
-        const workDataURL = "data:text/html;charset=utf-8," + encodeURIComponent(workHTML);
-        contentArea.innerHTML = `
-          <div class="align-wrapper">
-            <div class="work-iframe-wrapper">
-              <iframe src="${workDataURL}" frameborder="0"></iframe>
-            </div>
-          </div>
-        `;
-      }
-
-      // Handle messages from iframe
-      window.addEventListener('message', function(event) {
-        if (event.data.type === 'openLightbox') {
-          lightboxImg1.src = event.data.src;
-          lightbox.style.display = 'block';
-
-          // Reset scroll position to top
-          const imagesContainer = document.querySelector('.lightbox-images-container');
-          if (imagesContainer) {
-            imagesContainer.scrollTop = 0;
-          }
-        }
-      });
-
-      lightboxClose.onclick = function() {
-        lightbox.style.display = 'none';
-      };
-
-      window.onclick = function(event) {
-        if (event.target === lightbox) {
-          lightbox.style.display = 'none';
-        }
-      };
-
-      homeBtn.addEventListener('click', loadHomeContent);
-      document.getElementById('logoLink').addEventListener('click', (e) => {
-        e.preventDefault();
-        loadHomeContent();
-      });
-
-      // Add click event for the work button itself
-      workBtn.addEventListener('click', () => {
-        loadWorkContent('all');
-      });
-
-      document.querySelectorAll('#workItem .submenu-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const filter = btn.dataset.filter;
-          loadWorkContent(filter);
-        });
-      });
-    });
-  </script>
-</body>
-</html>
-
-
+          { src: "https://drive.google.com/thumbnail?id
