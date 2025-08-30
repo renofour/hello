@@ -1,142 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>My Portfolio</title>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Portfolio</title>
   <style>
     :root {
-      --menu-open: 250px;
-      --menu-collapsed: 60px;
-      --menu-pad: 20px;
-      --header-height: 80px;
-      --page-gutter: 20px;
-      --header-bg-rgb: 255, 255, 255;
-      --header-bg-opacity: 0.5;
+      --sidebar-width: 250px;
+      --header-height: 70px;
     }
-    /* Layout */
-    .container {
-      display: flex;
-      height: 100vh;
-    }
-    /* Sidebar */
-    .left-menu {
-      width: var(--menu-open);
-      background: #fff;
-      transition: width .3s ease, padding .3s ease;
-      overflow: hidden;
-      position: relative;
-      box-sizing: border-box;
-      padding: var(--menu-pad);
-    }
-    .left-menu.collapsed {
-      width: var(--menu-collapsed);
-      padding: var(--menu-pad) 5px;
-    }
-    .left-menu nav { margin-top: 100px; }
-    .left-menu.collapsed nav { display: none; }
-    .left-menu ul { list-style: none; padding: 0; margin: 0; }
-    .left-menu li { margin-bottom: 6px; position: relative; }
-    .menu-btn {
-      background: none;
-      border: none;
-      padding: 5px 0;
-      width: 100%;
-      text-align: left;
-      cursor: pointer;
-      color: #333;
-      font: inherit;
-      display: block;
-      user-select: none;
-    }
-    .has-dropdown .menu-btn::after {
-      content: "▸";
-      float: right;
-      transition: transform .2s ease;
-    }
-    .has-dropdown.open .menu-btn::after { transform: rotate(90deg); }
-    .dropdown {
-      font-size: 14px;
-      color: #333;
-      margin-top: 8px;
-      padding-left: 0;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height .3s ease;
-    }
-    .has-dropdown.open .dropdown { max-height: 800px; }
-    /* Work dropdown specific styling */
-    #workItem .dropdown {
-      white-space: normal;
-      padding-left: 0;
-      line-height: 1.4;
-    }
-    #workItem .dropdown .submenu-row {
-      display: block;
-      margin-bottom: 4px;
-    }
-    #workItem .dropdown .submenu-btn {
-      background: none;
-      border: none;
-      font-size: 14px;
-      padding: 0;
+
+    body {
       margin: 0;
-      cursor: pointer;
-      color: #333;
-      display: inline;
+      font-family: Arial, sans-serif;
+      display: flex;
+      background: #f9f9f9;
     }
-    #workItem .dropdown .submenu-btn:not(:last-child)::after {
-      content: "•";
-      margin-right: 8px;
-      margin-left: 8px;
-      color: #555;
-    }
-    /* Right content layout */
-    .right-content {
-      flex-grow: 1;
+
+    /* Sidebar */
+    .sidebar {
+      width: var(--sidebar-width);
+      background: #111;
+      color: #fff;
       display: flex;
       flex-direction: column;
-      position: relative;
-      overflow: hidden;
-    }
-    /* Header */
-    .header {
-      display: flex;
-      align-items: center;
-      height: var(--header-height);
-      background: rgba(var(--header-bg-rgb), var(--header-bg-opacity));
-      z-index: 100;
-      position: sticky;
-      top: 0;
-      padding: 0;
-    }
-    .header .align-wrapper {
-      display: flex;
-      align-items: center;
-      height: 100%;
-      width: 100%;
+      padding: 20px;
       box-sizing: border-box;
-      padding-left: var(--page-gutter);
-      padding-right: var(--page-gutter);
     }
-    .header img {
-      width: 100px;
-      height: auto;
-      display: block;
+
+    .sidebar h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
     }
-    /* Sub-header (floating filters) */
+
+    .menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .menu li {
+      margin-bottom: 15px;
+    }
+
+    .menu a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    .menu a:hover {
+      text-decoration: underline;
+    }
+
+    .filters {
+      margin-top: 30px;
+    }
+
+    .filters h3 {
+      margin-bottom: 10px;
+    }
+
+    .filters ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .filters li {
+      margin-bottom: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .filters li:hover {
+      text-decoration: underline;
+    }
+
+    /* Main content */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      height: var(--header-height);
+      background: #fff;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      font-size: 20px;
+      font-weight: bold;
+      box-sizing: border-box;
+    }
+
+    .content-area {
+      padding: 20px;
+    }
+
+    /* Sub-header (filters bar) */
     .sub-header {
       position: sticky;
       top: var(--header-height);
-      background: white;
-      display: flex;
+      background: #fff;
+      display: none; /* hidden by default */
       justify-content: center;
       gap: 10px;
-      padding: 12px 0;
+      padding: 10px 0;
       border-bottom: 1px solid #ddd;
       z-index: 99;
-      font-size: 16px;
     }
+
+    .sub-header.active {
+      display: flex;
+    }
+
     .sub-header .filter-btn {
       background: none;
       border: none;
@@ -145,385 +125,140 @@
       cursor: pointer;
       padding: 0;
     }
+
     .sub-header .dot {
       color: #555;
     }
-    /* Scrollable content */
-    .content-area {
-      flex: 1;
-      overflow-y: auto;
-      padding: 0;
-      box-sizing: border-box;
-      background: transparent;
+
+    /* Work grid */
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
     }
-    .align-wrapper {
-      width: 100%;
-      box-sizing: border-box;
-      padding-left: var(--page-gutter);
-      padding-right: var(--page-gutter);
-    }
-    /* Video */
-    .video-wrapper {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%;
-      height: 0;
-      overflow: hidden;
-    }
-    .video-wrapper video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    /* Work iframe wrapper */
-    .work-iframe-wrapper {
-      width: calc(100% + 40px);
-      height: calc(100vh - var(--header-height) - 60px);
-      border: none;
-      overflow: hidden;
-      margin-left: -20px;
-      margin-right: -20px;
-    }
-    .work-iframe-wrapper iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      background: transparent;
-    }
-    /* Gallery */
-    .work-gallery {
-      column-count: 3;
-      column-gap: 10px;
-      width: 100%;
-      box-sizing: border-box;
-      padding: 20px;
-      margin: 0;
-      background: white;
-    }
-    .work-gallery img {
-      width: 100%;
-      margin-bottom: 10px;
-      display: block;
-      break-inside: avoid;
-      padding: 0;
-      margin-left: 0;
-      margin-right: 0;
-      cursor: pointer;
-    }
-    @media (max-width: 1024px) {
-      .work-gallery { column-count: 2; }
-    }
-    @media (max-width: 768px) {
-      .work-gallery { column-count: 1; }
-    }
-    /* Lightbox */
-    .lightbox {
-      display: none;
-      position: fixed;
-      z-index: 2000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.9);
-      overflow: hidden;
-    }
-    .lightbox-container {
+
+    .work-item {
+      background: #eee;
+      height: 150px;
       display: flex;
-      max-width: 900px;
-      margin: 50px auto;
-      position: relative;
-      width: 75%;
-      height: calc(100vh - 100px);
-    }
-    .lightbox-images-container {
-      flex: 1;
-      overflow-y: auto;
-      padding-right: 20px;
-      height: 100%;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
-    .lightbox-images-container::-webkit-scrollbar {
-      display: none;
-    }
-    .lightbox-images {
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      background: white;
-      min-height: 100%;
-    }
-    .lightbox-text {
-      width: 200px;
-      padding: 20px;
-      background: white;
-      position: sticky;
-      top: 50px;
-      align-self: flex-start;
-      border-left: 1px solid #eee;
-      height: fit-content;
-    }
-    .lightbox-text-inner {
-      display: inline;
-    }
-    .lightbox-img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      margin-bottom: 20px;
-    }
-    .lightbox-img:last-child {
-      margin-bottom: 0;
-    }
-    .lightbox-close {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 10px;
-      z-index: 2001;
-      width: 30px;
-      height: 30px;
-    }
-    .lightbox-close .bar {
-      display: block;
-      width: 100%;
-      height: 3px;
-      background: #fff;
-      position: absolute;
-      left: 0;
-      transition: 0.3s;
-    }
-    .lightbox-close .bar:nth-child(1) {
-      top: 14px;
-      transform: rotate(45deg);
-    }
-    .lightbox-close .bar:nth-child(2) {
-      opacity: 0;
-    }
-    .lightbox-close .bar:nth-child(3) {
-      top: 14px;
-      transform: rotate(-45deg);
-    }
-    /* Hamburger */
-    .menu-toggle {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 10px;
-      z-index: 1000;
-      width: 30px;
-      height: 30px;
-    }
-    .menu-toggle .bar {
-      display: block;
-      width: 100%;
-      height: 3px;
-      background: #333;
-      position: absolute;
-      left: 0;
-      transition: 0.3s;
-    }
-    .menu-toggle .bar:nth-child(1) {
-      top: 0;
-    }
-    .menu-toggle .bar:nth-child(2) {
-      top: 14px;
-    }
-    .menu-toggle .bar:nth-child(3) {
-      top: 28px;
-    }
-    .menu-toggle.active .bar:nth-child(1) {
-      transform: rotate(45deg);
-      top: 14px;
-    }
-    .menu-toggle.active .bar:nth-child(2) {
-      opacity: 0;
-    }
-    .menu-toggle.active .bar:nth-child(3) {
-      transform: rotate(-45deg);
-      top: 14px;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Hamburger -->
-    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </button>
-    <!-- Sidebar -->
-    <aside class="left-menu collapsed" id="menu">
-      <nav>
-        <ul>
-          <li><button type="button" class="menu-btn" id="homeBtn">hello</button></li>
-          <li class="has-dropdown" id="workItem">
-            <button type="button" class="menu-btn" aria-expanded="false">work</button>
-            <div class="dropdown">
-              <div class="submenu-row">
-                <button type="button" class="submenu-btn" data-filter="all">All</button>
-                <button type="button" class="submenu-btn" data-filter="print">Print</button>
-                <button type="button" class="submenu-btn" data-filter="digital">Digital</button>
-              </div>
-              <div class="submenu-row">
-                <button type="button" class="submenu-btn" data-filter="3d">3D Design</button>
-                <button type="button" class="submenu-btn" data-filter="product">Product Design</button>
-              </div>
-            </div>
-          </li>
-          <li class="has-dropdown" id="aboutItem">
-            <button type="button" class="menu-btn" aria-expanded="false">about</button>
-            <div class="dropdown">
-              Shohei Shohei Shigematsu is a partner at OMA based out of the New York office, who leads the firm's diverse portfolio in the Americas and Japan.
-            </div>
-          </li>
-          <li class="has-dropdown" id="contactItem">
-            <button type="button" class="menu-btn" aria-expanded="false">contact</button>
-            <div class="dropdown">
-              Shohei Shohei Shigematsu is a partner at OMA based out of the New York office, who leads the firm's diverse portfolio in the Americas and Japan.
-            </div>
-          </li>
-        </ul>
-      </nav>
-    </aside>
-    <!-- Right content -->
-    <main class="right-content">
-      <!-- Header -->
-      <div class="header">
-        <div class="align-wrapper">
-          <a href="#" id="logoLink"><img src="NYXum_logo_blood2.png" alt="NYXum Logo" /></a>
-        </div>
-      </div>
-      <!-- Sub-header (floating filters) -->
-      <div class="sub-header">
-        <button class="filter-btn" data-filter="all">All</button>
-        <span class="dot">•</span>
-        <button class="filter-btn" data-filter="print">Print</button>
-        <span class="dot">•</span>
-        <button class="filter-btn" data-filter="digital">Digital</button>
-        <span class="dot">•</span>
-        <button class="filter-btn" data-filter="3d">3D Design</button>
-        <span class="dot">•</span>
-        <button class="filter-btn" data-filter="product">Product Design</button>
-      </div>
-      <!-- Scrollable content -->
-      <div class="content-area" id="contentArea">
-        <div class="align-wrapper">
-          <div class="video-wrapper">
-            <video autoplay muted loop>
-              <source src="https://framerusercontent.com/assets/CtSYQwWgD3v3HDe3HMRPnHbvGOk.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-          </div>
-        </div>
-      </div>
-    </main>
-    <!-- Lightbox -->
-    <div id="lightbox" class="lightbox">
-      <button class="lightbox-close" id="lightboxClose" aria-label="Close lightbox">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </button>
-      <div class="lightbox-container">
-        <div class="lightbox-images-container">
-          <div class="lightbox-images">
-            <img id="lightbox-img-1" class="lightbox-img" src="" alt="">
-            <img id="lightbox-img-2" class="lightbox-img" src="https://drive.google.com/thumbnail?id=1RyzMQq0e5dyYPf3EZDkVFuIYATfpSeDD&sz=w1200" alt="">
-          </div>
-        </div>
-        <div class="lightbox-text">
-          <div class="lightbox-text-inner">
-            Shohei Shohei Shigematsu is a partner at OMA based out of the New York office, who leads the firm's diverse portfolio in the Americas and Japan.
-          </div>
-        </div>
-      </div>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h1>My Portfolio</h1>
+    <ul class="menu">
+      <li><a href="#home" class="menu-link" data-section="home">Home</a></li>
+      <li><a href="#about" class="menu-link" data-section="about">About</a></li>
+      <li><a href="#work" class="menu-link" data-section="work">Work</a></li>
+      <li><a href="#contact" class="menu-link" data-section="contact">Contact</a></li>
+    </ul>
+
+    <!-- Sidebar filters -->
+    <div class="filters" id="sidebar-filters">
+      <h3>Filters</h3>
+      <ul>
+        <li data-filter="all">All</li>
+        <li data-filter="print">Print</li>
+        <li data-filter="digital">Digital</li>
+        <li data-filter="3d">3D Design</li>
+        <li data-filter="product">Product Design</li>
+      </ul>
     </div>
   </div>
+
+  <!-- Main content -->
+  <div class="main">
+    <div class="header">My Portfolio</div>
+
+    <!-- Floating sub-header (only active in Work section) -->
+    <div class="sub-header" id="floating-filters">
+      <button class="filter-btn" data-filter="all">All</button>
+      <span class="dot">•</span>
+      <button class="filter-btn" data-filter="print">Print</button>
+      <span class="dot">•</span>
+      <button class="filter-btn" data-filter="digital">Digital</button>
+      <span class="dot">•</span>
+      <button class="filter-btn" data-filter="3d">3D Design</button>
+      <span class="dot">•</span>
+      <button class="filter-btn" data-filter="product">Product Design</button>
+    </div>
+
+    <div class="content-area" id="content-area">
+      <!-- Default section -->
+      <h2>Welcome to my portfolio!</h2>
+      <p>Select a section from the left menu.</p>
+    </div>
+  </div>
+
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const menu = document.getElementById('menu');
-      const menuToggle = document.getElementById('menuToggle');
-      const contentArea = document.getElementById('contentArea');
-      const homeBtn = document.getElementById('homeBtn');
-      const workBtn = document.querySelector('#workItem .menu-btn');
-      const lightbox = document.getElementById('lightbox');
-      const lightboxClose = document.getElementById('lightboxClose');
-      const lightboxImg1 = document.getElementById('lightbox-img-1');
-      const initialVideoURL = "https://framerusercontent.com/assets/CtSYQwWgD3v3HDe3HMRPnHbvGOk.mp4";
+    const contentArea = document.getElementById('content-area');
+    const floatingFilters = document.getElementById('floating-filters');
 
-      function syncButton() {
-        const open = !menu.classList.contains('collapsed');
-        menuToggle.classList.toggle('active', open);
-        menuToggle.setAttribute('aria-expanded', String(open));
-      }
-      syncButton();
-
-      menuToggle.addEventListener('click', () => {
-        menu.classList.toggle('collapsed');
-        syncButton();
+    // Menu navigation
+    document.querySelectorAll('.menu-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const section = link.dataset.section;
+        loadSection(section);
       });
+    });
 
-      const nav = menu.querySelector('nav');
-      nav.addEventListener('click', (e) => {
-        const btn = e.target.closest('.menu-btn');
-        if (!btn) return;
-
-        // If the work button itself is clicked (not a submenu item), load all images
-        if (btn === workBtn) {
-          loadWorkContent('all');
-          // Open the dropdown
-          const item = btn.closest('.has-dropdown');
-          item.classList.add('open');
-          btn.setAttribute('aria-expanded', 'true');
-          return;
+    function loadSection(section) {
+      if (section === 'work') {
+        floatingFilters.classList.add('active'); // Show floating filters
+        loadWorkContent('all');
+      } else {
+        floatingFilters.classList.remove('active'); // Hide floating filters
+        if (section === 'home') {
+          contentArea.innerHTML = '<h2>Welcome to my portfolio!</h2><p>Select a section from the left menu.</p>';
+        } else if (section === 'about') {
+          contentArea.innerHTML = '<h2>About Me</h2><p>This is the about section.</p>';
+        } else if (section === 'contact') {
+          contentArea.innerHTML = '<h2>Contact</h2><p>This is the contact section.</p>';
         }
-
-        if (menu.classList.contains('collapsed')) {
-          menu.classList.remove('collapsed');
-          syncButton();
-        }
-
-        const item = btn.closest('.has-dropdown');
-        if (!item) return;
-
-        const isOpen = item.classList.contains('open');
-        nav.querySelectorAll('.has-dropdown').forEach(li => {
-          li.classList.remove('open');
-          const b = li.querySelector('.menu-btn');
-          if (b) b.setAttribute('aria-expanded', 'false');
-        });
-
-        item.classList.toggle('open', !isOpen);
-        btn.setAttribute('aria-expanded', String(!isOpen));
-      });
-
-      function loadHomeContent() {
-        contentArea.innerHTML = `
-          <div class="align-wrapper">
-            <div class="video-wrapper">
-              <video autoplay muted loop>
-                <source src="${initialVideoURL}" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-            </div>
-          </div>
-        `;
       }
+    }
 
-      function loadWorkContent(filter = 'all') {
-        const images = [
-          { src: "https://drive.google.com/thumbnail?id=1KS_yxQ51nW9AnfmysBbYxzPaLG54wuYi&sz=w1200", alt: "Work Image 1", categories: ["print", "digital"] },
-          { src: "https://drive.google.com/thumbnail?id
+    // Load work content with filters
+    function loadWorkContent(filter) {
+      const items = [
+        { name: 'Print Design 1', category: 'print' },
+        { name: 'Digital Design 1', category: 'digital' },
+        { name: '3D Design 1', category: '3d' },
+        { name: 'Product Design 1', category: 'product' },
+        { name: 'Print Design 2', category: 'print' },
+        { name: 'Digital Design 2', category: 'digital' }
+      ];
+
+      const filtered = filter === 'all' ? items : items.filter(i => i.category === filter);
+
+      let html = '<div class="work-grid">';
+      filtered.forEach(i => {
+        html += `<div class="work-item">${i.name}</div>`;
+      });
+      html += '</div>';
+
+      contentArea.innerHTML = html;
+    }
+
+    // Sidebar filter click
+    document.querySelectorAll('#sidebar-filters li').forEach(li => {
+      li.addEventListener('click', () => {
+        loadWorkContent(li.dataset.filter);
+      });
+    });
+
+    // Floating filter click
+    document.querySelectorAll('.sub-header .filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        loadWorkContent(btn.dataset.filter);
+      });
+    });
+  </script>
+</body>
+</html>
