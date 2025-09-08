@@ -31,12 +31,10 @@
       box-sizing: border-box;
       padding: var(--menu-pad);
     }
-
     .left-menu.collapsed {
       width: var(--menu-collapsed);
       padding: var(--menu-pad) 5px;
     }
-
     .left-menu nav { margin-top: 100px; }
     .left-menu.collapsed nav { display: none; }
     .left-menu ul { list-style: none; padding: 0; margin: 0; }
@@ -70,7 +68,6 @@
     }
     .has-dropdown.open .dropdown { max-height: 800px; }
 
-    /* Work dropdown specific styling */
     #workItem .dropdown {
       white-space: normal;
       padding-left: 0;
@@ -97,7 +94,6 @@
       color: #555;
     }
 
-    /* Right content layout */
     .right-content {
       flex-grow: 1;
       display: flex;
@@ -106,7 +102,6 @@
       overflow: hidden;
     }
 
-    /* Header */
     .header {
       display: flex;
       align-items: center;
@@ -132,7 +127,6 @@
       display: block;
     }
 
-    /* Scrollable content */
     .content-area {
       flex: 1;
       overflow-y: auto;
@@ -147,7 +141,6 @@
       padding-right: var(--page-gutter);
     }
 
-    /* Video */
     .video-wrapper {
       position: relative;
       width: 100%;
@@ -164,7 +157,6 @@
       object-fit: cover;
     }
 
-    /* Work iframe wrapper */
     .work-iframe-wrapper {
       width: calc(100% + 40px);
       height: calc(100vh - var(--header-height));
@@ -180,7 +172,6 @@
       background: transparent;
     }
 
-    /* Gallery */
     .work-gallery {
       column-count: 3;
       column-gap: 10px;
@@ -195,9 +186,6 @@
       margin-bottom: 10px;
       display: block;
       break-inside: avoid;
-      padding: 0;
-      margin-left: 0;
-      margin-right: 0;
       cursor: pointer;
     }
     @media (max-width: 1024px) {
@@ -207,7 +195,6 @@
       .work-gallery { column-count: 1; }
     }
 
-    /* Lightbox */
     .lightbox {
       display: none;
       position: fixed;
@@ -220,17 +207,31 @@
       overflow: hidden;
     }
 
-    /* Lightbox Container */
     .lightbox-container {
       display: flex;
-      max-width: 1200px;
       margin: 50px auto;
       position: relative;
-      width: 80%;
       height: calc(100vh - 100px);
     }
 
-    /* Lightbox Images Container */
+    /* Default width before class is applied */
+    .lightbox-container {
+      width: 85%;
+      max-width: 1600px;
+    }
+
+    /* Portrait narrower */
+    .lightbox-container.portrait {
+      width: 60%;
+      max-width: 800px;
+    }
+
+    /* Landscape wider */
+    .lightbox-container.landscape {
+      width: 90%;
+      max-width: 1600px;
+    }
+
     .lightbox-images-container {
       flex: 1;
       overflow-y: auto;
@@ -252,7 +253,6 @@
       min-height: 100%;
     }
 
-    /* Scalable media */
     .lightbox-img {
       max-width: 100%;
       max-height: 70vh;
@@ -262,7 +262,6 @@
       margin: 0 auto;
     }
 
-    /* Lightbox Text */
     .lightbox-text {
       width: 250px;
       padding: 20px;
@@ -275,11 +274,8 @@
       margin-left: 20px;
     }
 
-    .lightbox-text-inner {
-      display: inline;
-    }
+    .lightbox-text-inner { display: inline; }
 
-    /* Lightbox Close Button */
     .lightbox-close {
       position: fixed;
       top: 20px;
@@ -313,7 +309,6 @@
       transform: rotate(-45deg);
     }
 
-    /* Hamburger */
     .menu-toggle {
       position: absolute;
       top: 20px;
@@ -335,334 +330,88 @@
       left: 0;
       transition: 0.3s;
     }
-    .menu-toggle .bar:nth-child(1) {
-      top: 0;
-    }
-    .menu-toggle .bar:nth-child(2) {
-      top: 14px;
-    }
-    .menu-toggle .bar:nth-child(3) {
-      top: 28px;
-    }
+    .menu-toggle .bar:nth-child(1) { top: 0; }
+    .menu-toggle .bar:nth-child(2) { top: 14px; }
+    .menu-toggle .bar:nth-child(3) { top: 28px; }
     .menu-toggle.active .bar:nth-child(1) {
       transform: rotate(45deg);
       top: 14px;
     }
-    .menu-toggle.active .bar:nth-child(2) {
-      opacity: 0;
-    }
+    .menu-toggle.active .bar:nth-child(2) { opacity: 0; }
     .menu-toggle.active .bar:nth-child(3) {
       transform: rotate(-45deg);
       top: 14px;
     }
-
-    /* Portrait/Landscape Layout */
-    .lightbox-container.portrait {
-      width: 60%;
-      max-width: 600px;
-    }
-
-    .lightbox-container.landscape {
-      width: 80%;
-      max-width: 1000px;
-    }
-
-    .lightbox-container.portrait .lightbox-img {
-      max-width: 100%;
-      max-height: 70vh;
-    }
-
-    .lightbox-container.landscape .lightbox-img {
-      max-width: 100%;
-      max-height: 70vh;
-    }
   </style>
 </head>
-
 <body>
   <div class="container">
-    <!-- Hamburger -->
-    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </button>
-
-    <!-- Sidebar -->
-    <aside class="left-menu collapsed" id="menu">
-      <nav>
-        <ul>
-          <li><button type="button" class="menu-btn" id="homeBtn">hello</button></li>
-          <li class="has-dropdown" id="workItem">
-            <button type="button" class="menu-btn" aria-expanded="false">work</button>
-            <div class="dropdown">
-              <div class="submenu-row">
-                <button type="button" class="submenu-btn" data-filter="all">all</button>
-                <button type="button" class="submenu-btn" data-filter="print">you print</button>
-                <button type="button" class="submenu-btn" data-filter="digital">digital</button>
-              </div>
-              <div class="submenu-row">
-                <button type="button" class="submenu-btn" data-filter="3d">3d design</button>
-                <button type="button" class="submenu-btn" data-filter="product">product design</button>
-              </div>
-            </div>
-          </li>
-          <li class="has-dropdown" id="aboutItem">
-            <button type="button" class="menu-btn" aria-expanded="false">about</button>
-            <div class="dropdown">
-              Shohei Shohei Shigematsu is a partner at OMA based out of the New York office, who leads the firm's diverse portfolio in the Americas and Japan.
-            </div>
-          </li>
-          <li class="has-dropdown" id="contactItem">
-            <button type="button" class="menu-btn" aria-expanded="false">contact</button>
-            <div class="dropdown">
-              Shohei Shohei Shigematsu is a partner at OMA based out of the New York office, who leads the firm's diverse portfolio in the Americas and Japan.
-            </div>
-          </li>
-        </ul>
-      </nav>
-    </aside>
-
-    <!-- Right content -->
-    <main class="right-content">
-      <!-- Header -->
-      <div class="header">
-        <div class="align-wrapper">
-          <a href="#" id="logoLink"><img src="NYXum_logo_blood2.png" alt="NYXum Logo" /></a>
-        </div>
-      </div>
-
-      <!-- Scrollable content -->
-      <div class="content-area" id="contentArea">
-        <div class="align-wrapper">
-          <div class="video-wrapper">
-            <video autoplay muted loop>
-              <source src="https://framerusercontent.com/assets/CtSYQwWgD3v3HDe3HMRPnHbvGOk.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-          </div>
-        </div>
-      </div>
-    </main>
-
-    <!-- Lightbox -->
-    <div id="lightbox" class="lightbox">
-      <button class="lightbox-close" id="lightboxClose">
+    <aside class="left-menu">
+      <button class="menu-toggle" id="menuToggle">
         <span class="bar"></span>
         <span class="bar"></span>
         <span class="bar"></span>
       </button>
-      <div class="lightbox-container">
-        <div class="lightbox-images-container">
-          <div class="lightbox-images">
-            <img id="lightbox-img" class="lightbox-img" src="" alt="" />
+      <nav>
+        <ul>
+          <li><button class="menu-btn">Home</button></li>
+          <li class="has-dropdown" id="workItem">
+            <button class="menu-btn">Work</button>
+            <ul class="dropdown">
+              <li class="submenu-row">
+                <button class="submenu-btn">Project 1</button>
+                <button class="submenu-btn">Project 2</button>
+              </li>
+              <li class="submenu-row">
+                <button class="submenu-btn">Project 3</button>
+                <button class="submenu-btn">Project 4</button>
+              </li>
+            </ul>
+          </li>
+          <li><button class="menu-btn">About</button></li>
+        </ul>
+      </nav>
+    </aside>
+    <main class="right-content">
+      <header class="header">
+        <div class="align-wrapper">
+          <img src="logo.png" alt="Logo">
+        </div>
+      </header>
+      <div class="content-area">
+        <div class="align-wrapper">
+          <div class="work-gallery">
+            <img src="image1.jpg" alt="Sample" onclick="openLightbox('image1.jpg')">
+            <img src="image2.jpg" alt="Sample" onclick="openLightbox('image2.jpg')">
+            <img src="image3.jpg" alt="Sample" onclick="openLightbox('image3.jpg')">
           </div>
         </div>
-        <div class="lightbox-text">
-          <div class="lightbox-text-inner">
-            Shohei Shohei Shigematsu is a partner at OMA based out of the New York office, who leads the firm's diverse portfolio in the Americas and Japan.
-          </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <button id="lightboxClose" class="lightbox-close">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <div class="lightbox-container">
+      <div class="lightbox-images-container">
+        <div class="lightbox-images">
+          <img id="lightbox-img" class="lightbox-img" src="" alt="Preview">
+        </div>
+      </div>
+      <div class="lightbox-text">
+        <div class="lightbox-text-inner">
+          <h2>Title</h2>
+          <p>Description text goes here.</p>
         </div>
       </div>
     </div>
   </div>
 
   <script src="lightbox.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const menu = document.getElementById('menu');
-      const menuToggle = document.getElementById('menuToggle');
-      const contentArea = document.getElementById('contentArea');
-      const homeBtn = document.getElementById('homeBtn');
-      const workBtn = document.querySelector('#workItem .menu-btn');
-      const initialVideoURL = "https://framerusercontent.com/assets/CtSYQwWgD3v3HDe3HMRPnHbvGOk.mp4";
-
-      function syncButton() {
-        const open = !menu.classList.contains('collapsed');
-        menuToggle.classList.toggle('active', open);
-        menuToggle.setAttribute('aria-expanded', String(open));
-      }
-      syncButton();
-
-      menuToggle.addEventListener('click', () => {
-        menu.classList.toggle('collapsed');
-        syncButton();
-      });
-
-      const nav = menu.querySelector('nav');
-      nav.addEventListener('click', (e) => {
-        const btn = e.target.closest('.menu-btn');
-        if (!btn) return;
-        if (btn === workBtn) {
-          loadWorkContent('all');
-          const item = btn.closest('.has-dropdown');
-          item.classList.add('open');
-          btn.setAttribute('aria-expanded', 'true');
-          return;
-        }
-        if (menu.classList.contains('collapsed')) {
-          menu.classList.remove('collapsed');
-          syncButton();
-        }
-        const item = btn.closest('.has-dropdown');
-        if (!item) return;
-        const isOpen = item.classList.contains('open');
-        nav.querySelectorAll('.has-dropdown').forEach(li => {
-          li.classList.remove('open');
-          const b = li.querySelector('.menu-btn');
-          if (b) b.setAttribute('aria-expanded', 'false');
-        });
-        item.classList.toggle('open', !isOpen);
-        btn.setAttribute('aria-expanded', String(!isOpen));
-      });
-
-      function loadHomeContent() {
-        contentArea.innerHTML = `
-          <div class="align-wrapper">
-            <div class="video-wrapper">
-              <video autoplay muted loop>
-                <source src="${initialVideoURL}" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-            </div>
-          </div>
-        `;
-      }
-
-      function loadWorkContent(filter = 'all') {
-        const images = [
-          { src: "https://drive.google.com/thumbnail?id=1KS_yxQ51nW9AnfmysBbYxzPaLG54wuYi&sz=w1200", alt: "Work Image 1", categories: ["print", "digital"] },
-          { src: "https://drive.google.com/thumbnail?id=1EC1pnEIS0HRcP8rUtYa0-SMFZFErVyv2&sz=w1200", alt: "Work Image 59", categories: ["print", "digital"] },
-          { src: "https://drive.google.com/thumbnail?id=16K-hJ7YB3eKzZ0Fpc1QsKV0EnO8l8mUE&sz=w1200", alt: "Work Image 3", categories: ["digital", "3d"] },
-          { src: "https://drive.google.com/thumbnail?id=1-IfFsOem4_uFoWHL7x0gUz-Nkk8s-Bu8&sz=w1200", alt: "Work Image 4", categories: ["print"] },
-          { src: "https://drive.google.com/thumbnail?id=1gaGdfaccHZWwBJw9yeNVh2mWeJ-VS3OE&sz=w1200", alt: "Work Image 5", categories: ["digital"] },
-          { src: "https://drive.google.com/thumbnail?id=1PXKgsT4wJTHYtTM6AEO2JrviddGzrMlH&sz=w1200", alt: "Work Image 6", categories: ["3d"] },
-          { src: "https://drive.google.com/thumbnail?id=1lsUV17h-65keB9IKgg_cJvifitwEC6Vi&sz=w1200", alt: "Work Image 7", categories: ["product"] },
-          { src: "https://drive.google.com/thumbnail?id=1zUrGQs70B-vTUnw0fBHeXn4ocoe2qy5T&sz=w1200", alt: "Work Image 8", categories: ["product", "print"] },
-          { src: "https://drive.google.com/thumbnail?id=1vtIkjFXJhFKwc6TsK93EaPMMNzMRsEwK&sz=w1200", alt: "Work Image 50", categories: ["print", "digital"] },
-          { src: "https://drive.google.com/thumbnail?id=1ptX-VRuXA1tcAnu9SbpojjjCTAR7kPuT&sz=w1200", alt: "Work Image 10", categories: ["3d"] },
-          { src: "https://drive.google.com/thumbnail?id=1OOpjoJiNmzZxttfIBpQ43xWlXKiMoDHz&sz=w1200", alt: "Work Image 13", categories: ["digital"] },
-          { src: "https://drive.google.com/thumbnail?id=1F2-rWxNQC7JJAib07GLS7u2whIhXVWeZ&sz=w1200", alt: "Work Image 14", categories: ["digital"] },
-          { src: "https://drive.google.com/thumbnail?id=1ImWqmE7xA0CBkEe3uJnudWVErv_zBnCP&sz=w1200", alt: "Work Image 46", categories: ["print", "digital"] },
-          { src: "https://drive.google.com/thumbnail?id=1I7S1LB7e2FaIMDz9Zz6Fm5Ipwug2uqmF&sz=w1200", alt: "Work Image 17", categories: ["product"] },
-          { src: "https://drive.google.com/thumbnail?id=1mqoGFLRHapYzaITMI1ysyVzlO1Rs0O1y&sz=w1200", alt: "Work Image 18", categories: ["3d"] },
-          { src: "https://drive.google.com/thumbnail?id=1L1EO9xbx7G3MGovxKV7GPV8VB1ZzSNJO&sz=w1200", alt: "Work Image 60", categories: ["print", "digital"] },
-          { src: "https://drive.google.com/thumbnail?id=1U4w5yifsei5eouYWFk2iwvpRSvDSUv1x&sz=w1200", alt: "Work Image 19", categories: ["3d"] },
-          { src: "https://drive.google.com/thumbnail?id=1MoZUKu-mqukVAE8XCmRoRY_2zi8mCqNn&sz=w1200", alt: "Work Image 63", categories: ["print", "digital"] },
-          { src: "https://drive.google.com/thumbnail?id=1F9qZLOnde9gnx-i-fl_xfBNaQA9K6P9G&sz=w1200", alt: "Work Image 20", categories: ["print"] },
-          { src: "https://drive.google.com/thumbnail?id=1RECxWfONSoN3ZQBG19OEn8mksZ6THr0a&sz=w1200", alt: "Work Image 61", categories: ["print", "digital"] },
-          { src: "https://drive.google.com/thumbnail?id=14D4vKLVvp7BkijAAU_t5MR6f4Ss1VciX&sz=w1200", alt: "Work Image 26", categories: ["3d"] },
-          { src: "https://drive.google.com/thumbnail?id=12yh7OmQPdnBEHswGDG6-6HqUXB12-zOM&sz=w1200", alt: "Work Image 12", categories: ["digital"] },
-          { src: "https://drive.google.com/thumbnail?id=1dF2OYY3O2DvWhUsYtrjRgzcGCq4r60hr&sz=w1200", alt: "Work Image 58", categories: ["print", "digital"] },
-          { src: "https://drive.google.com/thumbnail?id=1Fa31QBfqsmU_gxcJ1oLIUOMMoF7xZvbq&sz=w1200", alt: "Work Image 30", categories: ["print", "digital"] },
-          { src: "https://drive.google.com/thumbnail?id=1O9GBM8ofceocw_7FKUUNalePqpRBecEV&sz=w1200", alt: "Work Image 31", categories: ["print", "digital"] },
-          { src: "https://drive.google.com/thumbnail?id=1jet7dWkYBvufxEfkwkkTrliGeVvoaqsx&sz=w1200", alt: "Work Image 32", categories: ["print"] },
-          { src: "https://drive.google.com/thumbnail?id=1xrQtbZopFhhVC6qTfrLz-QN-9UCrOS7c&sz=w1200", alt: "Work Image 33", categories: ["print"] },
-          { src: "https://drive.google.com/thumbnail?id=1GsOPy6yuFUl24n16hg7o_mZjd9kmH5kS&sz=w1200", alt: "Work Image 34", categories: ["print"] },
-          { src: "https://drive.google.com/thumbnail?id=1PJWWacnXxr_oMKHuyofx4jbUt8a1jRlx&sz=w1200", alt: "Work Image 37", categories: ["3d"] },
-          { src: "https://drive.google.com/thumbnail?id=1nUz7nIiWNDHeQMzinTPRCZbeWFe0jGxA&sz=w1200", alt: "Work Image 39", categories: ["print"] },
-          { src: "https://drive.google.com/thumbnail?id=1WTPglGAVDTdMfkLsa2VsoT73u28Jbjje&sz=w1200", alt: "Work Image 38", categories: ["product"] },
-          { src: "https://drive.google.com/thumbnail?id=16sF-s__bcL3TnZBU397B4ANvLeHDyNml&sz=w1200", alt: "Work Image 59", categories: ["print", "digital"] },
-          { src: "https://drive.google.com/thumbnail?id=1tmNtf3fpuG35aQY_B20jX5zFuJYbZn9t&sz=w1200", alt: "Work Image 22", categories: ["3d"] },
-          { src: "https://drive.google.com/thumbnail?id=1citj8Zu7j3JEzF-B7kczQiYVg8n-PNqo&sz=w1200", alt: "Work Image 51", categories: ["print", "digital"] },
-          { src: "https://drive.google.com/thumbnail?id=19cWGXdMQfO5tjz8Xz6IqKRf_e6U-Pk5L&sz=w1200", alt: "Work Image 52", categories: ["print", "digital"] },
-          { src: "https://drive.google.com/thumbnail?id=1IwnEtTHPZukFOMrXLGbCvk3ag429jFEM&sz=w1200", alt: "Work Image 9", categories: ["print"] },
-        ];
-
-        const filteredImages = filter === 'all'
-          ? images
-          : images.filter(img => img.categories.includes(filter));
-
-        const imagesHTML = filteredImages.map(img =>
-          `<img src="${img.src}" alt="${img.alt}" data-category="${img.categories.join(',')}">`
-        ).join('');
-
-        const iframeScript = `
-          <script>
-            document.addEventListener('DOMContentLoaded', function() {
-              const images = document.querySelectorAll('.work-gallery img');
-              images.forEach((img) => {
-                img.addEventListener('click', function() {
-                  window.parent.postMessage({
-                    type: 'openLightbox',
-                    src: this.src
-                  }, '*');
-                });
-              });
-            });
-          <\/script>
-        `;
-
-        const workHTML = `
-          <!DOCTYPE html>
-          <html>
-          <head>
-            <style>
-              body, html {
-                margin: 0;
-                padding: 20px;
-                box-sizing: border-box;
-                font-family: inherit;
-                background: white;
-              }
-              .work-gallery {
-                column-count: 3;
-                column-gap: 10px;
-                width: 100%;
-              }
-              .work-gallery img {
-                width: 100%;
-                height: auto;
-                max-width: 100%;
-                margin: 0 0 10px 0;
-                display: block;
-                break-inside: avoid;
-                cursor: pointer;
-              }
-              @media (max-width: 1024px) {
-                .work-gallery { column-count: 2; }
-              }
-              @media (max-width: 768px) {
-                .work-gallery { column-count: 1; }
-              }
-            </style>
-          </head>
-          <body>
-            <div class="work-gallery">
-              ${imagesHTML}
-            </div>
-            ${iframeScript}
-          </body>
-          </html>
-        `;
-
-        const workDataURL = "data:text/html;charset=utf-8," + encodeURIComponent(workHTML);
-        contentArea.innerHTML = `
-          <div class="align-wrapper">
-            <div class="work-iframe-wrapper">
-              <iframe src="${workDataURL}" frameborder="0"></iframe>
-            </div>
-          </div>
-        `;
-      }
-
-      homeBtn.addEventListener('click', loadHomeContent);
-      document.getElementById('logoLink').addEventListener('click', (e) => {
-        e.preventDefault();
-        loadHomeContent();
-      });
-
-      workBtn.addEventListener('click', () => {
-        loadWorkContent('all');
-      });
-
-      document.querySelectorAll('#workItem .submenu-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const filter = btn.dataset.filter;
-          loadWorkContent(filter);
-        });
-      });
-    });
-  </script>
 </body>
 </html>
