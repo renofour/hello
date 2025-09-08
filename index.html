@@ -404,8 +404,7 @@
       <div class="lightbox-container">
         <div class="lightbox-images-container">
           <div class="lightbox-images">
-            <img id="lightbox-img-1" class="lightbox-img" src="" alt="">
-            <img id="lightbox-img-2" class="lightbox-img" src="https://drive.google.com/thumbnail?id=1RyzMQq0e5dyYPf3EZDkVFuIYATfpSeDD&sz=w1200" alt="">
+            <img id="lightbox-img" class="lightbox-img" src="" alt="">
           </div>
         </div>
         <div class="lightbox-text">
@@ -416,6 +415,7 @@
       </div>
     </div>
   </div>
+  <script src="lightbox.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const menu = document.getElementById('menu');
@@ -423,9 +423,6 @@
       const contentArea = document.getElementById('contentArea');
       const homeBtn = document.getElementById('homeBtn');
       const workBtn = document.querySelector('#workItem .menu-btn');
-      const lightbox = document.getElementById('lightbox');
-      const lightboxClose = document.getElementById('lightboxClose');
-      const lightboxImg1 = document.getElementById('lightbox-img-1');
       const initialVideoURL = "https://framerusercontent.com/assets/CtSYQwWgD3v3HDe3HMRPnHbvGOk.mp4";
 
       function syncButton() {
@@ -444,32 +441,25 @@
       nav.addEventListener('click', (e) => {
         const btn = e.target.closest('.menu-btn');
         if (!btn) return;
-
-        // If the work button itself is clicked (not a submenu item), load all images
         if (btn === workBtn) {
           loadWorkContent('all');
-          // Open the dropdown
           const item = btn.closest('.has-dropdown');
           item.classList.add('open');
           btn.setAttribute('aria-expanded', 'true');
           return;
         }
-
         if (menu.classList.contains('collapsed')) {
           menu.classList.remove('collapsed');
           syncButton();
         }
-
         const item = btn.closest('.has-dropdown');
         if (!item) return;
-
         const isOpen = item.classList.contains('open');
         nav.querySelectorAll('.has-dropdown').forEach(li => {
           li.classList.remove('open');
           const b = li.querySelector('.menu-btn');
           if (b) b.setAttribute('aria-expanded', 'false');
         });
-
         item.classList.toggle('open', !isOpen);
         btn.setAttribute('aria-expanded', String(!isOpen));
       });
@@ -488,7 +478,7 @@
       }
 
       function loadWorkContent(filter = 'all') {
-       const images = [
+        const images = [
           { src: "https://drive.google.com/thumbnail?id=1KS_yxQ51nW9AnfmysBbYxzPaLG54wuYi&sz=w1200", alt: "Work Image 1", categories: ["print", "digital"] },
           { src: "https://drive.google.com/thumbnail?id=1EC1pnEIS0HRcP8rUtYa0-SMFZFErVyv2&sz=w1200", alt: "Work Image 59", categories: ["print", "digital"] },
           { src: "https://drive.google.com/thumbnail?id=16K-hJ7YB3eKzZ0Fpc1QsKV0EnO8l8mUE&sz=w1200", alt: "Work Image 3", categories: ["digital", "3d"] },
@@ -497,11 +487,11 @@
           { src: "https://drive.google.com/thumbnail?id=1PXKgsT4wJTHYtTM6AEO2JrviddGzrMlH&sz=w1200", alt: "Work Image 6", categories: ["3d"] },
           { src: "https://drive.google.com/thumbnail?id=1lsUV17h-65keB9IKgg_cJvifitwEC6Vi&sz=w1200", alt: "Work Image 7", categories: ["product"] },
           { src: "https://drive.google.com/thumbnail?id=1zUrGQs70B-vTUnw0fBHeXn4ocoe2qy5T&sz=w1200", alt: "Work Image 8", categories: ["product", "print"] },
-          { src: "https://drive.google.com/thumbnail?id=1vtIkjFXJhFKwc6TsK93EaPMMNzMRsEwK&sz=w1200", alt: "Work Image 50", categories: ["print", "digital"] },         
+          { src: "https://drive.google.com/thumbnail?id=1vtIkjFXJhFKwc6TsK93EaPMMNzMRsEwK&sz=w1200", alt: "Work Image 50", categories: ["print", "digital"] },
           { src: "https://drive.google.com/thumbnail?id=1ptX-VRuXA1tcAnu9SbpojjjCTAR7kPuT&sz=w1200", alt: "Work Image 10", categories: ["3d"] },
           { src: "https://drive.google.com/thumbnail?id=1OOpjoJiNmzZxttfIBpQ43xWlXKiMoDHz&sz=w1200", alt: "Work Image 13", categories: ["digital"] },
           { src: "https://drive.google.com/thumbnail?id=1F2-rWxNQC7JJAib07GLS7u2whIhXVWeZ&sz=w1200", alt: "Work Image 14", categories: ["digital"] },
-          { src: "https://drive.google.com/thumbnail?id=1ImWqmE7xA0CBkEe3uJnudWVErv_zBnCP&sz=w1200", alt: "Work Image 46", categories: ["print", "digital"] },           
+          { src: "https://drive.google.com/thumbnail?id=1ImWqmE7xA0CBkEe3uJnudWVErv_zBnCP&sz=w1200", alt: "Work Image 46", categories: ["print", "digital"] },
           { src: "https://drive.google.com/thumbnail?id=1I7S1LB7e2FaIMDz9Zz6Fm5Ipwug2uqmF&sz=w1200", alt: "Work Image 17", categories: ["product"] },
           { src: "https://drive.google.com/thumbnail?id=1mqoGFLRHapYzaITMI1ysyVzlO1Rs0O1y&sz=w1200", alt: "Work Image 18", categories: ["3d"] },
           { src: "https://drive.google.com/thumbnail?id=1L1EO9xbx7G3MGovxKV7GPV8VB1ZzSNJO&sz=w1200", alt: "Work Image 60", categories: ["print", "digital"] },
@@ -524,35 +514,28 @@
           { src: "https://drive.google.com/thumbnail?id=1tmNtf3fpuG35aQY_B20jX5zFuJYbZn9t&sz=w1200", alt: "Work Image 22", categories: ["3d"] },
           { src: "https://drive.google.com/thumbnail?id=1citj8Zu7j3JEzF-B7kczQiYVg8n-PNqo&sz=w1200", alt: "Work Image 51", categories: ["print", "digital"] },
           { src: "https://drive.google.com/thumbnail?id=19cWGXdMQfO5tjz8Xz6IqKRf_e6U-Pk5L&sz=w1200", alt: "Work Image 52", categories: ["print", "digital"] },
-          { src: "https://drive.google.com/thumbnail?id=1IwnEtTHPZukFOMrXLGbCvk3ag429jFEM&sz=w1200", alt: "Work Image 9", categories: ["print"] },         
-
+          { src: "https://drive.google.com/thumbnail?id=1IwnEtTHPZukFOMrXLGbCvk3ag429jFEM&sz=w1200", alt: "Work Image 9", categories: ["print"] },
         ];
-
         const filteredImages = filter === 'all'
           ? images
           : images.filter(img => img.categories.includes(filter));
-
-        const imagesHTML = filteredImages.map((img, index) =>
-          `<img src="${img.src}" alt="${img.alt}" data-category="${img.categories.join(',')}" ${index === 0 ? 'class="lightbox-trigger"' : ''}>`).join('');
-
+        const imagesHTML = filteredImages.map(img =>
+          `<img src="${img.src}" alt="${img.alt}" data-category="${img.categories.join(',')}">`).join('');
         const iframeScript = `
           <script>
             document.addEventListener('DOMContentLoaded', function() {
               const images = document.querySelectorAll('.work-gallery img');
-              images.forEach((img, index) => {
+              images.forEach((img) => {
                 img.addEventListener('click', function() {
-                  if (this.classList.contains('lightbox-trigger')) {
-                    window.parent.postMessage({
-                      type: 'openLightbox',
-                      src: this.src
-                    }, '*');
-                  }
+                  window.parent.postMessage({
+                    type: 'openLightbox',
+                    src: this.src
+                  }, '*');
                 });
               });
             });
           <\/script>
         `;
-
         const workHTML = `
           <!DOCTYPE html>
           <html>
@@ -595,7 +578,6 @@
           </body>
           </html>
         `;
-
         const workDataURL = "data:text/html;charset=utf-8," + encodeURIComponent(workHTML);
         contentArea.innerHTML = `
           <div class="align-wrapper">
@@ -606,37 +588,12 @@
         `;
       }
 
-      // Handle messages from iframe
-      window.addEventListener('message', function(event) {
-        if (event.data.type === 'openLightbox') {
-          lightboxImg1.src = event.data.src;
-          lightbox.style.display = 'block';
-
-          // Reset scroll position to top
-          const imagesContainer = document.querySelector('.lightbox-images-container');
-          if (imagesContainer) {
-            imagesContainer.scrollTop = 0;
-          }
-        }
-      });
-
-      lightboxClose.onclick = function() {
-        lightbox.style.display = 'none';
-      };
-
-      window.onclick = function(event) {
-        if (event.target === lightbox) {
-          lightbox.style.display = 'none';
-        }
-      };
-
       homeBtn.addEventListener('click', loadHomeContent);
       document.getElementById('logoLink').addEventListener('click', (e) => {
         e.preventDefault();
         loadHomeContent();
       });
 
-      // Add click event for the work button itself
       workBtn.addEventListener('click', () => {
         loadWorkContent('all');
       });
