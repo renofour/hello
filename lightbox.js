@@ -1,40 +1,60 @@
+let currentLightboxImages = [];
+let currentImageIndex = 0;
+
 document.addEventListener('DOMContentLoaded', () => {
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightbox-img');
   const lightboxClose = document.getElementById('lightboxClose');
   const lightboxContainer = document.querySelector('.lightbox-container');
   const lightboxImagesContainer = document.querySelector('.lightbox-images-container');
+  const lightboxText = document.querySelector('.lightbox-text-inner');
+  const lightboxNavPrev = document.createElement('button');
+  const lightboxNavNext = document.createElement('button');
+
+  // Add navigation buttons for the lightbox
+  lightboxNavPrev.className = 'lightbox-nav-prev';
+  lightboxNavPrev.innerHTML = '&#10094;';
+  lightboxNavNext.className = 'lightbox-nav-next';
+  lightboxNavNext.innerHTML = '&#10095;';
+
+  lightboxContainer.appendChild(lightboxNavPrev);
+  lightboxContainer.appendChild(lightboxNavNext);
 
   window.addEventListener('message', function(event) {
     if (event.data.type === 'openLightbox') {
-      lightboxImg.src = event.data.src;
-      lightbox.style.display = 'block';
+      currentLightboxImages = getLightboxImages(event.data.src);
+      currentImageIndex = 0;
 
-      // Reset classes and padding
-      lightboxContainer.classList.remove('landscape', 'portrait');
-      lightboxImagesContainer.style.padding = '0';
+      if (currentLightboxImages.length > 0) {
+        lightboxImg.src = currentLightboxImages[currentImageIndex].src;
+        lightboxText.textContent = currentLightboxImages[currentImageIndex].text;
+        lightbox.style.display = 'block';
 
-      // Wait for the image to load
-      lightboxImg.onload = function() {
-        const isLandscape = this.naturalWidth > this.naturalHeight;
-        if (isLandscape) {
-          lightboxContainer.classList.add('landscape');
-        } else {
-          lightboxContainer.classList.add('portrait');
-        }
+        // Reset classes and padding
+        lightboxContainer.classList.remove('landscape', 'portrait');
+        lightboxImagesContainer.style.padding = '0';
 
-        // Calculate and set dynamic padding (1/4 of the previous size)
-        const paddingPercentage = 2.5; // Reduced from 10% to 2.5%
-        const containerWidth = lightboxImagesContainer.clientWidth;
-        const containerHeight = lightboxImagesContainer.clientHeight;
+        // Wait for the image to load
+        lightboxImg.onload = function() {
+          const isLandscape = this.naturalWidth > this.naturalHeight;
+          if (isLandscape) {
+            lightboxContainer.classList.add('landscape');
+          } else {
+            lightboxContainer.classList.add('portrait');
+          }
 
-        // Calculate padding to center the image with consistent white space
-        const paddingHorizontal = containerWidth * (paddingPercentage / 100);
-        const paddingVertical = containerHeight * (paddingPercentage / 100);
+          // Calculate and set dynamic padding
+          const paddingPercentage = 2.5;
+          const containerWidth = lightboxImagesContainer.clientWidth;
+          const containerHeight = lightboxImagesContainer.clientHeight;
 
-        lightboxImagesContainer.style.padding =
-          `${paddingVertical}px ${paddingHorizontal}px`;
-      };
+          const paddingHorizontal = containerWidth * (paddingPercentage / 100);
+          const paddingVertical = containerHeight * (paddingPercentage / 100);
+
+          lightboxImagesContainer.style.padding =
+            `${paddingVertical}px ${paddingHorizontal}px`;
+        };
+      }
 
       const imagesContainer = document.querySelector('.lightbox-images-container');
       if (imagesContainer) {
@@ -45,6 +65,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   lightboxClose.onclick = function() {
     lightbox.style.display = 'none';
+  };
+
+  lightboxNavPrev.onclick = function() {
+    if (currentLightboxImages.length > 0) {
+      currentImageIndex = (currentImageIndex - 1 + currentLightboxImages.length) % currentLightboxImages.length;
+      lightboxImg.src = currentLightboxImages[currentImageIndex].src;
+      lightboxText.textContent = currentLightboxImages[currentImageIndex].text;
+    }
+  };
+
+  lightboxNavNext.onclick = function() {
+    if (currentLightboxImages.length > 0) {
+      currentImageIndex = (currentImageIndex + 1) % currentLightboxImages.length;
+      lightboxImg.src = currentLightboxImages[currentImageIndex].src;
+      lightboxText.textContent = currentLightboxImages[currentImageIndex].text;
+    }
   };
 
   window.onclick = function(event) {
