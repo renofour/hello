@@ -223,10 +223,10 @@
     /* Lightbox Container */
     .lightbox-container {
       display: flex;
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 50px auto;
       position: relative;
-      width: 80%;
+      width: 90%;
       height: calc(100vh - 100px);
     }
 
@@ -234,25 +234,37 @@
     .lightbox-images-container {
       flex: 1;
       overflow-y: auto;
-      padding-right: 20px;
-      height: 100%;
+      padding: 20px;
       scrollbar-width: none;
       -ms-overflow-style: none;
       background: white;
     }
+
+    /* Portrait Image Container */
+    .lightbox-container.portrait .lightbox-images-container {
+      width: 60%;
+      max-width: 600px;
+    }
+
+    /* Landscape Image Container */
+    .lightbox-container.landscape .lightbox-images-container {
+      width: 80%;
+      max-width: 1000px;
+    }
+
     .lightbox-images-container::-webkit-scrollbar {
       display: none;
     }
 
     .lightbox-images {
-      padding: 20px;
+      padding: 0;
       display: flex;
       flex-direction: column;
       gap: 20px;
       min-height: 100%;
     }
 
-    /* Scalable media */
+    /* Image Scaling */
     .lightbox-img {
       max-width: 100%;
       max-height: 70vh;
@@ -354,27 +366,6 @@
     .menu-toggle.active .bar:nth-child(3) {
       transform: rotate(-45deg);
       top: 14px;
-    }
-
-    /* Portrait/Landscape Layout */
-    .lightbox-container.portrait {
-      width: 60%;
-      max-width: 600px;
-    }
-
-    .lightbox-container.landscape {
-      width: 80%;
-      max-width: 1000px;
-    }
-
-    .lightbox-container.portrait .lightbox-img {
-      max-width: 100%;
-      max-height: 70vh;
-    }
-
-    .lightbox-container.landscape .lightbox-img {
-      max-width: 100%;
-      max-height: 70vh;
     }
   </style>
 </head>
