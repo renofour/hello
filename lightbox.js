@@ -24,12 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Calculate and set dynamic padding
-        const imgAspectRatio = this.naturalWidth / this.naturalHeight;
+        const paddingPercentage = 10; // Adjust this value to control the amount of white space
         const containerWidth = lightboxImagesContainer.clientWidth;
         const containerHeight = lightboxImagesContainer.clientHeight;
 
         // Calculate padding to center the image with consistent white space
-        const paddingPercentage = 10; // Adjust this value to control the amount of white space
         const paddingHorizontal = containerWidth * (paddingPercentage / 100);
         const paddingVertical = containerHeight * (paddingPercentage / 100);
 
