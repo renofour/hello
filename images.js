@@ -38,21 +38,6 @@ const images = [
   { src: "https://drive.google.com/thumbnail?id=1IwnEtTHPZukFOMrXLGbCvk3ag429jFEM&sz=w1200", alt: "Work Image 9", categories: ["print"] },
 ];
 
-// Function to filter gallery images based on category
-function getFilteredGalleryImages(filter) {
-  return filter === 'all'
-    ? galleryImages
-    : galleryImages.filter(img => img.categories.includes(filter));
-}
-
-// Function to get lightbox images for a specific gallery image
-function getLightboxImages(galleryImageSrc) {
-  const galleryImage = galleryImages.find(img => img.src === galleryImageSrc);
-  return galleryImage ? galleryImage.lightboxImages : [];
-}
-
-];
-
 // Function to filter images based on category
 function getFilteredImages(filter) {
   return filter === 'all'
