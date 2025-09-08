@@ -223,53 +223,43 @@
     /* Lightbox Container */
     .lightbox-container {
       display: flex;
+      max-width: 1200px;
       margin: 50px auto;
       position: relative;
-      height: calc(100vh - 100px);
-      background: white;
-    }
-
-    /* Portrait Layout */
-    .lightbox-container.portrait {
-      width: 60%;
-      max-width: 600px;
-    }
-
-    .lightbox-container.portrait .lightbox-img {
-      max-width: 100%;
-      max-height: 70vh;
-      width: auto;
-      height: auto;
-      display: block;
-      margin: 0 auto;
-    }
-
-    /* Landscape Layout */
-    .lightbox-container.landscape {
       width: 80%;
-      max-width: 1000px;
-    }
-
-    .lightbox-container.landscape .lightbox-img {
-      max-width: 100%;
-      max-height: 70vh;
-      width: auto;
-      height: auto;
-      display: block;
-      margin: 0 auto;
+      height: calc(100vh - 100px);
     }
 
     /* Lightbox Images Container */
     .lightbox-images-container {
       flex: 1;
       overflow-y: auto;
-      padding: 20px;
+      padding-right: 20px;
+      height: 100%;
       scrollbar-width: none;
       -ms-overflow-style: none;
+      background: white;
     }
-
     .lightbox-images-container::-webkit-scrollbar {
       display: none;
+    }
+
+    .lightbox-images {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      min-height: 100%;
+    }
+
+    /* Scalable media */
+    .lightbox-img {
+      max-width: 100%;
+      max-height: 70vh;
+      width: auto;
+      height: auto;
+      display: block;
+      margin: 0 auto;
     }
 
     /* Lightbox Text */
@@ -285,6 +275,10 @@
       margin-left: 20px;
     }
 
+    .lightbox-text-inner {
+      display: inline;
+    }
+
     /* Lightbox Close Button */
     .lightbox-close {
       position: fixed;
@@ -298,7 +292,6 @@
       width: 30px;
       height: 30px;
     }
-
     .lightbox-close .bar {
       display: block;
       width: 100%;
@@ -308,16 +301,13 @@
       left: 0;
       transition: 0.3s;
     }
-
     .lightbox-close .bar:nth-child(1) {
       top: 14px;
       transform: rotate(45deg);
     }
-
     .lightbox-close .bar:nth-child(2) {
       opacity: 0;
     }
-
     .lightbox-close .bar:nth-child(3) {
       top: 14px;
       transform: rotate(-45deg);
@@ -336,7 +326,6 @@
       width: 30px;
       height: 30px;
     }
-
     .menu-toggle .bar {
       display: block;
       width: 100%;
@@ -346,31 +335,46 @@
       left: 0;
       transition: 0.3s;
     }
-
     .menu-toggle .bar:nth-child(1) {
       top: 0;
     }
-
     .menu-toggle .bar:nth-child(2) {
       top: 14px;
     }
-
     .menu-toggle .bar:nth-child(3) {
       top: 28px;
     }
-
     .menu-toggle.active .bar:nth-child(1) {
       transform: rotate(45deg);
       top: 14px;
     }
-
     .menu-toggle.active .bar:nth-child(2) {
       opacity: 0;
     }
-
     .menu-toggle.active .bar:nth-child(3) {
       transform: rotate(-45deg);
       top: 14px;
+    }
+
+    /* Portrait/Landscape Layout */
+    .lightbox-container.portrait {
+      width: 60%;
+      max-width: 600px;
+    }
+
+    .lightbox-container.landscape {
+      width: 80%;
+      max-width: 1000px;
+    }
+
+    .lightbox-container.portrait .lightbox-img {
+      max-width: 100%;
+      max-height: 70vh;
+    }
+
+    .lightbox-container.landscape .lightbox-img {
+      max-width: 100%;
+      max-height: 70vh;
     }
   </style>
 </head>
