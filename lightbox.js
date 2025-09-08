@@ -23,8 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
           lightboxContainer.classList.add('portrait');
         }
 
-        // Calculate and set dynamic padding
-        const paddingPercentage = 10; // Adjust this value to control the amount of white space
+        // Calculate and set dynamic padding (1/4 of the previous size)
+        const paddingPercentage = 2.5; // Reduced from 10% to 2.5%
         const containerWidth = lightboxImagesContainer.clientWidth;
         const containerHeight = lightboxImagesContainer.clientHeight;
 
