@@ -15,10 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
       // Look up clicked image in images.js
       const imgObj = images.find(img => img.src === clickedSrc);
 
-      // If it has a group → use that group, otherwise just show itself
+      // Include clicked image + its group (avoid duplicates)
       let sources = [clickedSrc];
       if (imgObj && imgObj.group) {
-        sources = imgObj.group;
+        sources = [clickedSrc, ...imgObj.group.filter(src => src !== clickedSrc)];
       }
 
       // Render all sources in order
