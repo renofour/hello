@@ -1,6 +1,16 @@
 // List of images/videos/GIFs
 const images = [
-  { src: "https://drive.google.com/thumbnail?id=1KS_yxQ51nW9AnfmysBbYxzPaLG54wuYi&sz=w1200", alt: "Work Image 1", categories: ["print", "digital"] },
+  { 
+    src: "https://drive.google.com/thumbnail?id=1KS_yxQ51nW9AnfmysBbYxzPaLG54wuYi&sz=w1200", 
+    alt: "Work Image 1", 
+    categories: ["print", "digital"],
+    group: [
+      "https://drive.google.com/thumbnail?id=1tmNtf3fpuG35aQY_B20jX5zFuJYbZn9t&sz=w1200",
+      "https://drive.google.com/thumbnail?id=1citj8Zu7j3JEzF-B7kczQiYVg8n-PNqo&sz=w1200",
+      "https://drive.google.com/thumbnail?id=19cWGXdMQfO5tjz8Xz6IqKRf_e6U-Pk5L&sz=w1200",
+      "https://drive.google.com/thumbnail?id=1IwnEtTHPZukFOMrXLGbCvk3ag429jFEM&sz=w1200"
+    ]
+  },
   { src: "https://drive.google.com/thumbnail?id=1EC1pnEIS0HRcP8rUtYa0-SMFZFErVyv2&sz=w1200", alt: "Work Image 59", categories: ["print", "digital"] },
   { src: "https://drive.google.com/thumbnail?id=16K-hJ7YB3eKzZ0Fpc1QsKV0EnO8l8mUE&sz=w1200", alt: "Work Image 3", categories: ["digital", "3d"] },
   { src: "https://drive.google.com/thumbnail?id=1-IfFsOem4_uFoWHL7x0gUz-Nkk8s-Bu8&sz=w1200", alt: "Work Image 4", categories: ["print"] },
