@@ -240,7 +240,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      scroll-padding-top: 30px; /* ✅ spacing for first image */
     }
 
     .lightbox-images-container::-webkit-scrollbar {
@@ -255,6 +254,11 @@
       min-height: 100%;
       justify-content: center;
       align-items: center;
+    }
+
+    /* Add spacing above first image */
+    .lightbox-images img:first-child {
+      margin-top: 30px; /* adjust value as needed */
     }
 
     /* Image Scaling */
@@ -578,4 +582,48 @@
               @media (max-width: 1024px) {
                 .work-gallery { column-count: 2; }
               }
-              @media (max-width: 768px)
+              @media (max-width: 768px) {
+                .work-gallery { column-count: 1; }
+              }
+            </style>
+          </head>
+          <body>
+            <div class="work-gallery">
+              ${imagesHTML}
+            </div>
+            ${iframeScript}
+          </body>
+          </html>
+        `;
+
+        const workDataURL = "data:text/html;charset=utf-8," + encodeURIComponent(workHTML);
+        contentArea.innerHTML = `
+          <div class="align-wrapper">
+            <div class="work-iframe-wrapper">
+              <iframe src="${workDataURL}" frameborder="0"></iframe>
+            </div>
+          </div>
+        `;
+      }
+
+      homeBtn.addEventListener('click', loadHomeContent);
+      document.getElementById('logoLink').addEventListener('click', (e) => {
+        e.preventDefault();
+        loadHomeContent();
+      });
+
+      workBtn.addEventListener('click', () => {
+        loadWorkContent('all');
+      });
+
+      document.querySelectorAll('#workItem .submenu-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const filter = btn.dataset.filter;
+          loadWorkContent(filter);
+        });
+      });
+    });
+  </script>
+  <script src="lightbox.js"></script>
+</body>
+</html>
