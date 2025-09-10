@@ -256,6 +256,11 @@
       align-items: center;
     }
 
+    /* Add spacing above first image */
+    .lightbox-images img:first-child {
+      margin-top: 30px; /* adjust value as needed */
+    }
+
     /* Image Scaling */
     .lightbox-img {
       max-width: 100%;
@@ -578,47 +583,4 @@
                 .work-gallery { column-count: 2; }
               }
               @media (max-width: 768px) {
-                .work-gallery { column-count: 1; }
-              }
-            </style>
-          </head>
-          <body>
-            <div class="work-gallery">
-              ${imagesHTML}
-            </div>
-            ${iframeScript}
-          </body>
-          </html>
-        `;
-
-        const workDataURL = "data:text/html;charset=utf-8," + encodeURIComponent(workHTML);
-        contentArea.innerHTML = `
-          <div class="align-wrapper">
-            <div class="work-iframe-wrapper">
-              <iframe src="${workDataURL}" frameborder="0"></iframe>
-            </div>
-          </div>
-        `;
-      }
-
-      homeBtn.addEventListener('click', loadHomeContent);
-      document.getElementById('logoLink').addEventListener('click', (e) => {
-        e.preventDefault();
-        loadHomeContent();
-      });
-
-      workBtn.addEventListener('click', () => {
-        loadWorkContent('all');
-      });
-
-      document.querySelectorAll('#workItem .submenu-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const filter = btn.dataset.filter;
-          loadWorkContent(filter);
-        });
-      });
-    });
-  </script>
-  <script src="lightbox.js"></script>
-</body>
-</html>
+                .work-gallery { column-count:
