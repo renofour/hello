@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Clear previous images
       lightboxImagesWrapper.innerHTML = "";
 
-      // Find image in list
+      // Find the image object
       const imgObj = images.find(img => img.src === clickedSrc);
 
       let sources = [clickedSrc];
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         sources = imgObj.group;
       }
 
-      // Add all images to lightbox
+      // Insert all images
       sources.forEach(src => {
         const img = document.createElement('img');
         img.src = src;
@@ -35,8 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       lightbox.style.display = 'block';
-
-      // Reset scroll
       lightboxImagesContainer.scrollTop = 0;
     }
   });
