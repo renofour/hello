@@ -9,18 +9,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (event.data.type === 'openLightbox') {
       const clickedSrc = event.data.src;
 
-      // Clear previous images
+      // Clear old content
       lightboxImagesWrapper.innerHTML = "";
 
-      // Find the image object
+      // Look up clicked image in images.js
       const imgObj = images.find(img => img.src === clickedSrc);
 
+      // If it has a group → use that group, otherwise just show itself
       let sources = [clickedSrc];
       if (imgObj && imgObj.group) {
         sources = imgObj.group;
       }
 
-      // Insert all images
+      // Render all sources in order
       sources.forEach(src => {
         const img = document.createElement('img');
         img.src = src;
