@@ -5,10 +5,13 @@ const images = [
     alt: "Work Image 1", 
     categories: ["print", "digital"],
     group: [
-      "https://lh3.googleusercontent.com/d/1tmNtf3fpuG35aQY_B20jX5zFuJYbZn9t=w1200",
-      "https://lh3.googleusercontent.com/d/1citj8Zu7j3JEzF-B7kczQiYVg8n-PNqo=w1200",
-      "https://lh3.googleusercontent.com/d/19cWGXdMQfO5tjz8Xz6IqKRf_e6U-Pk5L=w1200",
-      "https://lh3.googleusercontent.com/d/1IwnEtTHPZukFOMrXLGbCvk3ag429jFEM=w1200"
+       "https://lh3.googleusercontent.com/d/1KS_yxQ51nW9AnfmysBbYxzPaLG54wuYi=w1200",
+       "https://lh3.googleusercontent.com/d/1RyzMQq0e5dyYPf3EZDkVFuIYATfpSeDD=w1200",
+       "https://lh3.googleusercontent.com/d/16yUb4m2XDdxHsWYjZnBiHKHBSlPrjEJA=w1200",
+       "https://lh3.googleusercontent.com/d/1d9NwnWaF9-nbDloklOrrxuxOzZl6WUc9=w1200",
+       "https://lh3.googleusercontent.com/d/1Gok3Xtfp5AlziPR1qrk6ymQ9Wst0lDpo=w1200",
+       "https://lh3.googleusercontent.com/d/16Y4GYduVN7xhi7iRkzT084_pMzhi889A=w1200"
+
     ]
   },
   { src: "https://lh3.googleusercontent.com/d/1EC1pnEIS0HRcP8rUtYa0-SMFZFErVyv2=w1200", alt: "Work Image 59", categories: ["print", "digital"] },
