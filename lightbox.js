@@ -1,45 +1,43 @@
 document.addEventListener('DOMContentLoaded', () => {
   const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxImagesWrapper = document.querySelector('.lightbox-images');
   const lightboxClose = document.getElementById('lightboxClose');
   const lightboxContainer = document.querySelector('.lightbox-container');
   const lightboxImagesContainer = document.querySelector('.lightbox-images-container');
 
   window.addEventListener('message', function(event) {
     if (event.data.type === 'openLightbox') {
-      lightboxImg.src = event.data.src;
+      const clickedSrc = event.data.src;
+
+      // Clear previous images
+      lightboxImagesWrapper.innerHTML = "";
+
+      // Find image in list
+      const imgObj = images.find(img => img.src === clickedSrc);
+
+      let sources = [clickedSrc];
+      if (imgObj && imgObj.group) {
+        sources = imgObj.group;
+      }
+
+      // Add all images to lightbox
+      sources.forEach(src => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.classList.add('lightbox-img');
+        lightboxImagesWrapper.appendChild(img);
+
+        img.onload = function() {
+          const isLandscape = this.naturalWidth > this.naturalHeight;
+          lightboxContainer.classList.remove('landscape', 'portrait');
+          lightboxContainer.classList.add(isLandscape ? 'landscape' : 'portrait');
+        };
+      });
+
       lightbox.style.display = 'block';
 
-      // Reset classes and padding
-      lightboxContainer.classList.remove('landscape', 'portrait');
-      lightboxImagesContainer.style.padding = '0';
-
-      // Wait for the image to load
-      lightboxImg.onload = function() {
-        const isLandscape = this.naturalWidth > this.naturalHeight;
-        if (isLandscape) {
-          lightboxContainer.classList.add('landscape');
-        } else {
-          lightboxContainer.classList.add('portrait');
-        }
-
-        // Calculate and set dynamic padding (1/4 of the previous size)
-        const paddingPercentage = 2.5; // Reduced from 10% to 2.5%
-        const containerWidth = lightboxImagesContainer.clientWidth;
-        const containerHeight = lightboxImagesContainer.clientHeight;
-
-        // Calculate padding to center the image with consistent white space
-        const paddingHorizontal = containerWidth * (paddingPercentage / 100);
-        const paddingVertical = containerHeight * (paddingPercentage / 100);
-
-        lightboxImagesContainer.style.padding =
-          `${paddingVertical}px ${paddingHorizontal}px`;
-      };
-
-      const imagesContainer = document.querySelector('.lightbox-images-container');
-      if (imagesContainer) {
-        imagesContainer.scrollTop = 0;
-      }
+      // Reset scroll
+      lightboxImagesContainer.scrollTop = 0;
     }
   });
 
