@@ -71,7 +71,11 @@ const images = [
   { src: "https://lh3.googleusercontent.com/d/1tmNtf3fpuG35aQY_B20jX5zFuJYbZn9t=w1200", alt: "Cooex", categories: ["3d"] },
   { src: "https://lh3.googleusercontent.com/d/1citj8Zu7j3JEzF-B7kczQiYVg8n-PNqo=w1200", alt: "Stella", categories: ["print", "digital"] },
   { src: "https://lh3.googleusercontent.com/d/19cWGXdMQfO5tjz8Xz6IqKRf_e6U-Pk5L=w1200", alt: "Fall", categories: ["print", "digital"] },
-  { src: "https://lh3.googleusercontent.com/d/1IwnEtTHPZukFOMrXLGbCvk3ag429jFEM=w1200", alt: "Alfa", categories: ["print"] },
+  {src: "https://lh3.googleusercontent.com/d/1ZGSa2uhJRqoObgMCPpQ0Auua-kMSjDtZ=w1200", 
+  alt: "Odd", 
+  categories: ["print"] 
+},
+
 ];
 
 // Function to filter images based on category
