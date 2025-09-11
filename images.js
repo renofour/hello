@@ -31,7 +31,20 @@ const images = [
   },
 
   { src: "https://lh3.googleusercontent.com/d/1gaGdfaccHZWwBJw9yeNVh2mWeJ-VS3OE=w1200", alt: "Space", categories: ["digital"] },
-  { src: "https://lh3.googleusercontent.com/d/1PXKgsT4wJTHYtTM6AEO2JrviddGzrMlH=w1200", alt: "Flags", categories: ["3d"] },
+  
+  { src: "https://lh3.googleusercontent.com/d/1PXKgsT4wJTHYtTM6AEO2JrviddGzrMlH=w1200", 
+   alt: "Flags", 
+   categories: ["3d"], 
+   group: [
+     "https://lh3.googleusercontent.com/d/1z5hlLZvZ7E89QKkdwBOegW3u45UeAJqx=w1200",
+     "https://lh3.googleusercontent.com/d/1Q6AyJgcSu3-xw_O13a8bnkl_QyzhelBz=w1200",
+     "https://lh3.googleusercontent.com/d/1mMb37RFB4RQGqMT5fSKAE4F4wnL8RpW1=w1200",
+     "https://lh3.googleusercontent.com/d/1v-qeoTEP0I1Vq0XCyH_FyVOKF4ILfqfR=w1200",
+     "https://lh3.googleusercontent.com/d/14e7R4cbk4nc7pmW5EXUKt16GlX3auofQ=w1200",
+     "https://lh3.googleusercontent.com/d/1rHPUDFseJP4AEG13pNXGXgOvaN-zBWmx=w1200"
+    ]
+  },
+  
   { src: "https://lh3.googleusercontent.com/d/1lsUV17h-65keB9IKgg_cJvifitwEC6Vi=w1200", alt: "Plauat", categories: ["product"] },
   { src: "https://lh3.googleusercontent.com/d/1zUrGQs70B-vTUnw0fBHeXn4ocoe2qy5T=w1200", alt: "Ballsy", categories: ["product", "print"] },
   { src: "https://lh3.googleusercontent.com/d/1vtIkjFXJhFKwc6TsK93EaPMMNzMRsEwK=w1200", alt: "Time", categories: ["print", "digital"] },
