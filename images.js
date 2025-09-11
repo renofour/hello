@@ -15,7 +15,23 @@ const images = [
   },
   { src: "https://lh3.googleusercontent.com/d/1EC1pnEIS0HRcP8rUtYa0-SMFZFErVyv2=w1200", alt: "WThink Big", categories: ["print", "digital"] },
   { src: "https://lh3.googleusercontent.com/d/16K-hJ7YB3eKzZ0Fpc1QsKV0EnO8l8mUE=w1200", alt: "Mau", categories: ["digital", "3d"] },
-  { src: "https://lh3.googleusercontent.com/d/1-IfFsOem4_uFoWHL7x0gUz-Nkk8s-Bu8=w1200", alt: "30DII", categories: ["print"] },
+
+  {src: "https://lh3.googleusercontent.com/d/15FTIUfeVcqKgX-D7WNouuUOAzcj-2VRC=w1200",
+    alt: "30DII",
+    categories: ["print"],
+    group: [
+      "https://lh3.googleusercontent.com/d/15FTIUfeVcqKgX-D7WNouuUOAzcj-2VRC=w1200",
+      "https://lh3.googleusercontent.com/d/1kEALBwWjwUwCIXXtLOPIFRjghW6zi3gD=w1200",
+      "https://lh3.googleusercontent.com/d/1eGDP41pcqUYDwj1IMc4LDK_IY5lMxOUj=w1200",
+      "https://lh3.googleusercontent.com/d/1o9Yoe_mLvZtMifItUwLA02WHEtrz-oss=w1200",
+      "https://lh3.googleusercontent.com/d/1FZkyoX1s0bDIRWeEHrgwfNtbylAyjZzS=w1200",
+      "https://lh3.googleusercontent.com/d/1rbu6THSuW3DzBIBJXI0MmVY48Zpjsbjy=w1200",
+      "https://lh3.googleusercontent.com/d/1ky8YgZzDVj4IVouvlf8YLbRjOJimsqn-=w1200",
+      "https://lh3.googleusercontent.com/d/1hkt52J-1Ec2temdDGcoGBzZaicaoiO2n=w1200"
+    ]
+  },
+
+  { src: "https://lh3.googleusercontent.com/d/1-IfFsOem4_uFoWHL7x0gUz-Nkk8s-Bu8=w1200", alt: "30DII-old", categories: ["print"] },
   { src: "https://lh3.googleusercontent.com/d/1gaGdfaccHZWwBJw9yeNVh2mWeJ-VS3OE=w1200", alt: "Space", categories: ["digital"] },
   { src: "https://lh3.googleusercontent.com/d/1PXKgsT4wJTHYtTM6AEO2JrviddGzrMlH=w1200", alt: "Flags", categories: ["3d"] },
   { src: "https://lh3.googleusercontent.com/d/1lsUV17h-65keB9IKgg_cJvifitwEC6Vi=w1200", alt: "Plauat", categories: ["product"] },
@@ -38,7 +54,8 @@ const images = [
   { src: "https://lh3.googleusercontent.com/d/1Fa31QBfqsmU_gxcJ1oLIUOMMoF7xZvbq=w1200", alt: "Mom", categories: ["print", "digital"] },
   { src: "https://lh3.googleusercontent.com/d/1O9GBM8ofceocw_7FKUUNalePqpRBecEV=w1200", alt: "Kiiroo-3", categories: ["print", "digital"] },
 
-  {src: "https://lh3.googleusercontent.com/d/1jet7dWkYBvufxEfkwkkTrliGeVvoaqsx=w1200", 
+  { 
+    src: "https://lh3.googleusercontent.com/d/1jet7dWkYBvufxEfkwkkTrliGeVvoaqsx=w1200", 
     alt: "Paul", 
     categories: ["print"],
     group: [
