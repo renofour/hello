@@ -11,7 +11,6 @@ const images = [
        "https://lh3.googleusercontent.com/d/1d9NwnWaF9-nbDloklOrrxuxOzZl6WUc9=w1200",
        "https://lh3.googleusercontent.com/d/1Gok3Xtfp5AlziPR1qrk6ymQ9Wst0lDpo=w1200",
        "https://lh3.googleusercontent.com/d/16Y4GYduVN7xhi7iRkzT084_pMzhi889A=w1200"
-
     ]
   },
   { src: "https://lh3.googleusercontent.com/d/1EC1pnEIS0HRcP8rUtYa0-SMFZFErVyv2=w1200", alt: "WThink Big", categories: ["print", "digital"] },
@@ -38,7 +37,17 @@ const images = [
   { src: "https://lh3.googleusercontent.com/d/1dF2OYY3O2DvWhUsYtrjRgzcGCq4r60hr=w1200", alt: "Black", categories: ["print", "digital"] },
   { src: "https://lh3.googleusercontent.com/d/1Fa31QBfqsmU_gxcJ1oLIUOMMoF7xZvbq=w1200", alt: "Mom", categories: ["print", "digital"] },
   { src: "https://lh3.googleusercontent.com/d/1O9GBM8ofceocw_7FKUUNalePqpRBecEV=w1200", alt: "Kiiroo-3", categories: ["print", "digital"] },
-  { src: "https://lh3.googleusercontent.com/d/1jet7dWkYBvufxEfkwkkTrliGeVvoaqsx=w1200", alt: "Paul", categories: ["print"] },
+
+  {src: "https://lh3.googleusercontent.com/d/1jet7dWkYBvufxEfkwkkTrliGeVvoaqsx=w1200", 
+    alt: "Paul", 
+    categories: ["print"],
+    group: [
+      "https://lh3.googleusercontent.com/d/1koB1zcoezKIPbB28EczcRm_v7S9znZxz=w1200",
+      "https://lh3.googleusercontent.com/d/1kZJG5wFO4JTpoOlDGO_xEtoGoI15lbeL=w1200",
+      "https://lh3.googleusercontent.com/d/1454G-GZ77GPREoBRoTGywmF1jpAUKKtG=w1200"
+    ]
+  },
+
   { src: "https://lh3.googleusercontent.com/d/1xrQtbZopFhhVC6qTfrLz-QN-9UCrOS7c=w1200", alt: "Cards", categories: ["print"] },
   { src: "https://lh3.googleusercontent.com/d/1GsOPy6yuFUl24n16hg7o_mZjd9kmH5kS=w1200", alt: "Galaxy", categories: ["print"] },
   { src: "https://lh3.googleusercontent.com/d/1PJWWacnXxr_oMKHuyofx4jbUt8a1jRlx=w1200", alt: "Buddha", categories: ["3d"] },
