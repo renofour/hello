@@ -60,7 +60,20 @@ const images = [
   { src: "https://lh3.googleusercontent.com/d/1F9qZLOnde9gnx-i-fl_xfBNaQA9K6P9G=w1200", alt: "Book", categories: ["print"] },
   { src: "https://lh3.googleusercontent.com/d/1RECxWfONSoN3ZQBG19OEn8mksZ6THr0a=w1200", alt: "Nike", categories: ["print", "digital"] },
   { src: "https://lh3.googleusercontent.com/d/14D4vKLVvp7BkijAAU_t5MR6f4Ss1VciX=w1200", alt: "Snow", categories: ["3d"] },
-  { src: "https://lh3.googleusercontent.com/d/12yh7OmQPdnBEHswGDG6-6HqUXB12-zOM=w1200", alt: "Smile", categories: ["digital"] },
+  
+  { src: "https://lh3.googleusercontent.com/d/12yh7OmQPdnBEHswGDG6-6HqUXB12-zOM=w1200", 
+    alt: "Smile", 
+    categories: ["digital"], 
+    group: [
+      "https://lh3.googleusercontent.com/d/1bv1-8DTuKQjDJV3ixN6IOK9CrP68qg79=w1200",
+      "https://lh3.googleusercontent.com/d/1kjSC1Cq3ZJyi6uBe1CF1yWqAla9l_-d8=w1200",
+      "https://lh3.googleusercontent.com/d/1cGf6mqDp5e4s6QV0IZwA7nvfin1FuDOi=w1200",
+      "https://lh3.googleusercontent.com/d/1FEBL8nfwI6VgErRb95TB0B0vGjB7Jxu2=w1200",
+      "https://lh3.googleusercontent.com/d/1MHcfbajeA9-m3nAckdwFLcxsG-HwFz4r=w1200",
+      "https://lh3.googleusercontent.com/d/1pqqaSgQbtqtSytEhxJzlrJA0hgFDWbvt=w1200"
+    ]
+  },
+  
   { src: "https://lh3.googleusercontent.com/d/1dF2OYY3O2DvWhUsYtrjRgzcGCq4r60hr=w1200", alt: "Black", categories: ["print", "digital"] },
   { src: "https://lh3.googleusercontent.com/d/1Fa31QBfqsmU_gxcJ1oLIUOMMoF7xZvbq=w1200", alt: "Mom", categories: ["print", "digital"] },
   { src: "https://lh3.googleusercontent.com/d/1O9GBM8ofceocw_7FKUUNalePqpRBecEV=w1200", alt: "Kiiroo-3", categories: ["print", "digital"] },
