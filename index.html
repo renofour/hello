@@ -22,7 +22,7 @@
     /* Global font setup */
     body, button, input, textarea {
       font-family: 'Open Sans', sans-serif;
-      font-size: 15px;
+      font-size: 14px;          /* base font size */
       line-height: 1.5;
       letter-spacing: 0.3px;
       color: #222;
@@ -47,8 +47,7 @@
     .left-menu ul { list-style: none; padding: 0; margin: 0; }
     .left-menu li { margin-bottom: 6px; position: relative; }
 
-    .menu-btn,
-    .submenu-btn {
+    .menu-btn {
       background: none;
       border: none;
       padding: 5px 0;
@@ -57,16 +56,18 @@
       cursor: pointer;
       color: #222;
       font: inherit;
+      font-size: 14px;        /* menu buttons = 14px */
       line-height: 1.5;
       letter-spacing: 0.3px;
       display: block;
       user-select: none;
     }
+
     .has-dropdown .menu-btn::after { content: "▸"; float: right; transition: transform 0.2s ease; }
     .has-dropdown.open .menu-btn::after { transform: rotate(90deg); }
 
     .dropdown {
-      font-size: 15px;
+      font-size: 14px;
       color: #222;
       margin-top: 8px;
       padding-left: 0;
@@ -76,9 +77,21 @@
     }
     .has-dropdown.open .dropdown { max-height: 800px; }
 
-    #workItem .dropdown { white-space: normal; padding-left: 0; line-height: 1.5; }
+    /* Work dropdown specific styling */
+    #workItem .dropdown { white-space: normal; padding-left: 0; line-height: 1.4; }
     #workItem .dropdown .submenu-row { display: block; margin-bottom: 6px; }
-    #workItem .dropdown .submenu-btn { display: inline; margin: 0; }
+    #workItem .dropdown .submenu-btn {
+      background: none;
+      border: none;
+      font-size: 12px;       /* submenu smaller */
+      line-height: 1.4;
+      letter-spacing: 0.2px;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+      color: #222;
+      display: inline;
+    }
     #workItem .dropdown .submenu-btn:not(:last-child)::after { content: "•"; margin: 0 8px; color: #555; }
 
     /* Right content layout */
@@ -128,8 +141,19 @@
     .lightbox-img { max-width: 100%; max-height: 70vh; width: auto; height: auto; display: block; }
 
     .lightbox-text {
-      width: 250px; padding: 20px; background: white; position: sticky; top: 50px; align-self: flex-start; border-left: 1px solid #eee; height: fit-content; margin-left: 20px;
-      font-size: 15px; line-height: 1.5; letter-spacing: 0.3px; color: #222;
+      width: 250px;
+      padding: 20px;
+      background: white;
+      position: sticky;
+      top: 50px;
+      align-self: flex-start;
+      border-left: 1px solid #eee;
+      height: fit-content;
+      margin-left: 20px;
+      font-size: 14px;       /* lightbox text = 14px */
+      line-height: 1.5;
+      letter-spacing: 0.3px;
+      color: #222;
     }
     .lightbox-text-inner { display: inline; }
 
@@ -222,156 +246,6 @@
   </div>
 
   <script src="images.js"></script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const menu = document.getElementById('menu');
-      const menuToggle = document.getElementById('menuToggle');
-      const contentArea = document.getElementById('contentArea');
-      const homeBtn = document.getElementById('homeBtn');
-      const workBtn = document.querySelector('#workItem .menu-btn');
-      const initialVideoURL = "https://framerusercontent.com/assets/CtSYQwWgD3v3HDe3HMRPnHbvGOk.mp4";
-
-      function syncButton() {
-        const open = !menu.classList.contains('collapsed');
-        menuToggle.classList.toggle('active', open);
-        menuToggle.setAttribute('aria-expanded', String(open));
-      }
-      syncButton();
-
-      menuToggle.addEventListener('click', () => {
-        menu.classList.toggle('collapsed');
-        syncButton();
-      });
-
-      const nav = menu.querySelector('nav');
-      nav.addEventListener('click', (e) => {
-        const btn = e.target.closest('.menu-btn');
-        if (!btn) return;
-
-        if (btn === workBtn) {
-          loadWorkContent('all');
-          const item = btn.closest('.has-dropdown');
-          item.classList.add('open');
-          btn.setAttribute('aria-expanded', 'true');
-          return;
-        }
-
-        if (menu.classList.contains('collapsed')) {
-          menu.classList.remove('collapsed');
-          syncButton();
-        }
-
-        const item = btn.closest('.has-dropdown');
-        if (!item) return;
-
-        const isOpen = item.classList.contains('open');
-        nav.querySelectorAll('.has-dropdown').forEach(li => {
-          li.classList.remove('open');
-          const b = li.querySelector('.menu-btn');
-          if (b) b.setAttribute('aria-expanded', 'false');
-        });
-        item.classList.toggle('open', !isOpen);
-        btn.setAttribute('aria-expanded', String(!isOpen));
-      });
-
-      function loadHomeContent() {
-        contentArea.innerHTML = `
-          <div class="align-wrapper">
-            <div class="video-wrapper">
-              <video autoplay muted loop>
-                <source src="${initialVideoURL}" type="video/mp4">
-              </video>
-            </div>
-          </div>
-        `;
-      }
-
-      function loadWorkContent(filter = 'all') {
-        const filteredImages = getFilteredImages(filter);
-
-        const imagesHTML = filteredImages.map(img =>
-          `<img src="${img.src}" alt="${img.alt}" data-category="${img.categories.join(',')}">`
-        ).join('');
-
-        const iframeScript = `
-          <script>
-            document.addEventListener('DOMContentLoaded', function() {
-              const images = document.querySelectorAll('.work-gallery img');
-              images.forEach((img) => {
-                img.addEventListener('click', function() {
-                  window.parent.postMessage({
-                    type: 'openLightbox',
-                    src: this.src
-                  }, '*');
-                });
-              });
-            });
-          <\/script>
-        `;
-
-        const workHTML = `
-          <!DOCTYPE html>
-          <html>
-          <head>
-            <meta charset="utf-8" />
-            <meta name="viewport" content="width=device-width,initial-scale=1" />
-            <style>
-              html,body { margin: 0; padding: 20px; box-sizing: border-box; font-family: inherit; background: white; }
-              .work-gallery { column-count: 3; column-gap: 10px; width: 100%; }
-              .work-gallery img {
-                width: 100%;
-                height: auto;
-                max-width: 100%;
-                margin: 0 0 10px 0;
-                display: block;
-                break-inside: avoid;
-                cursor: pointer;
-              }
-              @media (max-width: 1024px) { .work-gallery { column-count: 2; } }
-              @media (max-width: 768px) { .work-gallery { column-count: 1; } }
-            </style>
-          </head>
-          <body>
-            <div class="work-gallery">
-              ${imagesHTML}
-            </div>
-            ${iframeScript}
-          </body>
-          </html>
-        `;
-
-        const workDataURL = "data:text/html;charset=utf-8," + encodeURIComponent(workHTML);
-        contentArea.innerHTML = `
-          <div class="align-wrapper">
-            <div class="work-iframe-wrapper">
-              <iframe src="${workDataURL}" frameborder="0"></iframe>
-            </div>
-          </div>
-        `;
-      }
-
-      homeBtn.addEventListener('click', loadHomeContent);
-      document.getElementById('logoLink').addEventListener('click', (e) => {
-        e.preventDefault();
-        loadHomeContent();
-      });
-
-      workBtn.addEventListener('click', () => {
-        loadWorkContent('all');
-      });
-
-      document.querySelectorAll('#workItem .submenu-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const filter = btn.dataset.filter;
-          loadWorkContent(filter);
-        });
-      });
-
-      loadHomeContent();
-    });
-  </script>
-
   <script src="lightbox.js"></script>
 </body>
 </html>
