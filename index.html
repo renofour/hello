@@ -211,8 +211,7 @@
       .work-gallery { column-count: 1; }
     }
 
-    /* === LIGHTBOX CSS CHANGES: only this block updated === */
-
+    /* Lightbox */
     .lightbox {
       display: none;
       position: fixed;
@@ -222,10 +221,10 @@
       width: 100%;
       height: 100%;
       background-color: rgba(0, 0, 0, 0.9);
-      overflow: auto; /* allow scrolling when groups are tall */
+      overflow: auto;
     }
 
-    /* Keep the two-column layout (images column + text column) — unchanged structurally */
+    /* Lightbox Container */
     .lightbox-container {
       display: flex;
       max-width: 1400px;
@@ -235,23 +234,26 @@
       height: calc(100vh - 100px);
       box-sizing: border-box;
       gap: 20px;
-      align-items: flex-start; /* align from top so first image isn't pushed out */
+      align-items: flex-start;
     }
 
-    /* Make the images column have equal white padding on all sides (top/bottom/left/right)
-       so the horizontal white space matches the vertical white space between/above/below images */
+    /* Lightbox Images Container */
     .lightbox-images-container {
-      flex: 1;
+      /* do not flex-grow: width is controlled by JS based on first image */
+      flex: 0 0 auto;
       overflow-y: auto;
       scrollbar-width: none;
       -ms-overflow-style: none;
       background: white;
       display: flex;
       justify-content: center;
-      align-items: flex-start; /* start at top so first image is visible */
-      padding: 30px;            /* <-- equal padding added (top/right/bottom/left) */
-      scroll-padding-top: 30px; /* breathing room on open */
+      align-items: flex-start; /* start at top so first image stays visible */
+      padding: 30px;             /* equal padding top/right/bottom/left */
+      scroll-padding-top: 30px;
       box-sizing: border-box;
+      transition: width 180ms ease; /* animate width changes */
+      max-height: 90vh;
+      width: auto;
     }
 
     .lightbox-images-container::-webkit-scrollbar {
@@ -264,13 +266,13 @@
       flex-direction: column;
       gap: 20px;
       min-height: 100%;
-      justify-content: flex-start; /* stack from the top */
+      justify-content: flex-start;
       align-items: center;
       width: 100%;
       box-sizing: border-box;
     }
 
-    /* Image Scaling — images decide their own size, preventing container reflow */
+    /* Image Scaling */
     .lightbox-img {
       max-width: 100%;
       max-height: 70vh;
@@ -280,7 +282,7 @@
       object-fit: contain;
     }
 
-    /* Keep text panel separate on the right (unchanged) */
+    /* Lightbox Text */
     .lightbox-text {
       width: 250px;
       padding: 20px;
@@ -291,12 +293,14 @@
       border-left: 1px solid #eee;
       height: fit-content;
       margin-left: 20px;
+      box-sizing: border-box;
     }
 
     .lightbox-text-inner {
       display: inline;
     }
 
+    /* Lightbox Close Button */
     .lightbox-close {
       position: fixed;
       top: 20px;
@@ -451,6 +455,7 @@
       <div class="lightbox-container">
         <div class="lightbox-images-container">
           <div class="lightbox-images">
+            <!-- placeholder; JS will clear and populate group images -->
             <img id="lightbox-img" class="lightbox-img" src="" alt="" />
           </div>
         </div>
