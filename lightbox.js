@@ -29,23 +29,28 @@ document.addEventListener('DOMContentLoaded', () => {
       // Look up clicked image in images.js
       const imgObj = images.find(img => img.src === clickedSrc);
 
-      // Include clicked image + its group (avoid duplicates)
-      let sources = [clickedSrc];
-      if (imgObj && imgObj.group) {
-        sources = [clickedSrc, ...imgObj.group.filter(src => src !== clickedSrc)];
+      // Only use the group defined in images.js
+      let sources = [];
+      if (imgObj && imgObj.group && imgObj.group.length > 0) {
+        sources = imgObj.group; // exact order you define
+      } else {
+        return; // if no group is defined, do nothing
       }
 
       // Render all sources in order
-      sources.forEach(src => {
+      sources.forEach((src, index) => {
         const img = document.createElement('img');
         img.src = src;
         img.classList.add('lightbox-img');
         lightboxImagesWrapper.appendChild(img);
 
         img.onload = function() {
-          const isLandscape = this.naturalWidth > this.naturalHeight;
-          lightboxContainer.classList.remove('landscape', 'portrait');
-          lightboxContainer.classList.add(isLandscape ? 'landscape' : 'portrait');
+          // Only set orientation from the first image in the group
+          if (index === 0) {
+            const isLandscape = this.naturalWidth > this.naturalHeight;
+            lightboxContainer.classList.remove('landscape', 'portrait');
+            lightboxContainer.classList.add(isLandscape ? 'landscape' : 'portrait');
+          }
         };
       });
 
