@@ -211,16 +211,21 @@
       .work-gallery { column-count: 1; }
     }
 
-    /* === LIGHTBOX === */
+    /* === LIGHTBOX CSS CHANGES: only this block updated === */
+
     .lightbox {
       display: none;
       position: fixed;
       z-index: 2000;
-      inset: 0;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
       background-color: rgba(0, 0, 0, 0.9);
-      overflow: auto;
+      overflow: auto; /* allow scrolling when groups are tall */
     }
 
+    /* Keep the two-column layout (images column + text column) — unchanged structurally */
     .lightbox-container {
       display: flex;
       max-width: 1400px;
@@ -230,9 +235,11 @@
       height: calc(100vh - 100px);
       box-sizing: border-box;
       gap: 20px;
-      align-items: flex-start;
+      align-items: flex-start; /* align from top so first image isn't pushed out */
     }
 
+    /* Make the images column have equal white padding on all sides (top/bottom/left/right)
+       so the horizontal white space matches the vertical white space between/above/below images */
     .lightbox-images-container {
       flex: 1;
       overflow-y: auto;
@@ -241,29 +248,29 @@
       background: white;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
-      padding: 30px;             /* equal margins top/bottom/left/right */
-      scroll-padding-top: 30px;
+      align-items: flex-start; /* start at top so first image is visible */
+      padding: 30px;            /* <-- equal padding added (top/right/bottom/left) */
+      scroll-padding-top: 30px; /* breathing room on open */
       box-sizing: border-box;
-      max-width: 90vw;
-      max-height: 90vh;
-      width: auto;
-      height: auto;
     }
 
-    .lightbox-images-container::-webkit-scrollbar { display: none; }
+    .lightbox-images-container::-webkit-scrollbar {
+      display: none;
+    }
 
     .lightbox-images {
+      padding: 0;
       display: flex;
       flex-direction: column;
       gap: 20px;
       min-height: 100%;
-      justify-content: flex-start;
+      justify-content: flex-start; /* stack from the top */
       align-items: center;
       width: 100%;
       box-sizing: border-box;
     }
 
+    /* Image Scaling — images decide their own size, preventing container reflow */
     .lightbox-img {
       max-width: 100%;
       max-height: 70vh;
@@ -273,6 +280,7 @@
       object-fit: contain;
     }
 
+    /* Keep text panel separate on the right (unchanged) */
     .lightbox-text {
       width: 250px;
       padding: 20px;
@@ -285,7 +293,9 @@
       margin-left: 20px;
     }
 
-    .lightbox-text-inner { display: inline; }
+    .lightbox-text-inner {
+      display: inline;
+    }
 
     .lightbox-close {
       position: fixed;
@@ -308,16 +318,60 @@
       left: 0;
       transition: 0.3s;
     }
-    .lightbox-close .bar:nth-child(1) { top: 14px; transform: rotate(45deg); }
-    .lightbox-close .bar:nth-child(2) { opacity: 0; }
-    .lightbox-close .bar:nth-child(3) { top: 14px; transform: rotate(-45deg); }
+    .lightbox-close .bar:nth-child(1) {
+      top: 14px;
+      transform: rotate(45deg);
+    }
+    .lightbox-close .bar:nth-child(2) {
+      opacity: 0;
+    }
+    .lightbox-close .bar:nth-child(3) {
+      top: 14px;
+      transform: rotate(-45deg);
+    }
 
-    /* Hamburger (unchanged) */
-    .menu-toggle { /* … */ }
-    .menu-toggle .bar { /* … */ }
-    .menu-toggle.active .bar:nth-child(1) { /* … */ }
-    .menu-toggle.active .bar:nth-child(2) { /* … */ }
-    .menu-toggle.active .bar:nth-child(3) { /* … */ }
+    /* Hamburger */
+    .menu-toggle {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      z-index: 1000;
+      width: 30px;
+      height: 30px;
+    }
+    .menu-toggle .bar {
+      display: block;
+      width: 100%;
+      height: 3px;
+      background: #333;
+      position: absolute;
+      left: 0;
+      transition: 0.3s;
+    }
+    .menu-toggle .bar:nth-child(1) {
+      top: 0;
+    }
+    .menu-toggle .bar:nth-child(2) {
+      top: 14px;
+    }
+    .menu-toggle .bar:nth-child(3) {
+      top: 28px;
+    }
+    .menu-toggle.active .bar:nth-child(1) {
+      transform: rotate(45deg);
+      top: 14px;
+    }
+    .menu-toggle.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle.active .bar:nth-child(3) {
+      transform: rotate(-45deg);
+      top: 14px;
+    }
   </style>
 </head>
 
@@ -325,23 +379,74 @@
   <div class="container">
     <!-- Hamburger -->
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
-      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
     </button>
 
     <!-- Sidebar -->
     <aside class="left-menu collapsed" id="menu">
-      <!-- … sidebar unchanged … -->
+      <nav>
+        <ul>
+          <li><button type="button" class="menu-btn" id="homeBtn">hello</button></li>
+          <li class="has-dropdown" id="workItem">
+            <button type="button" class="menu-btn" aria-expanded="false">work</button>
+            <div class="dropdown">
+              <div class="submenu-row">
+                <button type="button" class="submenu-btn" data-filter="all">all</button>
+                <button type="button" class="submenu-btn" data-filter="print">you print</button>
+                <button type="button" class="submenu-btn" data-filter="digital">digital</button>
+              </div>
+              <div class="submenu-row">
+                <button type="button" class="submenu-btn" data-filter="3d">3d design</button>
+                <button type="button" class="submenu-btn" data-filter="product">product design</button>
+              </div>
+            </div>
+          </li>
+          <li class="has-dropdown" id="aboutItem">
+            <button type="button" class="menu-btn" aria-expanded="false">about</button>
+            <div class="dropdown">
+              Shohei Shohei Shigematsu is a partner at OMA based out of the New York office, who leads the firm's diverse portfolio in the Americas and Japan.
+            </div>
+          </li>
+          <li class="has-dropdown" id="contactItem">
+            <button type="button" class="menu-btn" aria-expanded="false">contact</button>
+            <div class="dropdown">
+              Shohei Shohei Shigematsu is a partner at OMA based out of the New York office, who leads the firm's diverse portfolio in the Americas and Japan.
+            </div>
+          </li>
+        </ul>
+      </nav>
     </aside>
 
     <!-- Right content -->
     <main class="right-content">
-      <!-- … header + content unchanged … -->
+      <!-- Header -->
+      <div class="header">
+        <div class="align-wrapper">
+          <a href="#" id="logoLink"><img src="NYXum_logo_blood2.png" alt="NYXum Logo" /></a>
+        </div>
+      </div>
+
+      <!-- Scrollable content -->
+      <div class="content-area" id="contentArea">
+        <div class="align-wrapper">
+          <div class="video-wrapper">
+            <video autoplay muted loop>
+              <source src="https://framerusercontent.com/assets/CtSYQwWgD3v3HDe3HMRPnHbvGOk.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      </div>
     </main>
 
     <!-- Lightbox -->
     <div id="lightbox" class="lightbox">
       <button class="lightbox-close" id="lightboxClose">
-        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
       </button>
       <div class="lightbox-container">
         <div class="lightbox-images-container">
@@ -358,8 +463,169 @@
     </div>
   </div>
 
+  <!-- images.js must exist in the same folder -->
   <script src="images.js"></script>
-  <!-- your existing JS for menu/content is here (unchanged) -->
+
+  <!-- Main app script (menu, loading work iframe, etc.) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const menu = document.getElementById('menu');
+      const menuToggle = document.getElementById('menuToggle');
+      const contentArea = document.getElementById('contentArea');
+      const homeBtn = document.getElementById('homeBtn');
+      const workBtn = document.querySelector('#workItem .menu-btn');
+      const initialVideoURL = "https://framerusercontent.com/assets/CtSYQwWgD3v3HDe3HMRPnHbvGOk.mp4";
+
+      function syncButton() {
+        const open = !menu.classList.contains('collapsed');
+        menuToggle.classList.toggle('active', open);
+        menuToggle.setAttribute('aria-expanded', String(open));
+      }
+      syncButton();
+
+      menuToggle.addEventListener('click', () => {
+        menu.classList.toggle('collapsed');
+        syncButton();
+      });
+
+      const nav = menu.querySelector('nav');
+      nav.addEventListener('click', (e) => {
+        const btn = e.target.closest('.menu-btn');
+        if (!btn) return;
+
+        // If clicked the top-level work button — load work content (all)
+        if (btn === workBtn) {
+          loadWorkContent('all');
+          const item = btn.closest('.has-dropdown');
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+          return;
+        }
+
+        // If menu is collapsed and any button pressed, expand it for accessibility
+        if (menu.classList.contains('collapsed')) {
+          menu.classList.remove('collapsed');
+          syncButton();
+        }
+
+        const item = btn.closest('.has-dropdown');
+        if (!item) return;
+
+        const isOpen = item.classList.contains('open');
+        // Close all others
+        nav.querySelectorAll('.has-dropdown').forEach(li => {
+          li.classList.remove('open');
+          const b = li.querySelector('.menu-btn');
+          if (b) b.setAttribute('aria-expanded', 'false');
+        });
+        // Toggle this one
+        item.classList.toggle('open', !isOpen);
+        btn.setAttribute('aria-expanded', String(!isOpen));
+      });
+
+      function loadHomeContent() {
+        contentArea.innerHTML = `
+          <div class="align-wrapper">
+            <div class="video-wrapper">
+              <video autoplay muted loop>
+                <source src="${initialVideoURL}" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        `;
+      }
+
+      function loadWorkContent(filter = 'all') {
+        // getFilteredImages is defined in images.js
+        const filteredImages = getFilteredImages(filter);
+
+        const imagesHTML = filteredImages.map(img =>
+          `<img src="${img.src}" alt="${img.alt}" data-category="${img.categories.join(',')}">`
+        ).join('');
+
+        // script for the iframe; note closing SCRIPT tag is escaped
+        const iframeScript = `
+          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              const images = document.querySelectorAll('.work-gallery img');
+              images.forEach((img) => {
+                img.addEventListener('click', function() {
+                  window.parent.postMessage({
+                    type: 'openLightbox',
+                    src: this.src
+                  }, '*');
+                });
+              });
+            });
+          <\/script>
+        `;
+
+        const workHTML = `
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width,initial-scale=1" />
+            <style>
+              html,body { margin: 0; padding: 20px; box-sizing: border-box; font-family: inherit; background: white; }
+              .work-gallery { column-count: 3; column-gap: 10px; width: 100%; }
+              .work-gallery img {
+                width: 100%;
+                height: auto;
+                max-width: 100%;
+                margin: 0 0 10px 0;
+                display: block;
+                break-inside: avoid;
+                cursor: pointer;
+              }
+              @media (max-width: 1024px) { .work-gallery { column-count: 2; } }
+              @media (max-width: 768px) { .work-gallery { column-count: 1; } }
+            </style>
+          </head>
+          <body>
+            <div class="work-gallery">
+              ${imagesHTML}
+            </div>
+            ${iframeScript}
+          </body>
+          </html>
+        `;
+
+        const workDataURL = "data:text/html;charset=utf-8," + encodeURIComponent(workHTML);
+        contentArea.innerHTML = `
+          <div class="align-wrapper">
+            <div class="work-iframe-wrapper">
+              <iframe src="${workDataURL}" frameborder="0"></iframe>
+            </div>
+          </div>
+        `;
+      }
+
+      // initial bindings
+      homeBtn.addEventListener('click', loadHomeContent);
+      document.getElementById('logoLink').addEventListener('click', (e) => {
+        e.preventDefault();
+        loadHomeContent();
+      });
+
+      workBtn.addEventListener('click', () => {
+        loadWorkContent('all');
+      });
+
+      document.querySelectorAll('#workItem .submenu-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const filter = btn.dataset.filter;
+          loadWorkContent(filter);
+        });
+      });
+
+      // load home content initially
+      loadHomeContent();
+    });
+  </script>
+
+  <!-- Lightbox script (uses `images` array from images.js) -->
   <script src="lightbox.js"></script>
 </body>
 </html>
