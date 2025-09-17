@@ -211,43 +211,52 @@
       .work-gallery { column-count: 1; }
     }
 
-    /* === LIGHTBOX UPDATED (white box with equal padding) === */
+    /* === LIGHTBOX CSS CHANGES: only this block updated === */
 
-    /* overlay */
     .lightbox {
       display: none;
       position: fixed;
       z-index: 2000;
-      inset: 0;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
       background-color: rgba(0, 0, 0, 0.9);
-      overflow-y: auto; /* allow scrolling if group is tall */
+      overflow: auto; /* allow scrolling when groups are tall */
     }
 
-    /* white box around everything (equal padding on all sides) */
+    /* Keep the two-column layout (images column + text column) — unchanged structurally */
     .lightbox-container {
       display: flex;
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 50px auto;
-      background: #fff;      /* white box */
-      padding: 40px;         /* equal padding top/right/bottom/left */
+      position: relative;
+      width: 90%;
+      height: calc(100vh - 100px);
       box-sizing: border-box;
       gap: 20px;
-      align-items: flex-start;
+      align-items: flex-start; /* align from top so first image isn't pushed out */
     }
 
-    /* left column that holds stacked images */
+    /* Make the images column have equal white padding on all sides (top/bottom/left/right)
+       so the horizontal white space matches the vertical white space between/above/below images */
     .lightbox-images-container {
       flex: 1;
       overflow-y: auto;
       scrollbar-width: none;
       -ms-overflow-style: none;
+      background: white;
       display: flex;
       justify-content: center;
-      align-items: flex-start; /* start at top so first image stays visible */
-      padding: 0; 
-      scroll-padding-top: 30px;
+      align-items: flex-start; /* start at top so first image is visible */
+      padding: 30px;            /* <-- equal padding added (top/right/bottom/left) */
+      scroll-padding-top: 30px; /* breathing room on open */
+      box-sizing: border-box;
     }
-    .lightbox-images-container::-webkit-scrollbar { display: none; }
+
+    .lightbox-images-container::-webkit-scrollbar {
+      display: none;
+    }
 
     .lightbox-images {
       padding: 0;
@@ -255,23 +264,23 @@
       flex-direction: column;
       gap: 20px;
       min-height: 100%;
-      justify-content: flex-start;
+      justify-content: flex-start; /* stack from the top */
       align-items: center;
       width: 100%;
       box-sizing: border-box;
     }
 
-    /* per-image sizing — prevents container jumps */
+    /* Image Scaling — images decide their own size, preventing container reflow */
     .lightbox-img {
       max-width: 100%;
-      max-height: 80vh;
-      margin: 0 auto;
+      max-height: 70vh;
+      width: auto;
+      height: auto;
       display: block;
       object-fit: contain;
-      box-sizing: border-box;
     }
 
-    /* text panel on the right (unchanged) */
+    /* Keep text panel separate on the right (unchanged) */
     .lightbox-text {
       width: 250px;
       padding: 20px;
@@ -284,7 +293,9 @@
       margin-left: 20px;
     }
 
-    .lightbox-text-inner { display: inline; }
+    .lightbox-text-inner {
+      display: inline;
+    }
 
     .lightbox-close {
       position: fixed;
@@ -307,9 +318,17 @@
       left: 0;
       transition: 0.3s;
     }
-    .lightbox-close .bar:nth-child(1) { top: 14px; transform: rotate(45deg); }
-    .lightbox-close .bar:nth-child(2) { opacity: 0; }
-    .lightbox-close .bar:nth-child(3) { top: 14px; transform: rotate(-45deg); }
+    .lightbox-close .bar:nth-child(1) {
+      top: 14px;
+      transform: rotate(45deg);
+    }
+    .lightbox-close .bar:nth-child(2) {
+      opacity: 0;
+    }
+    .lightbox-close .bar:nth-child(3) {
+      top: 14px;
+      transform: rotate(-45deg);
+    }
 
     /* Hamburger */
     .menu-toggle {
@@ -333,12 +352,26 @@
       left: 0;
       transition: 0.3s;
     }
-    .menu-toggle .bar:nth-child(1) { top: 0; }
-    .menu-toggle .bar:nth-child(2) { top: 14px; }
-    .menu-toggle .bar:nth-child(3) { top: 28px; }
-    .menu-toggle.active .bar:nth-child(1) { transform: rotate(45deg); top: 14px; }
-    .menu-toggle.active .bar:nth-child(2) { opacity: 0; }
-    .menu-toggle.active .bar:nth-child(3) { transform: rotate(-45deg); top: 14px; }
+    .menu-toggle .bar:nth-child(1) {
+      top: 0;
+    }
+    .menu-toggle .bar:nth-child(2) {
+      top: 14px;
+    }
+    .menu-toggle .bar:nth-child(3) {
+      top: 28px;
+    }
+    .menu-toggle.active .bar:nth-child(1) {
+      transform: rotate(45deg);
+      top: 14px;
+    }
+    .menu-toggle.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle.active .bar:nth-child(3) {
+      transform: rotate(-45deg);
+      top: 14px;
+    }
   </style>
 </head>
 
@@ -409,19 +442,18 @@
     </main>
 
     <!-- Lightbox -->
-    <div id="lightbox" class="lightbox" aria-hidden="true">
-      <button class="lightbox-close" id="lightboxClose" aria-label="Close lightbox">
+    <div id="lightbox" class="lightbox">
+      <button class="lightbox-close" id="lightboxClose">
         <span class="bar"></span>
         <span class="bar"></span>
         <span class="bar"></span>
       </button>
-
       <div class="lightbox-container">
         <div class="lightbox-images-container">
-          <!-- JS will append <img> elements here in order; kept empty intentionally -->
-          <div class="lightbox-images"></div>
+          <div class="lightbox-images">
+            <img id="lightbox-img" class="lightbox-img" src="" alt="" />
+          </div>
         </div>
-
         <div class="lightbox-text">
           <div class="lightbox-text-inner">
             Shohei Shohei Shigematsu is a partner at OMA based out of the New York office, who leads the firm's diverse portfolio in the Americas and Japan.
