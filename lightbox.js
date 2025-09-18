@@ -1,71 +1,134 @@
 document.addEventListener('DOMContentLoaded', () => {
   const lightbox = document.getElementById('lightbox');
-  const lightboxImagesWrapper = document.querySelector('.lightbox-images');
-  const lightboxClose = document.getElementById('lightboxClose');
+  const imagesWrapper = document.querySelector('.lightbox-images');
+  const closeBtn = document.getElementById('lightboxClose');
+  const imagesContainer = document.querySelector('.lightbox-images-container');
   const lightboxContainer = document.querySelector('.lightbox-container');
-  const lightboxImagesContainer = document.querySelector('.lightbox-images-container');
+  const textPanel = document.querySelector('.lightbox-text');
 
-  // Inject Open Sans font into the lightbox
-  const fontLink = document.createElement('link');
-  fontLink.rel = 'stylesheet';
-  fontLink.href = 'https://fonts.googleapis.com/css2?family=Open+Sans&display=swap';
-  document.head.appendChild(fontLink);
+  // helpers
+  function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
 
-  const style = document.createElement('style');
-  style.textContent = `
-    body, button, input, textarea {
-      font-family: 'Open Sans', sans-serif !important;
-    }
-  `;
-  document.head.appendChild(style);
+  // Compute and set the white-box width based on the first image natural size
+  function setBoxWidthFromFirstImage(img) {
+    if (!img || !imagesContainer || !lightboxContainer) return;
+    const containerMax = Math.min(1400, window.innerWidth * 0.9); // matches .lightbox-container css
+    const styleContainer = window.getComputedStyle(imagesContainer);
+    const paddingLeft = parseFloat(styleContainer.paddingLeft) || 30;
+    const paddingRight = parseFloat(styleContainer.paddingRight) || paddingLeft;
+    const gap = parseFloat(window.getComputedStyle(lightboxContainer).gap) || 20;
+    const textWidth = parseFloat(window.getComputedStyle(textPanel).width) || 250;
 
-  window.addEventListener('message', function(event) {
-    if (event.data.type === 'openLightbox') {
-      const clickedSrc = event.data.src;
+    // maximum total width available for images box (including its padding)
+    const maxBoxTotal = Math.max(200, containerMax - textWidth - gap);
 
-      // Clear old content
-      lightboxImagesWrapper.innerHTML = "";
+    // desired width for the image display area (inside padding)
+    let desiredImageDisplayWidth = img.naturalWidth || img.width || (maxBoxTotal - paddingLeft - paddingRight);
+    desiredImageDisplayWidth = Math.min(desiredImageDisplayWidth, maxBoxTotal - paddingLeft - paddingRight);
 
-      // Look up clicked image in images.js
-      const imgObj = images.find(img => img.src === clickedSrc);
+    // ensure a sensible minimum (so tiny images don't create a tiny box)
+    const minContentWidth = 200 - paddingLeft - paddingRight;
+    if (desiredImageDisplayWidth < minContentWidth) desiredImageDisplayWidth = Math.max(desiredImageDisplayWidth, minContentWidth);
 
-      // Only use the group defined in images.js
-      let sources = [];
-      if (imgObj && imgObj.group && imgObj.group.length > 0) {
-        sources = imgObj.group; // exact order you define
-      } else {
-        return; // if no group is defined, do nothing
+    const finalBoxTotal = clamp(desiredImageDisplayWidth + paddingLeft + paddingRight, 200, maxBoxTotal);
+
+    imagesContainer.style.width = finalBoxTotal + 'px';
+  }
+
+  // Open lightbox with list (group) of image URLs
+  function openLightboxWithGroup(group) {
+    if (!Array.isArray(group) || group.length === 0) return;
+    // clear previous
+    imagesWrapper.innerHTML = '';
+    imagesContainer.style.width = ''; // reset to auto while images load
+
+    // create image elements
+    group.forEach((src, idx) => {
+      const img = document.createElement('img');
+      img.className = 'lightbox-img';
+      img.src = src;
+      img.alt = '';
+      if (idx !== 0) img.loading = 'lazy';
+      imagesWrapper.appendChild(img);
+
+      if (idx === 0) {
+        // when first image loads, set the box width based on its natural size
+        img.addEventListener('load', () => {
+          setBoxWidthFromFirstImage(img);
+        }, { once: true });
+
+        // fallback if image already loaded from cache
+        if (img.complete && img.naturalWidth) {
+          setBoxWidthFromFirstImage(img);
+        }
+      }
+    });
+
+    // show lightbox
+    lightbox.style.display = 'block';
+    // reset scroll top of images container to ensure first image visible
+    imagesContainer.scrollTop = 0;
+    // disable background scroll
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.style.display = 'none';
+    imagesWrapper.innerHTML = '';
+    imagesContainer.style.width = '';
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+  }
+
+  // Listen for messages from iframe (work gallery)
+  window.addEventListener('message', (ev) => {
+    if (!ev.data) return;
+    const msg = ev.data;
+    if (msg.type === 'openLightbox') {
+      const clickedSrc = msg.src;
+      // Find the matching image object in the global images array (images.js)
+      let imgObj = null;
+      if (window.images && Array.isArray(window.images)) {
+        imgObj = window.images.find(i => i.src === clickedSrc || (i.group && i.group.includes(clickedSrc)));
       }
 
-      // Render all sources in order
-      sources.forEach((src, index) => {
-        const img = document.createElement('img');
-        img.src = src;
-        img.classList.add('lightbox-img');
-        lightboxImagesWrapper.appendChild(img);
+      // Prefer the explicit group defined on the clicked image.
+      let groupToShow = null;
+      if (imgObj && Array.isArray(imgObj.group) && imgObj.group.length > 0) {
+        groupToShow = imgObj.group.slice(); // use group's order
+      } else {
+        // fallback: show the clickedSrc only
+        groupToShow = [clickedSrc];
+      }
 
-        img.onload = function() {
-          // Only set orientation from the first image in the group
-          if (index === 0) {
-            const isLandscape = this.naturalWidth > this.naturalHeight;
-            lightboxContainer.classList.remove('landscape', 'portrait');
-            lightboxContainer.classList.add(isLandscape ? 'landscape' : 'portrait');
-          }
-        };
-      });
-
-      lightbox.style.display = 'block';
-      lightboxImagesContainer.scrollTop = 0;
+      openLightboxWithGroup(groupToShow);
     }
   });
 
-  lightboxClose.onclick = function() {
-    lightbox.style.display = 'none';
-  };
+  // close handlers
+  closeBtn.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox.style.display === 'block') closeLightbox();
+  });
 
-  window.onclick = function(event) {
-    if (event.target === lightbox) {
-      lightbox.style.display = 'none';
+  // recompute box width on resize if lightbox open (use first image)
+  window.addEventListener('resize', () => {
+    if (lightbox.style.display !== 'block') return;
+    const firstImg = imagesWrapper.querySelector('.lightbox-img');
+    if (firstImg) {
+      // if the image is loaded, adjust immediately; otherwise wait a bit
+      if (firstImg.naturalWidth) {
+        setBoxWidthFromFirstImage(firstImg);
+      } else {
+        // small timeout to allow image decode
+        setTimeout(() => {
+          if (firstImg.naturalWidth) setBoxWidthFromFirstImage(firstImg);
+        }, 150);
+      }
     }
-  };
+  });
 });
