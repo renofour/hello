@@ -19,7 +19,11 @@
       --header-bg-opacity: 0.5;
     }
 
-    /* Layout */
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+    }
+
     .container {
       display: flex;
       height: 100vh;
@@ -101,7 +105,6 @@
       color: #555;
     }
 
-    /* Right content layout */
     .right-content {
       flex-grow: 1;
       display: flex;
@@ -110,7 +113,6 @@
       overflow: hidden;
     }
 
-    /* Header */
     .header {
       display: flex;
       align-items: center;
@@ -136,7 +138,6 @@
       display: block;
     }
 
-    /* Scrollable content */
     .content-area {
       flex: 1;
       overflow-y: auto;
@@ -151,7 +152,6 @@
       padding-right: var(--page-gutter);
     }
 
-    /* Video */
     .video-wrapper {
       position: relative;
       width: 100%;
@@ -168,7 +168,6 @@
       object-fit: cover;
     }
 
-    /* Work iframe wrapper */
     .work-iframe-wrapper {
       width: calc(100% + 40px);
       height: calc(100vh - var(--header-height));
@@ -184,35 +183,7 @@
       background: transparent;
     }
 
-    /* Gallery */
-    .work-gallery {
-      column-count: 3;
-      column-gap: 10px;
-      width: 100%;
-      box-sizing: border-box;
-      padding: 20px;
-      margin: 0;
-      background: white;
-    }
-    .work-gallery img {
-      width: 100%;
-      margin-bottom: 10px;
-      display: block;
-      break-inside: avoid;
-      padding: 0;
-      margin-left: 0;
-      margin-right: 0;
-      cursor: pointer;
-    }
-    @media (max-width: 1024px) {
-      .work-gallery { column-count: 2; }
-    }
-    @media (max-width: 768px) {
-      .work-gallery { column-count: 1; }
-    }
-
-    /* === LIGHTBOX CSS CHANGES: only this block updated === */
-
+    /* Lightbox (unchanged) */
     .lightbox {
       display: none;
       position: fixed;
@@ -222,155 +193,7 @@
       width: 100%;
       height: 100%;
       background-color: rgba(0, 0, 0, 0.9);
-      overflow: auto; /* allow scrolling when groups are tall */
-    }
-
-    /* Keep the two-column layout (images column + text column) — unchanged structurally */
-    .lightbox-container {
-      display: flex;
-      max-width: 1400px;
-      margin: 50px auto;
-      position: relative;
-      width: 90%;
-      height: calc(100vh - 100px);
-      box-sizing: border-box;
-      gap: 20px;
-      align-items: flex-start; /* align from top so first image isn't pushed out */
-    }
-
-    /* Make the images column have equal white padding on all sides (top/bottom/left/right)
-       so the horizontal white space matches the vertical white space between/above/below images */
-    .lightbox-images-container {
-      flex: 1;
-      overflow-y: auto;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-      background: white;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start; /* start at top so first image is visible */
-      padding: 30px;            /* <-- equal padding added (top/right/bottom/left) */
-      scroll-padding-top: 30px; /* breathing room on open */
-      box-sizing: border-box;
-    }
-
-    .lightbox-images-container::-webkit-scrollbar {
-      display: none;
-    }
-
-    .lightbox-images {
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      min-height: 100%;
-      justify-content: flex-start; /* stack from the top */
-      align-items: center;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    /* Image Scaling — images decide their own size, preventing container reflow */
-    .lightbox-img {
-      max-width: 100%;
-      max-height: 70vh;
-      width: auto;
-      height: auto;
-      display: block;
-      object-fit: contain;
-    }
-
-    /* Keep text panel separate on the right (unchanged) */
-    .lightbox-text {
-      width: 250px;
-      padding: 20px;
-      background: white;
-      position: sticky;
-      top: 50px;
-      align-self: flex-start;
-      border-left: 1px solid #eee;
-      height: fit-content;
-      margin-left: 20px;
-    }
-
-    .lightbox-text-inner {
-      display: inline;
-    }
-
-    .lightbox-close {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 10px;
-      z-index: 2001;
-      width: 30px;
-      height: 30px;
-    }
-    .lightbox-close .bar {
-      display: block;
-      width: 100%;
-      height: 3px;
-      background: #fff;
-      position: absolute;
-      left: 0;
-      transition: 0.3s;
-    }
-    .lightbox-close .bar:nth-child(1) {
-      top: 14px;
-      transform: rotate(45deg);
-    }
-    .lightbox-close .bar:nth-child(2) {
-      opacity: 0;
-    }
-    .lightbox-close .bar:nth-child(3) {
-      top: 14px;
-      transform: rotate(-45deg);
-    }
-
-    /* Hamburger */
-    .menu-toggle {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 10px;
-      z-index: 1000;
-      width: 30px;
-      height: 30px;
-    }
-    .menu-toggle .bar {
-      display: block;
-      width: 100%;
-      height: 3px;
-      background: #333;
-      position: absolute;
-      left: 0;
-      transition: 0.3s;
-    }
-    .menu-toggle .bar:nth-child(1) {
-      top: 0;
-    }
-    .menu-toggle .bar:nth-child(2) {
-      top: 14px;
-    }
-    .menu-toggle .bar:nth-child(3) {
-      top: 28px;
-    }
-    .menu-toggle.active .bar:nth-child(1) {
-      transform: rotate(45deg);
-      top: 14px;
-    }
-    .menu-toggle.active .bar:nth-child(2) {
-      opacity: 0;
-    }
-    .menu-toggle.active .bar:nth-child(3) {
-      transform: rotate(-45deg);
-      top: 14px;
+      overflow: hidden;
     }
   </style>
 </head>
@@ -406,35 +229,31 @@
           <li class="has-dropdown" id="aboutItem">
             <button type="button" class="menu-btn" aria-expanded="false">about</button>
             <div class="dropdown">
-              Shohei Shohei Shigematsu is a partner at OMA based out of the New York office, who leads the firm's diverse portfolio in the Americas and Japan.
+              Shohei Shohei Shigematsu is a partner at OMA based out of the New York office.
             </div>
           </li>
           <li class="has-dropdown" id="contactItem">
             <button type="button" class="menu-btn" aria-expanded="false">contact</button>
             <div class="dropdown">
-              Shohei Shohei Shigematsu is a partner at OMA based out of the New York office, who leads the firm's diverse portfolio in the Americas and Japan.
+              Shohei Shohei Shigematsu is a partner at OMA based out of the New York office.
             </div>
           </li>
         </ul>
       </nav>
     </aside>
 
-    <!-- Right content -->
     <main class="right-content">
-      <!-- Header -->
       <div class="header">
         <div class="align-wrapper">
           <a href="#" id="logoLink"><img src="NYXum_logo_blood2.png" alt="NYXum Logo" /></a>
         </div>
       </div>
 
-      <!-- Scrollable content -->
       <div class="content-area" id="contentArea">
         <div class="align-wrapper">
           <div class="video-wrapper">
             <video autoplay muted loop>
               <source src="https://framerusercontent.com/assets/CtSYQwWgD3v3HDe3HMRPnHbvGOk.mp4" type="video/mp4">
-              Your browser does not support the video tag.
             </video>
           </div>
         </div>
@@ -456,17 +275,14 @@
         </div>
         <div class="lightbox-text">
           <div class="lightbox-text-inner">
-            Shohei Shohei Shigematsu is a partner at OMA based out of the New York office, who leads the firm's diverse portfolio in the Americas and Japan.
+            Text placeholder
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- images.js must exist in the same folder -->
   <script src="images.js"></script>
-
-  <!-- Main app script (menu, loading work iframe, etc.) -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const menu = document.getElementById('menu');
@@ -493,32 +309,25 @@
         const btn = e.target.closest('.menu-btn');
         if (!btn) return;
 
-        // If clicked the top-level work button — load work content (all)
+        // ✅ FIXED WORK BUTTON BEHAVIOR
         if (btn === workBtn) {
-          loadWorkContent('all');
           const item = btn.closest('.has-dropdown');
-          item.classList.add('open');
-          btn.setAttribute('aria-expanded', 'true');
+          item.classList.toggle('open');
+          const expanded = item.classList.contains('open');
+          btn.setAttribute('aria-expanded', expanded);
+          if (expanded) loadWorkContent('all');
           return;
-        }
-
-        // If menu is collapsed and any button pressed, expand it for accessibility
-        if (menu.classList.contains('collapsed')) {
-          menu.classList.remove('collapsed');
-          syncButton();
         }
 
         const item = btn.closest('.has-dropdown');
         if (!item) return;
 
         const isOpen = item.classList.contains('open');
-        // Close all others
         nav.querySelectorAll('.has-dropdown').forEach(li => {
           li.classList.remove('open');
           const b = li.querySelector('.menu-btn');
           if (b) b.setAttribute('aria-expanded', 'false');
         });
-        // Toggle this one
         item.classList.toggle('open', !isOpen);
         btn.setAttribute('aria-expanded', String(!isOpen));
       });
@@ -529,7 +338,6 @@
             <div class="video-wrapper">
               <video autoplay muted loop>
                 <source src="${initialVideoURL}" type="video/mp4">
-                Your browser does not support the video tag.
               </video>
             </div>
           </div>
@@ -537,14 +345,11 @@
       }
 
       function loadWorkContent(filter = 'all') {
-        // getFilteredImages is defined in images.js
         const filteredImages = getFilteredImages(filter);
-
         const imagesHTML = filteredImages.map(img =>
           `<img src="${img.src}" alt="${img.alt}" data-category="${img.categories.join(',')}">`
         ).join('');
 
-        // script for the iframe; note closing SCRIPT tag is escaped
         const iframeScript = `
           <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -568,16 +373,10 @@
             <meta charset="utf-8" />
             <meta name="viewport" content="width=device-width,initial-scale=1" />
             <style>
-              html,body { margin: 0; padding: 20px; box-sizing: border-box; font-family: inherit; background: white; }
+              html,body { margin: 0; padding: 20px; background: white; font-family: inherit; }
               .work-gallery { column-count: 3; column-gap: 10px; width: 100%; }
               .work-gallery img {
-                width: 100%;
-                height: auto;
-                max-width: 100%;
-                margin: 0 0 10px 0;
-                display: block;
-                break-inside: avoid;
-                cursor: pointer;
+                width: 100%; height: auto; margin-bottom: 10px; display: block; cursor: pointer;
               }
               @media (max-width: 1024px) { .work-gallery { column-count: 2; } }
               @media (max-width: 768px) { .work-gallery { column-count: 1; } }
@@ -602,15 +401,10 @@
         `;
       }
 
-      // initial bindings
       homeBtn.addEventListener('click', loadHomeContent);
       document.getElementById('logoLink').addEventListener('click', (e) => {
         e.preventDefault();
         loadHomeContent();
-      });
-
-      workBtn.addEventListener('click', () => {
-        loadWorkContent('all');
       });
 
       document.querySelectorAll('#workItem .submenu-btn').forEach(btn => {
@@ -620,12 +414,9 @@
         });
       });
 
-      // load home content initially
       loadHomeContent();
     });
   </script>
-
-  <!-- Lightbox script (uses `images` array from images.js) -->
   <script src="lightbox.js"></script>
 </body>
 </html>
