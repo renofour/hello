@@ -90,7 +90,7 @@ const images = [
 
   { src: "https://lh3.googleusercontent.com/d/1xrQtbZopFhhVC6qTfrLz-QN-9UCrOS7c=w1200", 
    alt: "Cards", 
-   categories: ["print"] },
+   categories: ["print"],
    group: [
  "https://lh3.googleusercontent.com/d/1qnW1cFUEsYKX1RdIM5KOKpBahhViYXez=w1200",
  "https://lh3.googleusercontent.com/d/1L7bKdukUgHA5o4YoOIjUcXXyLxxz73hF=w1200",
