@@ -88,7 +88,18 @@ const images = [
     ]
   },
 
-  { src: "https://lh3.googleusercontent.com/d/1xrQtbZopFhhVC6qTfrLz-QN-9UCrOS7c=w1200", alt: "Cards", categories: ["print"] },
+  { src: "https://lh3.googleusercontent.com/d/1xrQtbZopFhhVC6qTfrLz-QN-9UCrOS7c=w1200", 
+   alt: "Cards", 
+   categories: ["print"] },
+   group: [
+ "https://lh3.googleusercontent.com/d/1qnW1cFUEsYKX1RdIM5KOKpBahhViYXez=w1200",
+ "https://lh3.googleusercontent.com/d/1L7bKdukUgHA5o4YoOIjUcXXyLxxz73hF=w1200",
+ "https://lh3.googleusercontent.com/d/1s_MAOrC2y8wTnnRGB-eUiq2uy1eQVCNa=w1200",
+ "https://lh3.googleusercontent.com/d/1bib0w_76GibZlfhs1QqmXeViudPwg710=w1200"
+  ]
+  },
+
+  
   { src: "https://lh3.googleusercontent.com/d/1GsOPy6yuFUl24n16hg7o_mZjd9kmH5kS=w1200", alt: "Galaxy", categories: ["print"] },
   { src: "https://lh3.googleusercontent.com/d/1PJWWacnXxr_oMKHuyofx4jbUt8a1jRlx=w1200", alt: "Buddha", categories: ["3d"] },
   { src: "https://lh3.googleusercontent.com/d/1nUz7nIiWNDHeQMzinTPRCZbeWFe0jGxA=w1200", alt: "Kiiroo-4", categories: ["print"] },
