@@ -112,11 +112,13 @@ const images = [
   categories: ["print"] 
 },
 
+
 ];
 
-// Function to filter images based on category
+// ✅ Must be globally defined
 function getFilteredImages(filter) {
   return filter === 'all'
     ? images
     : images.filter(img => img.categories.includes(filter));
 }
+
