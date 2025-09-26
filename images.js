@@ -93,8 +93,8 @@ const images = [
    categories: ["print"],
    group: [
  "https://lh3.googleusercontent.com/d/1qnW1cFUEsYKX1RdIM5KOKpBahhViYXez=w1200",
- "https://lh3.googleusercontent.com/d/1L7bKdukUgHA5o4YoOIjUcXXyLxxz73hF=w1200",
  "https://lh3.googleusercontent.com/d/1s_MAOrC2y8wTnnRGB-eUiq2uy1eQVCNa=w1200",
+ "https://lh3.googleusercontent.com/d/1L7bKdukUgHA5o4YoOIjUcXXyLxxz73hF=w1200",
  "https://lh3.googleusercontent.com/d/1bib0w_76GibZlfhs1QqmXeViudPwg710=w1200"
   ]
   },
