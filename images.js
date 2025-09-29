@@ -55,9 +55,19 @@ const images = [
   { src: "https://lh3.googleusercontent.com/d/1I7S1LB7e2FaIMDz9Zz6Fm5Ipwug2uqmF=w1200", alt: "Kiiroo-2", categories: ["product"] },
   { src: "https://lh3.googleusercontent.com/d/1mqoGFLRHapYzaITMI1ysyVzlO1Rs0O1y=w1200", alt: "Omnigo", categories: ["3d"] },
   { src: "https://lh3.googleusercontent.com/d/1L1EO9xbx7G3MGovxKV7GPV8VB1ZzSNJO=w1200", alt: "Wrap", categories: ["print", "digital"] },
-  { src: "https://lh3.googleusercontent.com/d/1U4w5yifsei5eouYWFk2iwvpRSvDSUv1x=w1200", alt: "Cosmos", categories: ["3d"] },
+  
+{ src: "https://lh3.googleusercontent.com/d/1LHJU0gas_N5T2cZbtnIcpU3ySLtd6drf=w1200", 
+  alt: "Alien", 
+  categories: ["digital"] 
+},
+  
   { src: "https://lh3.googleusercontent.com/d/1MoZUKu-mqukVAE8XCmRoRY_2zi8mCqNn=w1200", alt: "Time-2", categories: ["print", "digital"] },
-  { src: "https://lh3.googleusercontent.com/d/1F9qZLOnde9gnx-i-fl_xfBNaQA9K6P9G=w1200", alt: "Book", categories: ["print"] },
+  
+{ src: "https://lh3.googleusercontent.com/d/1Bkwd97k1DPg8NHaf80QJhZc0u05H6Vct=w1200", 
+  alt: "Holy", 
+  categories: ["digital"] 
+},  
+  
   { src: "https://lh3.googleusercontent.com/d/1RECxWfONSoN3ZQBG19OEn8mksZ6THr0a=w1200", alt: "Nike", categories: ["print", "digital"] },
   { src: "https://lh3.googleusercontent.com/d/14D4vKLVvp7BkijAAU_t5MR6f4Ss1VciX=w1200", alt: "Snow", categories: ["3d"] },
   
@@ -71,16 +81,20 @@ const images = [
       "https://lh3.googleusercontent.com/d/1FEBL8nfwI6VgErRb95TB0B0vGjB7Jxu2=w1200",
       "https://lh3.googleusercontent.com/d/1MHcfbajeA9-m3nAckdwFLcxsG-HwFz4r=w1200",
       "https://lh3.googleusercontent.com/d/1pqqaSgQbtqtSytEhxJzlrJA0hgFDWbvt=w1200"
-    ]
+  ]
   },
   
-  { src: "https://lh3.googleusercontent.com/d/1dF2OYY3O2DvWhUsYtrjRgzcGCq4r60hr=w1200", alt: "Black", categories: ["print", "digital"] },
+ { src: "https://lh3.googleusercontent.com/d/1fQW9pKL0wbk41VEANGm8un6cGCFfxK6b=w1200", 
+  alt: "Shoes", 
+  categories: ["print", "digital"] 
+},
+  
   { src: "https://lh3.googleusercontent.com/d/1Fa31QBfqsmU_gxcJ1oLIUOMMoF7xZvbq=w1200", alt: "Mom", categories: ["print", "digital"] },
   { src: "https://lh3.googleusercontent.com/d/1O9GBM8ofceocw_7FKUUNalePqpRBecEV=w1200", alt: "Kiiroo-3", categories: ["print", "digital"] },
 
-  {src: "https://lh3.googleusercontent.com/d/1jet7dWkYBvufxEfkwkkTrliGeVvoaqsx=w1200", 
-    alt: "Paul", 
-    categories: ["print"],
+{ src: "https://lh3.googleusercontent.com/d/1_i7TWeDd8WPvEMyvnMZM8eI_pyPZFKyT=w1200", 
+  alt: "Righttop", 
+  categories: ["print", "digital"],
     group: [
       "https://lh3.googleusercontent.com/d/1koB1zcoezKIPbB28EczcRm_v7S9znZxz=w1200",
       "https://lh3.googleusercontent.com/d/1kZJG5wFO4JTpoOlDGO_xEtoGoI15lbeL=w1200",
@@ -99,13 +113,35 @@ const images = [
   ]
   },
 
+{ src: "https://lh3.googleusercontent.com/d/1j9CGeOUhwHnYE1JNWCfQlpXl1ATJZWTh=w1200", 
+  alt: "Bikeride", 
+  categories: ["digital"] 
+}, 
+
   
-  { src: "https://lh3.googleusercontent.com/d/1GsOPy6yuFUl24n16hg7o_mZjd9kmH5kS=w1200", alt: "Galaxy", categories: ["print"] },
-  { src: "https://lh3.googleusercontent.com/d/1PJWWacnXxr_oMKHuyofx4jbUt8a1jRlx=w1200", alt: "Buddha", categories: ["3d"] },
-  { src: "https://lh3.googleusercontent.com/d/1nUz7nIiWNDHeQMzinTPRCZbeWFe0jGxA=w1200", alt: "Kiiroo-4", categories: ["print"] },
-  { src: "https://lh3.googleusercontent.com/d/1WTPglGAVDTdMfkLsa2VsoT73u28Jbjje=w1200", alt: "Ballsy-2", categories: ["product"] },
+ { src: "https://lh3.googleusercontent.com/d/1Tq-D6Hcsw09cJxTrO29VbaTbzR_-GhCM=w1200", 
+  alt: "Fashion", 
+  categories: ["digital"] 
+},
+  
+  { src: "https://lh3.googleusercontent.com/d/1nUz7nIiWNDHeQMzinTPRCZbeWFe0jGxA=w1200", 
+   alt: "Kiiroo-4", 
+   categories: ["print"] 
+},
+  
+{ src: "https://lh3.googleusercontent.com/d/132LvnPBQ7wLRB6Ak939Al5hlJLOpFhBL=w1200", 
+  alt: "Girlletter", 
+  categories: ["digital"] 
+},
+  
   { src: "https://lh3.googleusercontent.com/d/16sF-s__bcL3TnZBU397B4ANvLeHDyNml=w1200", alt: "Sine", categories: ["print", "digital"] },
-  { src: "https://lh3.googleusercontent.com/d/1tmNtf3fpuG35aQY_B20jX5zFuJYbZn9t=w1200", alt: "Cooex", categories: ["3d"] },
+  
+{ 
+  src: "https://lh3.googleusercontent.com/d/1Bn-T7qT2zDL5rbY01Ouk3y7lQMMck3yM=w1200", 
+  alt: "Pink", 
+  categories: ["print", "digital"] 
+},  
+  
   { src: "https://lh3.googleusercontent.com/d/1citj8Zu7j3JEzF-B7kczQiYVg8n-PNqo=w1200", alt: "Stella", categories: ["print", "digital"] },
   { src: "https://lh3.googleusercontent.com/d/19cWGXdMQfO5tjz8Xz6IqKRf_e6U-Pk5L=w1200", alt: "Fall", categories: ["print", "digital"] },
   {src: "https://lh3.googleusercontent.com/d/1ZGSa2uhJRqoObgMCPpQ0Auua-kMSjDtZ=w1200", 
