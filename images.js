@@ -63,8 +63,11 @@ const images = [
   alt: "Alien", 
   categories: ["digital"] 
 },
-  
-  { src: "https://lh3.googleusercontent.com/d/1MoZUKu-mqukVAE8XCmRoRY_2zi8mCqNn=w1200", alt: "Time-2", categories: ["print", "digital"] },
+  { src: "https://lh3.googleusercontent.com/d/1eHsnGo3XG8R9-gItEXHnWNNzkwf4M9Gy=w1200",
+  alt: "Rings",
+  categories: ["digital"]
+},
+
   
 { src: "https://lh3.googleusercontent.com/d/1Bkwd97k1DPg8NHaf80QJhZc0u05H6Vct=w1200", 
   alt: "Holy", 
