@@ -96,7 +96,11 @@ const images = [
 },
   
   { src: "https://lh3.googleusercontent.com/d/1Fa31QBfqsmU_gxcJ1oLIUOMMoF7xZvbq=w1200", alt: "Mom", categories: ["print", "digital"] },
-  { src: "https://lh3.googleusercontent.com/d/1O9GBM8ofceocw_7FKUUNalePqpRBecEV=w1200", alt: "Kiiroo-3", categories: ["print", "digital"] },
+  
+{ src: "https://lh3.googleusercontent.com/d/1YcTTIG9o4bVfpRpZZuYYuSYrFLfWHCUb=w1200",
+  alt: "Prompt",
+  categories: ["digital"]
+},
 
 { src: "https://lh3.googleusercontent.com/d/1_i7TWeDd8WPvEMyvnMZM8eI_pyPZFKyT=w1200", 
   alt: "Righttop", 
