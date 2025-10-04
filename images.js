@@ -54,7 +54,10 @@ const images = [
   { src: "https://lh3.googleusercontent.com/d/1ImWqmE7xA0CBkEe3uJnudWVErv_zBnCP=w1200", alt: "Taste", categories: ["print", "digital"] },
   { src: "https://lh3.googleusercontent.com/d/1I7S1LB7e2FaIMDz9Zz6Fm5Ipwug2uqmF=w1200", alt: "Kiiroo-2", categories: ["product"] },
   { src: "https://lh3.googleusercontent.com/d/1mqoGFLRHapYzaITMI1ysyVzlO1Rs0O1y=w1200", alt: "Omnigo", categories: ["3d"] },
-  { src: "https://lh3.googleusercontent.com/d/1L1EO9xbx7G3MGovxKV7GPV8VB1ZzSNJO=w1200", alt: "Wrap", categories: ["print", "digital"] },
+  { src: "https://lh3.googleusercontent.com/d/1AdUvGtMf8am8vdEvKlYeGbiECrhO24KA=w1200",
+  alt: "Glass_toooth",
+  categories: ["digital"]
+},
   
 { src: "https://lh3.googleusercontent.com/d/1LHJU0gas_N5T2cZbtnIcpU3ySLtd6drf=w1200", 
   alt: "Alien", 
