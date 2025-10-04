@@ -19,6 +19,10 @@
       --header-bg-opacity: 0.5;
     }
 
+    body {
+      font-family: 'Open Sans', sans-serif;
+    }
+
     /* Layout */
     .container {
       display: flex;
@@ -184,36 +188,7 @@
       background: transparent;
     }
 
-    /* Gallery */
-    .work-gallery {
-      column-count: 3;
-      column-gap: 10px;
-      width: 100%;
-      box-sizing: border-box;
-      padding: 20px;
-      margin: 0;
-      background: white;
-    }
-    .work-gallery img {
-      width: 100%;
-      margin-bottom: 10px;
-      display: block;
-      break-inside: avoid;
-      padding: 0;
-      margin-left: 0;
-      margin-right: 0;
-      cursor: pointer;
-    }
-    @media (max-width: 1024px) {
-      .work-gallery { column-count: 2; }
-    }
-    @media (max-width: 768px) {
-      .work-gallery { column-count: 1; }
-    }
-
-    /* === LIGHTBOX UPDATES (only these parts changed) === */
-
-    /* Lightbox base: allow scrolling and prevent container from forcing a new layout */
+    /* Lightbox */
     .lightbox {
       display: none;
       position: fixed;
@@ -223,23 +198,18 @@
       width: 100%;
       height: 100%;
       background-color: rgba(0, 0, 0, 0.9);
-      overflow-y: auto; /* allow scrolling if group is tall */
+      overflow: hidden;
     }
 
-    /* Lightbox Container: neutral sizing (no forced height) */
     .lightbox-container {
       display: flex;
       max-width: 1400px;
       margin: 50px auto;
       position: relative;
       width: 90%;
-      box-sizing: border-box;
-      align-items: flex-start; /* keep images stacked from the top so first image is visible */
-      gap: 20px;
-      padding-bottom: 60px;
+      height: calc(100vh - 100px);
     }
 
-    /* Images wrapper inside the lightbox */
     .lightbox-images-container {
       flex: 1;
       overflow-y: auto;
@@ -248,38 +218,31 @@
       background: white;
       display: flex;
       justify-content: center;
-      align-items: flex-start; /* align items from top to avoid pushing first image out */
-      padding: 30px 0; /* breathing room */
+      align-items: center;
       scroll-padding-top: 30px;
+      padding: 40px;
     }
-    .lightbox-images-container::-webkit-scrollbar { display: none; }
 
-    /* Stacked images — centered horizontally, start vertically */
+    .lightbox-images-container::-webkit-scrollbar {
+      display: none;
+    }
+
     .lightbox-images {
       padding: 0;
       display: flex;
       flex-direction: column;
       gap: 20px;
       min-height: 100%;
-      justify-content: flex-start;
+      justify-content: center;
       align-items: center;
-      width: 100%;
-      box-sizing: border-box;
     }
 
-    /* Each image sizes itself — prevents push/resize of container */
     .lightbox-img {
-      max-width: 90%;
-      max-height: 90vh;
-      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
       display: block;
-      object-fit: contain;
-      box-sizing: border-box;
     }
 
-    /* Remove global portrait/landscape container rules (we handle per-image sizing now) */
-
-    /* Lightbox Text (unchanged) */
     .lightbox-text {
       width: 250px;
       padding: 20px;
@@ -292,9 +255,6 @@
       margin-left: 20px;
     }
 
-    .lightbox-text-inner { display: inline; }
-
-    /* Lightbox Close Button */
     .lightbox-close {
       position: fixed;
       top: 20px;
@@ -307,20 +267,69 @@
       width: 30px;
       height: 30px;
     }
-    .lightbox-close .bar { display: block; width: 100%; height: 3px; background: #fff; position: absolute; left: 0; transition: 0.3s; }
-    .lightbox-close .bar:nth-child(1) { top: 14px; transform: rotate(45deg); }
-    .lightbox-close .bar:nth-child(2) { opacity: 0; }
-    .lightbox-close .bar:nth-child(3) { top: 14px; transform: rotate(-45deg); }
+    .lightbox-close .bar {
+      display: block;
+      width: 100%;
+      height: 3px;
+      background: #fff;
+      position: absolute;
+      left: 0;
+      transition: 0.3s;
+    }
+    .lightbox-close .bar:nth-child(1) {
+      top: 14px;
+      transform: rotate(45deg);
+    }
+    .lightbox-close .bar:nth-child(2) {
+      opacity: 0;
+    }
+    .lightbox-close .bar:nth-child(3) {
+      top: 14px;
+      transform: rotate(-45deg);
+    }
 
-    /* Hamburger (unchanged) */
-    .menu-toggle { position: absolute; top: 20px; left: 20px; background: none; border: none; cursor: pointer; padding: 10px; z-index: 1000; width: 30px; height: 30px; }
-    .menu-toggle .bar { display: block; width: 100%; height: 3px; background: #333; position: absolute; left: 0; transition: 0.3s; }
-    .menu-toggle .bar:nth-child(1) { top: 0; }
-    .menu-toggle .bar:nth-child(2) { top: 14px; }
-    .menu-toggle .bar:nth-child(3) { top: 28px; }
-    .menu-toggle.active .bar:nth-child(1) { transform: rotate(45deg); top: 14px; }
-    .menu-toggle.active .bar:nth-child(2) { opacity: 0; }
-    .menu-toggle.active .bar:nth-child(3) { transform: rotate(-45deg); top: 14px; }
+    /* Hamburger */
+    .menu-toggle {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      z-index: 1000;
+      width: 30px;
+      height: 30px;
+    }
+    .menu-toggle .bar {
+      display: block;
+      width: 100%;
+      height: 3px;
+      background: #333;
+      position: absolute;
+      left: 0;
+      transition: 0.3s;
+    }
+    .menu-toggle .bar:nth-child(1) {
+      top: 0;
+    }
+    .menu-toggle .bar:nth-child(2) {
+      top: 14px;
+    }
+    .menu-toggle .bar:nth-child(3) {
+      top: 28px;
+    }
+    .menu-toggle.active .bar:nth-child(1) {
+      transform: rotate(45deg);
+      top: 14px;
+    }
+    .menu-toggle.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle.active .bar:nth-child(3) {
+      transform: rotate(-45deg);
+      top: 14px;
+    }
   </style>
 </head>
 
@@ -391,19 +400,18 @@
     </main>
 
     <!-- Lightbox -->
-    <div id="lightbox" class="lightbox" aria-hidden="true">
-      <button class="lightbox-close" id="lightboxClose" aria-label="Close lightbox">
+    <div id="lightbox" class="lightbox">
+      <button class="lightbox-close" id="lightboxClose">
         <span class="bar"></span>
         <span class="bar"></span>
         <span class="bar"></span>
       </button>
-
       <div class="lightbox-container">
         <div class="lightbox-images-container">
-          <!-- NOTE: empty container — JS will append <img> elements here -->
-          <div class="lightbox-images"></div>
+          <div class="lightbox-images">
+            <img id="lightbox-img" class="lightbox-img" src="" alt="" />
+          </div>
         </div>
-
         <div class="lightbox-text">
           <div class="lightbox-text-inner">
             Shohei Shohei Shigematsu is a partner at OMA based out of the New York office, who leads the firm's diverse portfolio in the Americas and Japan.
@@ -413,10 +421,8 @@
     </div>
   </div>
 
-  <!-- images.js must exist in the same folder -->
   <script src="images.js"></script>
 
-  <!-- Main app script (menu, loading work iframe, etc.) -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const menu = document.getElementById('menu');
@@ -443,7 +449,6 @@
         const btn = e.target.closest('.menu-btn');
         if (!btn) return;
 
-        // If clicked the top-level work button — load work content (all)
         if (btn === workBtn) {
           loadWorkContent('all');
           const item = btn.closest('.has-dropdown');
@@ -452,7 +457,6 @@
           return;
         }
 
-        // If menu is collapsed and any button pressed, expand it for accessibility
         if (menu.classList.contains('collapsed')) {
           menu.classList.remove('collapsed');
           syncButton();
@@ -462,13 +466,11 @@
         if (!item) return;
 
         const isOpen = item.classList.contains('open');
-        // Close all others
         nav.querySelectorAll('.has-dropdown').forEach(li => {
           li.classList.remove('open');
           const b = li.querySelector('.menu-btn');
           if (b) b.setAttribute('aria-expanded', 'false');
         });
-        // Toggle this one
         item.classList.toggle('open', !isOpen);
         btn.setAttribute('aria-expanded', String(!isOpen));
       });
@@ -487,14 +489,11 @@
       }
 
       function loadWorkContent(filter = 'all') {
-        // getFilteredImages is defined in images.js
         const filteredImages = getFilteredImages(filter);
-
         const imagesHTML = filteredImages.map(img =>
           `<img src="${img.src}" alt="${img.alt}" data-category="${img.categories.join(',')}">`
         ).join('');
 
-        // script for the iframe; note the closing SCRIPT tag is escaped
         const iframeScript = `
           <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -519,12 +518,12 @@
             <meta name="viewport" content="width=device-width,initial-scale=1" />
             <style>
               html,body { margin: 0; padding: 20px; box-sizing: border-box; font-family: inherit; background: white; }
-              .work-gallery { column-count: 3; column-gap: 10px; width: 100%; }
+              .work-gallery { column-count: 3; column-gap: 5px; width: 100%; }
               .work-gallery img {
                 width: 100%;
                 height: auto;
                 max-width: 100%;
-                margin: 0 0 10px 0;
+                margin: 0 0 5px 0;
                 display: block;
                 break-inside: avoid;
                 cursor: pointer;
@@ -552,7 +551,6 @@
         `;
       }
 
-      // initial bindings
       homeBtn.addEventListener('click', loadHomeContent);
       document.getElementById('logoLink').addEventListener('click', (e) => {
         e.preventDefault();
@@ -570,12 +568,10 @@
         });
       });
 
-      // load home content initially
       loadHomeContent();
     });
   </script>
 
-  <!-- Lightbox script (uses `images` array from images.js) -->
   <script src="lightbox.js"></script>
 </body>
 </html>
