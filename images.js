@@ -47,9 +47,7 @@ const images = [
   
   { src: "https://lh3.googleusercontent.com/d/1lsUV17h-65keB9IKgg_cJvifitwEC6Vi=w1200", alt: "Plauat", categories: ["product"] },
   { src: "https://lh3.googleusercontent.com/d/1zUrGQs70B-vTUnw0fBHeXn4ocoe2qy5T=w1200", alt: "Ballsy", categories: ["product", "print"] },
-  { src: "https://lh3.googleusercontent.com/d/1vtIkjFXJhFKwc6TsK93EaPMMNzMRsEwK=w1200", alt: "Time", categories: ["print", "digital"] },
   { src: "https://lh3.googleusercontent.com/d/1ptX-VRuXA1tcAnu9SbpojjjCTAR7kPuT=w1200", alt: "Aventra Race", categories: ["3d"] },
-  { src: "https://lh3.googleusercontent.com/d/1OOpjoJiNmzZxttfIBpQ43xWlXKiMoDHz=w1200", alt: "Kiiroo", categories: ["digital"] },
   { src: "https://lh3.googleusercontent.com/d/1F2-rWxNQC7JJAib07GLS7u2whIhXVWeZ=w1200", alt: "30DII-2", categories: ["digital"] },
   { src: "https://lh3.googleusercontent.com/d/1ImWqmE7xA0CBkEe3uJnudWVErv_zBnCP=w1200", alt: "Taste", categories: ["print", "digital"] },
   { src: "https://lh3.googleusercontent.com/d/1I7S1LB7e2FaIMDz9Zz6Fm5Ipwug2uqmF=w1200", alt: "Kiiroo-2", categories: ["product"] },
@@ -65,13 +63,7 @@ const images = [
   { src: "https://lh3.googleusercontent.com/d/1eHsnGo3XG8R9-gItEXHnWNNzkwf4M9Gy=w1200",
   alt: "Rings",
   categories: ["digital"]
-},
-
-  
-{ src: "https://lh3.googleusercontent.com/d/1Bkwd97k1DPg8NHaf80QJhZc0u05H6Vct=w1200", 
-  alt: "Holy", 
-  categories: ["digital"] 
-},  
+}, 
   
   { src: "https://lh3.googleusercontent.com/d/1RECxWfONSoN3ZQBG19OEn8mksZ6THr0a=w1200", alt: "Nike", categories: ["print", "digital"] },
   { src: "https://lh3.googleusercontent.com/d/14D4vKLVvp7BkijAAU_t5MR6f4Ss1VciX=w1200", alt: "Snow", categories: ["3d"] },
