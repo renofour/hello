@@ -21,10 +21,20 @@ const images = [
     alt: "MAU",
     categories: ["digital"]
 },
-{ src: "https://lh3.googleusercontent.com/d/1YcTTIG9o4bVfpRpZZuYYuSYrFLfWHCUb=w1200",
-  alt: "Prompt",
-  categories: ["digital"]
-},
+ { src: "https://lh3.googleusercontent.com/d/1-IfFsOem4_uFoWHL7x0gUz-Nkk8s-Bu8=w1200", 
+    alt: "30DII",
+    categories: ["print"],
+    group: [
+      "https://lh3.googleusercontent.com/d/15FTIUfeVcqKgX-D7WNouuUOAzcj-2VRC=w1200",
+      "https://lh3.googleusercontent.com/d/1kEALBwWjwUwCIXXtLOPIFRjghW6zi3gD=w1200",
+      "https://lh3.googleusercontent.com/d/1eGDP41pcqUYDwj1IMc4LDK_IY5lMxOUj=w1200",
+      "https://lh3.googleusercontent.com/d/1o9Yoe_mLvZtMifItUwLA02WHEtrz-oss=w1200",
+      "https://lh3.googleusercontent.com/d/1FZkyoX1s0bDIRWeEHrgwfNtbylAyjZzS=w1200",
+      "https://lh3.googleusercontent.com/d/1rbu6THSuW3DzBIBJXI0MmVY48Zpjsbjy=w1200",
+      "https://lh3.googleusercontent.com/d/1ky8YgZzDVj4IVouvlf8YLbRjOJimsqn-=w1200",
+      "https://lh3.googleusercontent.com/d/1hkt52J-1Ec2temdDGcoGBzZaicaoiO2n=w1200"
+    ]
+  },
 
 { src: "https://lh3.googleusercontent.com/d/1mUnx_T1G3QDxo7NadiR7pqzjxocGXiyi=w1200",
   alt: "Invaders",
@@ -115,22 +125,12 @@ const images = [
        "https://lh3.googleusercontent.com/d/1bib0w_76GibZlfhs1QqmXeViudPwg710=w1200"
   ]
   },
-{ src: "https://lh3.googleusercontent.com/d/1-IfFsOem4_uFoWHL7x0gUz-Nkk8s-Bu8=w1200", 
-    alt: "30DII",
-    categories: ["print"],
-    group: [
-      "https://lh3.googleusercontent.com/d/15FTIUfeVcqKgX-D7WNouuUOAzcj-2VRC=w1200",
-      "https://lh3.googleusercontent.com/d/1kEALBwWjwUwCIXXtLOPIFRjghW6zi3gD=w1200",
-      "https://lh3.googleusercontent.com/d/1eGDP41pcqUYDwj1IMc4LDK_IY5lMxOUj=w1200",
-      "https://lh3.googleusercontent.com/d/1o9Yoe_mLvZtMifItUwLA02WHEtrz-oss=w1200",
-      "https://lh3.googleusercontent.com/d/1FZkyoX1s0bDIRWeEHrgwfNtbylAyjZzS=w1200",
-      "https://lh3.googleusercontent.com/d/1rbu6THSuW3DzBIBJXI0MmVY48Zpjsbjy=w1200",
-      "https://lh3.googleusercontent.com/d/1ky8YgZzDVj4IVouvlf8YLbRjOJimsqn-=w1200",
-      "https://lh3.googleusercontent.com/d/1hkt52J-1Ec2temdDGcoGBzZaicaoiO2n=w1200"
-    ]
-  },
 
-
+ { src: "https://lh3.googleusercontent.com/d/1YcTTIG9o4bVfpRpZZuYYuSYrFLfWHCUb=w1200",
+  alt: "Prompt",
+  categories: ["digital"]
+},
+ 
   { src: "https://lh3.googleusercontent.com/d/1citj8Zu7j3JEzF-B7kczQiYVg8n-PNqo=w1200", alt: "Stella", categories: ["print", "digital"] },
   { src: "https://lh3.googleusercontent.com/d/1F2-rWxNQC7JJAib07GLS7u2whIhXVWeZ=w1200", alt: "30DII-2", categories: ["digital"] },
 ];
