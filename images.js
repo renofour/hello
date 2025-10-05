@@ -12,7 +12,10 @@ const images = [
        "https://lh3.googleusercontent.com/d/16Y4GYduVN7xhi7iRkzT084_pMzhi889A=w1200"
     ]
   },
-  { src: "https://lh3.googleusercontent.com/d/1EC1pnEIS0HRcP8rUtYa0-SMFZFErVyv2=w1200", alt: "WThink Big", categories: ["print", "digital"] },
+  { src: "https://lh3.googleusercontent.com/d/1EC1pnEIS0HRcP8rUtYa0-SMFZFErVyv2=w1200", 
+   alt: "Think Big", 
+   categories: ["print", "digital"] 
+  },
  
   { src: "https://lh3.googleusercontent.com/d/1It6_fexSflYCfj_h6NhbUvr6yZZkVF2Y=w1200",
     alt: "MAU",
@@ -23,8 +26,7 @@ const images = [
   categories: ["digital"]
 },
 
-{
-  src: "https://lh3.googleusercontent.com/d/1mUnx_T1G3QDxo7NadiR7pqzjxocGXiyi=w1200",
+{ src: "https://lh3.googleusercontent.com/d/1mUnx_T1G3QDxo7NadiR7pqzjxocGXiyi=w1200",
   alt: "Invaders",
   categories: ["digital"]
 },
@@ -47,6 +49,7 @@ const images = [
  { src: "https://lh3.googleusercontent.com/d/1OEubZ1zimJZ9ozsBWBDxrglqhQyElMQd=w1200",
   alt: "Nike",
   categories: ["digital"]
+   },
  
   { src: "https://lh3.googleusercontent.com/d/1ImWqmE7xA0CBkEe3uJnudWVErv_zBnCP=w1200", alt: "Taste", categories: ["print", "digital"] },
   { src: "https://lh3.googleusercontent.com/d/1I7S1LB7e2FaIMDz9Zz6Fm5Ipwug2uqmF=w1200", alt: "Kiiroo-2", categories: ["product"] },
