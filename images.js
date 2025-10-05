@@ -13,7 +13,11 @@ const images = [
     ]
   },
   { src: "https://lh3.googleusercontent.com/d/1EC1pnEIS0HRcP8rUtYa0-SMFZFErVyv2=w1200", alt: "WThink Big", categories: ["print", "digital"] },
-  { src: "https://lh3.googleusercontent.com/d/16K-hJ7YB3eKzZ0Fpc1QsKV0EnO8l8mUE=w1200", alt: "Mau", categories: ["digital", "3d"] },
+ 
+  { src: "https://lh3.googleusercontent.com/d/1It6_fexSflYCfj_h6NhbUvr6yZZkVF2Y=w1200",
+    alt: "MAU",
+    categories: ["digital"]
+},
 
   { src: "https://lh3.googleusercontent.com/d/1-IfFsOem4_uFoWHL7x0gUz-Nkk8s-Bu8=w1200", 
     alt: "30DII",
