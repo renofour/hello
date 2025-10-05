@@ -53,7 +53,6 @@ const images = [
   { src: "https://lh3.googleusercontent.com/d/1F2-rWxNQC7JJAib07GLS7u2whIhXVWeZ=w1200", alt: "30DII-2", categories: ["digital"] },
   { src: "https://lh3.googleusercontent.com/d/1ImWqmE7xA0CBkEe3uJnudWVErv_zBnCP=w1200", alt: "Taste", categories: ["print", "digital"] },
   { src: "https://lh3.googleusercontent.com/d/1I7S1LB7e2FaIMDz9Zz6Fm5Ipwug2uqmF=w1200", alt: "Kiiroo-2", categories: ["product"] },
-  { src: "https://lh3.googleusercontent.com/d/1mqoGFLRHapYzaITMI1ysyVzlO1Rs0O1y=w1200", alt: "Omnigo", categories: ["3d"] },
   { src: "https://lh3.googleusercontent.com/d/1AdUvGtMf8am8vdEvKlYeGbiECrhO24KA=w1200",
   alt: "Glass_toooth",
   categories: ["digital"]
@@ -95,8 +94,6 @@ const images = [
   categories: ["print", "digital"] 
 },
   
-  { src: "https://lh3.googleusercontent.com/d/1Fa31QBfqsmU_gxcJ1oLIUOMMoF7xZvbq=w1200", alt: "Mom", categories: ["print", "digital"] },
-  
 { src: "https://lh3.googleusercontent.com/d/1YcTTIG9o4bVfpRpZZuYYuSYrFLfWHCUb=w1200",
   alt: "Prompt",
   categories: ["digital"]
@@ -135,31 +132,11 @@ const images = [
   alt: "Fashion", 
   categories: ["digital"] 
 },
-  
-  { src: "https://lh3.googleusercontent.com/d/1nUz7nIiWNDHeQMzinTPRCZbeWFe0jGxA=w1200", 
-   alt: "Kiiroo-4", 
-   categories: ["print"] 
-},
-  
-{ src: "https://lh3.googleusercontent.com/d/132LvnPBQ7wLRB6Ak939Al5hlJLOpFhBL=w1200", 
-  alt: "Girlletter", 
-  categories: ["digital"] 
-},
-  
-  { src: "https://lh3.googleusercontent.com/d/16sF-s__bcL3TnZBU397B4ANvLeHDyNml=w1200", alt: "Sine", categories: ["print", "digital"] },
-  
-{ 
-  src: "https://lh3.googleusercontent.com/d/1Bn-T7qT2zDL5rbY01Ouk3y7lQMMck3yM=w1200", 
-  alt: "Pink", 
-  categories: ["print", "digital"] 
-},  
+ 
   
   { src: "https://lh3.googleusercontent.com/d/1citj8Zu7j3JEzF-B7kczQiYVg8n-PNqo=w1200", alt: "Stella", categories: ["print", "digital"] },
   { src: "https://lh3.googleusercontent.com/d/19cWGXdMQfO5tjz8Xz6IqKRf_e6U-Pk5L=w1200", alt: "Fall", categories: ["print", "digital"] },
-  {src: "https://lh3.googleusercontent.com/d/1ZGSa2uhJRqoObgMCPpQ0Auua-kMSjDtZ=w1200", 
-  alt: "Odd", 
-  categories: ["print"] 
-},
+
 
 ];
 
