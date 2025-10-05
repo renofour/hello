@@ -83,7 +83,6 @@ const images = [
       "https://lh3.googleusercontent.com/d/1pqqaSgQbtqtSytEhxJzlrJA0hgFDWbvt=w1200"
   ]
   },
- { src: "https://lh3.googleusercontent.com/d/1F2-rWxNQC7JJAib07GLS7u2whIhXVWeZ=w1200", alt: "30DII-2", categories: ["digital"] },
 
   
 { src: "https://lh3.googleusercontent.com/d/1YcTTIG9o4bVfpRpZZuYYuSYrFLfWHCUb=w1200",
@@ -119,16 +118,8 @@ const images = [
   categories: ["digital"] 
 }, 
 
-  
- { src: "https://lh3.googleusercontent.com/d/1Tq-D6Hcsw09cJxTrO29VbaTbzR_-GhCM=w1200", 
-  alt: "Fashion", 
-  categories: ["digital"] 
-},
- 
-  
   { src: "https://lh3.googleusercontent.com/d/1citj8Zu7j3JEzF-B7kczQiYVg8n-PNqo=w1200", alt: "Stella", categories: ["print", "digital"] },
-
-
+  { src: "https://lh3.googleusercontent.com/d/1F2-rWxNQC7JJAib07GLS7u2whIhXVWeZ=w1200", alt: "30DII-2", categories: ["digital"] },
 ];
 
 // Function to filter images based on category
