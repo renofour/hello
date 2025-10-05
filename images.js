@@ -90,7 +90,10 @@ const images = [
 
 
  
-  { src: "https://lh3.googleusercontent.com/d/14D4vKLVvp7BkijAAU_t5MR6f4Ss1VciX=w1200", alt: "Snow", categories: ["3d"] },
+{ src: "https://lh3.googleusercontent.com/d/1H8_lRyafliGnAOtn20LoAbxz8h3Ztz0n=w1200",
+  alt: "Artinus",
+  categories: ["digital"]
+},
   
  {
   src: "https://lh3.googleusercontent.com/d/1J2lm600a_10ipwkGbfwxWwFKuTtoB3h4=w1200",
