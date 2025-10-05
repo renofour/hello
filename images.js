@@ -1,9 +1,9 @@
 // List of images/videos/GIFs
 const images = [
-  {src: "https://lh3.googleusercontent.com/d/1KS_yxQ51nW9AnfmysBbYxzPaLG54wuYi=w1200", 
-    alt: "Brown", 
-    categories: ["print", "digital"],
-    group: [
+ { src: "https://lh3.googleusercontent.com/d/1qGEuOLUfCVHcJ0-aFrzOeLOWjAvX2uTS=w1200",
+   alt: "Tunnel",
+   categories: ["digital"],
+   group: [
        "https://lh3.googleusercontent.com/d/1KS_yxQ51nW9AnfmysBbYxzPaLG54wuYi=w1200",
        "https://lh3.googleusercontent.com/d/1RyzMQq0e5dyYPf3EZDkVFuIYATfpSeDD=w1200",
        "https://lh3.googleusercontent.com/d/16yUb4m2XDdxHsWYjZnBiHKHBSlPrjEJA=w1200",
@@ -30,7 +30,11 @@ const images = [
     ]
   },
 
-  { src: "https://lh3.googleusercontent.com/d/1gaGdfaccHZWwBJw9yeNVh2mWeJ-VS3OE=w1200", alt: "Space", categories: ["digital"] },
+{
+  src: "https://lh3.googleusercontent.com/d/1mUnx_T1G3QDxo7NadiR7pqzjxocGXiyi=w1200",
+  alt: "Invaders",
+  categories: ["digital"]
+},
   
   { src: "https://lh3.googleusercontent.com/d/1PXKgsT4wJTHYtTM6AEO2JrviddGzrMlH=w1200", 
    alt: "Flags", 
@@ -81,10 +85,6 @@ const images = [
   },
  { src: "https://lh3.googleusercontent.com/d/1F2-rWxNQC7JJAib07GLS7u2whIhXVWeZ=w1200", alt: "30DII-2", categories: ["digital"] },
 
- { src: "https://lh3.googleusercontent.com/d/1fQW9pKL0wbk41VEANGm8un6cGCFfxK6b=w1200", 
-  alt: "Shoes", 
-  categories: ["print", "digital"] 
-},
   
 { src: "https://lh3.googleusercontent.com/d/1YcTTIG9o4bVfpRpZZuYYuSYrFLfWHCUb=w1200",
   alt: "Prompt",
