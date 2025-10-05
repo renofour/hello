@@ -55,8 +55,16 @@ const images = [
   },
   
   { src: "https://lh3.googleusercontent.com/d/1lsUV17h-65keB9IKgg_cJvifitwEC6Vi=w1200", alt: "Plauat", categories: ["product"] },
+
+   { src: "https://lh3.googleusercontent.com/d/1zUrGQs70B-vTUnw0fBHeXn4ocoe2qy5T=w1200", 
+    alt: "Ballsy", 
+    categories: ["product", "print"] },
+
+  { src: "https://lh3.googleusercontent.com/d/1ImWqmE7xA0CBkEe3uJnudWVErv_zBnCP=w1200", 
+   alt: "Taste", 
+   categories: ["print", "digital"] 
+  },
  
-  { src: "https://lh3.googleusercontent.com/d/1ImWqmE7xA0CBkEe3uJnudWVErv_zBnCP=w1200", alt: "Taste", categories: ["print", "digital"] },
   { src: "https://lh3.googleusercontent.com/d/1I7S1LB7e2FaIMDz9Zz6Fm5Ipwug2uqmF=w1200", alt: "Kiiroo-2", categories: ["product"] },
   { src: "https://lh3.googleusercontent.com/d/1AdUvGtMf8am8vdEvKlYeGbiECrhO24KA=w1200",
   alt: "Glass_toooth",
@@ -77,7 +85,6 @@ const images = [
   categories: ["digital"]
    },
  
-  { src: "https://lh3.googleusercontent.com/d/1zUrGQs70B-vTUnw0fBHeXn4ocoe2qy5T=w1200", alt: "Ballsy", categories: ["product", "print"] },
 
   { src: "https://lh3.googleusercontent.com/d/1ptX-VRuXA1tcAnu9SbpojjjCTAR7kPuT=w1200", alt: "Aventra Race", categories: ["3d"] },
 
