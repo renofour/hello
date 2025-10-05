@@ -103,13 +103,12 @@ const images = [
   },
 
   
-{ src: "https://lh3.googleusercontent.com/d/1YcTTIG9o4bVfpRpZZuYYuSYrFLfWHCUb=w1200",
-  alt: "Prompt",
-  categories: ["digital"]
-},
+ { src: "https://lh3.googleusercontent.com/d/1j9CGeOUhwHnYE1JNWCfQlpXl1ATJZWTh=w1200", 
+  alt: "Bikeride", 
+  categories: ["digital"] 
+}, 
 
- {
-  src: "https://lh3.googleusercontent.com/d/1Rf-gmo2Rx2ldOu0V98Yjfl7Uh75cjU9b=w1200",
+ { src: "https://lh3.googleusercontent.com/d/1Rf-gmo2Rx2ldOu0V98Yjfl7Uh75cjU9b=w1200",
   alt: "Orange",
   categories: ["digital"],
   group: [
@@ -120,10 +119,10 @@ const images = [
   ]
   },
 
-{ src: "https://lh3.googleusercontent.com/d/1j9CGeOUhwHnYE1JNWCfQlpXl1ATJZWTh=w1200", 
-  alt: "Bikeride", 
-  categories: ["digital"] 
-}, 
+{ src: "https://lh3.googleusercontent.com/d/1YcTTIG9o4bVfpRpZZuYYuSYrFLfWHCUb=w1200",
+  alt: "Prompt",
+  categories: ["digital"]
+},
 
   { src: "https://lh3.googleusercontent.com/d/1citj8Zu7j3JEzF-B7kczQiYVg8n-PNqo=w1200", alt: "Stella", categories: ["print", "digital"] },
   { src: "https://lh3.googleusercontent.com/d/1F2-rWxNQC7JJAib07GLS7u2whIhXVWeZ=w1200", alt: "30DII-2", categories: ["digital"] },
