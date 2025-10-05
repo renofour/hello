@@ -74,7 +74,18 @@ const images = [
  
   { src: "https://lh3.googleusercontent.com/d/14D4vKLVvp7BkijAAU_t5MR6f4Ss1VciX=w1200", alt: "Snow", categories: ["3d"] },
   
-  { src: "https://lh3.googleusercontent.com/d/12yh7OmQPdnBEHswGDG6-6HqUXB12-zOM=w1200", 
+ {
+  src: "https://lh3.googleusercontent.com/d/1J2lm600a_10ipwkGbfwxWwFKuTtoB3h4=w1200",
+  alt: "Magic",
+  categories: ["digital"],
+  group: [
+      "https://lh3.googleusercontent.com/d/1koB1zcoezKIPbB28EczcRm_v7S9znZxz=w1200",
+      "https://lh3.googleusercontent.com/d/1kZJG5wFO4JTpoOlDGO_xEtoGoI15lbeL=w1200",
+      "https://lh3.googleusercontent.com/d/1454G-GZ77GPREoBRoTGywmF1jpAUKKtG=w1200"
+    ]
+  },
+ 
+ { src: "https://lh3.googleusercontent.com/d/12yh7OmQPdnBEHswGDG6-6HqUXB12-zOM=w1200", 
     alt: "Smile", 
     categories: ["digital"], 
     group: [
@@ -92,17 +103,6 @@ const images = [
   alt: "Prompt",
   categories: ["digital"]
 },
-
-{
-  src: "https://lh3.googleusercontent.com/d/1J2lm600a_10ipwkGbfwxWwFKuTtoB3h4=w1200",
-  alt: "Magic",
-  categories: ["digital"],
-  group: [
-      "https://lh3.googleusercontent.com/d/1koB1zcoezKIPbB28EczcRm_v7S9znZxz=w1200",
-      "https://lh3.googleusercontent.com/d/1kZJG5wFO4JTpoOlDGO_xEtoGoI15lbeL=w1200",
-      "https://lh3.googleusercontent.com/d/1454G-GZ77GPREoBRoTGywmF1jpAUKKtG=w1200"
-    ]
-  },
 
  {
   src: "https://lh3.googleusercontent.com/d/1Rf-gmo2Rx2ldOu0V98Yjfl7Uh75cjU9b=w1200",
