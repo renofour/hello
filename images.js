@@ -102,10 +102,11 @@ const images = [
   categories: ["digital"]
 },
 
-{ src: "https://lh3.googleusercontent.com/d/1_i7TWeDd8WPvEMyvnMZM8eI_pyPZFKyT=w1200", 
-  alt: "Righttop", 
-  categories: ["print", "digital"],
-    group: [
+{
+  src: "https://lh3.googleusercontent.com/d/1J2lm600a_10ipwkGbfwxWwFKuTtoB3h4=w1200",
+  alt: "Magic",
+  categories: ["digital"],
+  group: [
       "https://lh3.googleusercontent.com/d/1koB1zcoezKIPbB28EczcRm_v7S9znZxz=w1200",
       "https://lh3.googleusercontent.com/d/1kZJG5wFO4JTpoOlDGO_xEtoGoI15lbeL=w1200",
       "https://lh3.googleusercontent.com/d/1454G-GZ77GPREoBRoTGywmF1jpAUKKtG=w1200"
