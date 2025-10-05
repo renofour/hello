@@ -71,7 +71,10 @@ const images = [
   categories: ["digital"]
 }, 
   
-  { src: "https://lh3.googleusercontent.com/d/1RECxWfONSoN3ZQBG19OEn8mksZ6THr0a=w1200", alt: "Nike", categories: ["print", "digital"] },
+{ src: "https://lh3.googleusercontent.com/d/1OEubZ1zimJZ9ozsBWBDxrglqhQyElMQd=w1200",
+  alt: "Nike",
+  categories: ["digital"]
+},
   { src: "https://lh3.googleusercontent.com/d/1ptX-VRuXA1tcAnu9SbpojjjCTAR7kPuT=w1200", alt: "Aventra Race", categories: ["3d"] },
 
 
