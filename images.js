@@ -12,11 +12,11 @@ const images = [
        "https://lh3.googleusercontent.com/d/16Y4GYduVN7xhi7iRkzT084_pMzhi889A=w1200"
     ]
   },
-  { src: "https://lh3.googleusercontent.com/d/1EC1pnEIS0HRcP8rUtYa0-SMFZFErVyv2=w1200", 
-   alt: "Think Big", 
-   categories: ["print", "digital"] 
-  },
- 
+ { src: "https://lh3.googleusercontent.com/d/1PvqBPlD0JysbDoav79Zoa0SeXRkVCH95=w1200",
+  alt: "Think",
+  categories: ["print", "digital"]
+},
+
   { src: "https://lh3.googleusercontent.com/d/1It6_fexSflYCfj_h6NhbUvr6yZZkVF2Y=w1200",
     alt: "MAU",
     categories: ["digital"]
