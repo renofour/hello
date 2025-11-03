@@ -490,9 +490,12 @@
         // getFilteredImages is defined in images.js
         const filteredImages = getFilteredImages(filter);
 
-        const imagesHTML = filteredImages.map(img =>
-          `<img src="${img.src}" alt="${img.alt}" data-category="${img.categories.join(',')}">`
-        ).join('');
+        const imagesHTML = filteredImages.map(img => `
+  <div class="work-item">
+    <img src="${img.src}" alt="${img.alt}" data-category="${img.categories.join(',')}">
+    <div class="work-text">${img.alt}</div>
+  </div>
+`).join('');
 
         // script for the iframe; note the closing SCRIPT tag is escaped
         const iframeScript = `
@@ -531,6 +534,30 @@
               }
               @media (max-width: 1024px) { .work-gallery { column-count: 2; } }
               @media (max-width: 768px) { .work-gallery { column-count: 1; } }
+
+              .work-item {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.work-item img {
+  width: 100%;
+  display: block;
+}
+
+.work-text {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  font-size: 12px;
+  color: #fff;
+  background: rgba(0,0,0,0.6);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: inherit;
+}
+
             </style>
           </head>
           <body>
