@@ -151,3 +151,51 @@ function getFilteredImages(filter) {
     ? images
     : images.filter(img => img.categories.includes(filter));
 }
+// Your existing JavaScript code
+// ...
+
+// Function to show submenu in the green area
+document.addEventListener('DOMContentLoaded', function() {
+    const submenuContainer = document.querySelector('.submenu-container');
+    const workLink = document.querySelector('a[href="#work"]');
+    const aboutLink = document.querySelector('a[href="#about"]');
+    const contactLink = document.querySelector('a[href="#contact"]');
+
+    function showSubmenu(content) {
+        submenuContainer.innerHTML = `<div class="submenu-content">${content}</div>`;
+        submenuContainer.classList.add('active');
+    }
+
+    function hideSubmenu() {
+        submenuContainer.classList.remove('active');
+    }
+
+    if (workLink) {
+        workLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            showSubmenu('<h3>Work Submenu</h3><p>All<br>Digital<br>3D Design<br>Product Design</p>');
+        });
+    }
+
+    if (aboutLink) {
+        aboutLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            showSubmenu('<h3>About Submenu</h3><p>Bio<br>CV</p>');
+        });
+    }
+
+    if (contactLink) {
+        contactLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            showSubmenu('<h3>Contact Submenu</h3><p>Email<br>Instagram</p>');
+        });
+    }
+
+    // Hide submenu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!submenuContainer || !submenuContainer.contains(e.target) && !e.target.matches('a[href="#work"], a[href="#about"], a[href="#contact"]')) {
+            hideSubmenu();
+        }
+    });
+});
+
