@@ -86,8 +86,10 @@ const images = [
    },
  
 
-  { src: "https://lh3.googleusercontent.com/d/1ptX-VRuXA1tcAnu9SbpojjjCTAR7kPuT=w1200", alt: "Aventra Race", categories: ["3d"] },
-
+{ src: "https://lh3.googleusercontent.com/d/1jt1a1GyDPq9OeYrgfxcVIXMTK3md0Sbl=w1200",
+  alt: "Next Rise",
+  categories: ["product design", "digital"],
+},
 
  
 { src: "https://lh3.googleusercontent.com/d/1H8_lRyafliGnAOtn20LoAbxz8h3Ztz0n=w1200",
