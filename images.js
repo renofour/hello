@@ -125,9 +125,10 @@ const images = [
   categories: ["digital"] 
 }, 
 
- { src: "https://lh3.googleusercontent.com/d/1Rf-gmo2Rx2ldOu0V98Yjfl7Uh75cjU9b=w1200",
-  alt: "Orange",
-  categories: ["digital"],
+{
+  src: "https://lh3.googleusercontent.com/d/1TK4f5gCsP7BFOEADC_S95nVC12_NWpZj=w1200",
+  alt: "Polyspot",
+  categories: ["product design", "digital"],
   group: [
        "https://lh3.googleusercontent.com/d/1qnW1cFUEsYKX1RdIM5KOKpBahhViYXez=w1200",
        "https://lh3.googleusercontent.com/d/1s_MAOrC2y8wTnnRGB-eUiq2uy1eQVCNa=w1200",
