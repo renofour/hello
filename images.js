@@ -1,7 +1,6 @@
 // List of images/videos/GIFs
 const images = [
- {
-  src: "https://lh3.googleusercontent.com/d/1cG5rtu3i6vJxqGkpeYf5jiRvqHWKBgf9=w1200",
+ { src: "https://lh3.googleusercontent.com/d/1cG5rtu3i6vJxqGkpeYf5jiRvqHWKBgf9=w1200",
   alt: "Digital Travel Agency",
   categories: ["product design", "digital"],
    group: [
@@ -99,7 +98,6 @@ const images = [
 },
   
 {
- {
   src: "https://lh3.googleusercontent.com/d/1c-H35RgNXWWiEODJMmWdXJYiuzSNBZVx=w1200",
   alt: "Sit App",
   categories: ["product design", "digital"],
