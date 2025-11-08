@@ -1,8 +1,9 @@
 // List of images/videos/GIFs
 const images = [
- { src: "https://lh3.googleusercontent.com/d/1qGEuOLUfCVHcJ0-aFrzOeLOWjAvX2uTS=w1200",
-   alt: "Tunnel",
-   categories: ["digital"],
+ {
+  src: "https://lh3.googleusercontent.com/d/1cG5rtu3i6vJxqGkpeYf5jiRvqHWKBgf9=w1200",
+  alt: "Digital Travel Agency",
+  categories: ["product design", "digital"],
    group: [
        "https://lh3.googleusercontent.com/d/1KS_yxQ51nW9AnfmysBbYxzPaLG54wuYi=w1200",
        "https://lh3.googleusercontent.com/d/1RyzMQq0e5dyYPf3EZDkVFuIYATfpSeDD=w1200",
