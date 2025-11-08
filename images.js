@@ -98,10 +98,10 @@ const images = [
   categories: ["digital"]
 },
   
- {
-  src: "https://lh3.googleusercontent.com/d/1J2lm600a_10ipwkGbfwxWwFKuTtoB3h4=w1200",
-  alt: "Magic",
-  categories: ["digital"],
+{
+  src: "https://lh3.googleusercontent.com/d/1B49dQ0_3GNm3iSodsHojliWbWuAYz4gf=w1200",
+  alt: "Sit App",
+  categories: ["product design", "digital"],
   group: [
       "https://lh3.googleusercontent.com/d/1koB1zcoezKIPbB28EczcRm_v7S9znZxz=w1200",
       "https://lh3.googleusercontent.com/d/1kZJG5wFO4JTpoOlDGO_xEtoGoI15lbeL=w1200",
