@@ -12,19 +12,15 @@ const images = [
        "https://lh3.googleusercontent.com/d/16Y4GYduVN7xhi7iRkzT084_pMzhi889A=w1200"
     ]
   },
- { src: "https://lh3.googleusercontent.com/d/1mUnx_T1G3QDxo7NadiR7pqzjxocGXiyi=w1200",
-  alt: "Invaders",
-  categories: ["digital"]
+ { src: "https://lh3.googleusercontent.com/d/1PvqBPlD0JysbDoav79Zoa0SeXRkVCH95=w1200",
+  alt: "Think", 
+  categories: ["print", "digital"]
 },
+
   { src: "https://lh3.googleusercontent.com/d/1It6_fexSflYCfj_h6NhbUvr6yZZkVF2Y=w1200",
     alt: "MAU",
     categories: ["digital"]
 },
-  { src: "https://lh3.googleusercontent.com/d/1PvqBPlD0JysbDoav79Zoa0SeXRkVCH95=w1200",
-  alt: "Think",
-  categories: ["print", "digital"]
-},
- 
  { src: "https://lh3.googleusercontent.com/d/1-IfFsOem4_uFoWHL7x0gUz-Nkk8s-Bu8=w1200", 
     alt: "30DII",
     categories: ["print"],
@@ -40,6 +36,10 @@ const images = [
     ]
   },
 
+{ src: "https://lh3.googleusercontent.com/d/1mUnx_T1G3QDxo7NadiR7pqzjxocGXiyi=w1200",
+  alt: "Invaders",
+  categories: ["digital"]
+},
   
   { src: "https://lh3.googleusercontent.com/d/1PXKgsT4wJTHYtTM6AEO2JrviddGzrMlH=w1200", 
    alt: "Flags", 
