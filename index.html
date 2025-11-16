@@ -1,126 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>レノ四</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <title>レノ四</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --menu-open: 250px;
-      --menu-collapsed: 60px;
-      --menu-pad: 20px;
-      --header-height: 80px;
-      --page-gutter: 20px;
-      --header-bg-rgb: 255, 255, 255;
-      --header-bg-opacity: 0.5;
-    }
+  <style>
+    :root {
+      --menu-open: 250px;
+      --menu-collapsed: 60px;
+      --menu-pad: 20px;
+      --header-height: 80px;
+      --page-gutter: 20px;
+      --header-bg-rgb: 255, 255, 255;
+      --header-bg-opacity: 0.5;
+    }
 
-    /* Layout */
-    .container {
-      display: flex;
-      height: 100vh;
-    }
+    /* Layout */
+    .container {
+      display: flex;
+      height: 100vh;
+    }
 
-    /* Sidebar */
-    .left-menu {
-      width: var(--menu-open);
-      background: #fff;
-      transition: width 0.3s ease, padding 0.3s ease;
-      overflow: hidden;
-      position: relative;
-      box-sizing: border-box;
-      padding: var(--menu-pad);
-    }
+    /* Sidebar */
+    .left-menu {
+      width: var(--menu-open);
+      background: #fff;
+      transition: width 0.3s ease, padding 0.3s ease;
+      overflow: hidden;
+      position: relative;
+      box-sizing: border-box;
+      padding: var(--menu-pad);
+    }
 
-    .left-menu.collapsed {
-      width: var(--menu-collapsed);
-      padding: var(--menu-pad) 5px;
-    }
+    .left-menu.collapsed {
+      width: var(--menu-collapsed);
+      padding: var(--menu-pad) 5px;
+    }
 
-    .left-menu nav { margin-top: 100px; }
-    .left-menu.collapsed nav { display: none; }
-    .left-menu ul { list-style: none; padding: 0; margin: 0; }
-    .left-menu li { margin-bottom: 6px; position: relative; }
-    .menu-btn {
-      background: none;
-      border: none;
-      padding: 5px 0;
-      width: 100%;
-      text-align: left;
-      cursor: pointer;
-      color: #333;
-      font: inherit;
-      display: block;
-      user-select: none;
-    }
-    .has-dropdown .menu-btn::after {
-      content: "▸";
-      float: right;
-      transition: transform 0.2s ease;
-    }
-    /* The work item is no longer a dropdown, so we only apply these styles to other dropdowns */
+    .left-menu nav { margin-top: 100px; }
+    .left-menu.collapsed nav { display: none; }
+    .left-menu ul { list-style: none; padding: 0; margin: 0; }
+    .left-menu li { margin-bottom: 6px; position: relative; }
+    .menu-btn {
+      background: none;
+      border: none;
+      padding: 5px 0;
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
+      color: #333;
+      font: inherit;
+      display: block;
+      user-select: none;
+    }
+    .has-dropdown .menu-btn::after {
+      content: "▸";
+      float: right;
+      transition: transform 0.2s ease;
+    }
+    /* Remove disclosure arrow from the work button since it's no longer a dropdown */
     #workItem .menu-btn::after { content: none; }
-    .has-dropdown.open .menu-btn::after { transform: rotate(90deg); }
-    .dropdown {
-      font-size: 14px;
-      color: #333;
-      margin-top: 8px;
-      padding-left: 0;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-    }
-    .has-dropdown.open .dropdown { max-height: 800px; }
-
-    /* Work dropdown specific styling - REMOVED */
     
-    /* Header submenu buttons: same style as sidebar submenu */
-    .header .submenu-btn {
-      background: none;
-      border: none;
-      font-size: 14px;
-      padding: 0;
-      margin: 0;
-      cursor: pointer;
-      color: #333;
-      display: inline;
-      font-family: inherit;
-    }
-    .header .submenu-btn:not(:last-child)::after {
-      content: "•";
-      margin-right: 8px;
-      margin-left: 8px;
-      color: #555;
-    }
+    .has-dropdown.open .menu-btn::after { transform: rotate(90deg); }
+    .dropdown {
+      font-size: 14px;
+      color: #333;
+      margin-top: 8px;
+      padding-left: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .has-dropdown.open .dropdown { max-height: 800px; }
+
+    /* The following work-specific dropdown styles are now removed:
+    #workItem .dropdown { ... }
+    #workItem .dropdown .submenu-row { ... }
+    #workItem .dropdown .submenu-btn { ... }
+    #workItem .dropdown .submenu-btn:not(:last-child)::after { ... }
+    */
+    
+    /* Header submenu buttons: same style as sidebar submenu */
+    .header .submenu-btn {
+      background: none;
+      border: none;
+      font-size: 14px;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+      color: #333;
+      display: inline;
+      font-family: inherit;
+    }
+    .header .submenu-btn:not(:last-child)::after {
+      content: "•";
+      margin-right: 8px;
+      margin-left: 8px;
+      color: #555;
+    }
 
 
-    /* Right content layout */
-    .right-content {
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      overflow: hidden;
-    }
+    /* Right content layout */
+    .right-content {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
 
-    /* --- HEADER CSS --- */
-    .header {
-      display: flex;
-      flex-direction: column; /* Stack logo and menu vertically */
-      align-items: flex-start; /* Align logo and menu to the left */
-      height: auto; /* Allow height to adjust for logo + menu */
-      background: rgba(var(--header-bg-rgb), var(--header-bg-opacity));
-      z-index: 100;
-      position: sticky;
-      top: 0;
-      padding: 0;
-    }
-    .header .align-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: var(--header-height); /* Keep logo section height fixed */
-      width: 100%;
+    /* --- UPDATED HEADER CSS --- */
+    .header {
+      display: flex;
+      flex-direction: column; /* Stack logo and menu vertically */
+      align-items: flex-start; /* Align logo and menu to the left */
+      height: auto; /* Allow height to adjust for logo + menu */
+      background: rgba(var(--header-bg-rgb), var(--header-bg-opacity));
+      z-index: 100;
+      position: sticky;
+      top: 0;
+      padding: 0;
+    }
+    .header .align-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: var(--header-height); /* Keep logo section height fixed */
+      width: 100%;
+      box-sizing: border-box;
+      padding-left: var(--page-gutter);
+      padding-right: var(--page-gutter);
+    }
+    .header img {
+      width: 100px;
+      height: auto;
+      display: block;
+    }
+    
+    /* New menu container positioning */
+    .work-category-menu {
+      display: none; /* HIDDEN BY DEFAULT */
+      align-items: center;
+      line-height: 1.4;
+      white-space: nowrap;
+      
+      /* Positioning below the logo */
+      width: 100%;
+      padding: 0 var(--page-gutter) 10px var(--page-gutter); /* Padding for the bottom and sides */
+      box-sizing: border-box;
+    }
+
+    /* SHOW WHEN ACTIVE */
+    .work-category-menu.is-active {
+        display: flex;
+    }
+    /* --- END UPDATED HEADER CSS --- */
+
+    /* Scrollable content */
+    .content-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0;
+      box-sizing: border-box;
+      background: transparent;
+    }
+    .align-wrapper {
+      width: 100%;
+      box-sizing: border-box;
+      padding-left: var(--page-gutter);
+      padding-right: var(--page-gutter);
+    }
+
+    /* Video */
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+    }
+    .video-wrapper video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Work iframe wrapper */
+    .work-iframe-wrapper {
+      /* Height calculation adjusted since header height is now dynamic, but we keep the old logic for simplicity */
+      height: calc(100vh - 120px); /* Adjusted for assumed header height ~80px + menu padding ~40px */
+      width: calc(100% + 40px);
+      border: none;
+      overflow: hidden;
+      margin-left: -20px;
+      margin-right: -20px;
+    }
+    .work-iframe-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: transparent
