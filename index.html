@@ -5,7 +5,6 @@
   <title>レノ四</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Google Font: Open Sans -->
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 
   <style>
@@ -100,6 +99,26 @@
       margin-left: 8px;
       color: #555;
     }
+    
+    /* Header submenu buttons: same style as sidebar submenu */
+    .header .submenu-btn {
+      background: none;
+      border: none;
+      font-size: 14px;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+      color: #333;
+      display: inline;
+      font-family: inherit;
+    }
+    .header .submenu-btn:not(:last-child)::after {
+      content: "•";
+      margin-right: 8px;
+      margin-left: 8px;
+      color: #555;
+    }
+
 
     /* Right content layout */
     .right-content {
@@ -124,6 +143,7 @@
     .header .align-wrapper {
       display: flex;
       align-items: center;
+      justify-content: space-between; /* Space logo and new menu */
       height: 100%;
       width: 100%;
       box-sizing: border-box;
@@ -134,6 +154,14 @@
       width: 100px;
       height: auto;
       display: block;
+    }
+    
+    /* New menu container */
+    .work-category-menu {
+      display: flex;
+      align-items: center;
+      line-height: 1.4;
+      white-space: nowrap;
     }
 
     /* Scrollable content */
@@ -326,14 +354,12 @@
 
 <body>
   <div class="container">
-    <!-- Hamburger -->
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
       <span class="bar"></span>
       <span class="bar"></span>
       <span class="bar"></span>
     </button>
 
-    <!-- Sidebar -->
     <aside class="left-menu collapsed" id="menu">
       <nav>
         <ul>
@@ -367,16 +393,20 @@
       </nav>
     </aside>
 
-    <!-- Right content -->
     <main class="right-content">
-      <!-- Header -->
       <div class="header">
         <div class="align-wrapper">
           <a href="#" id="logoLink"><img src="NYXum_logo_blood2.png" alt="NYXum Logo" /></a>
-        </div>
+          
+          <div class="work-category-menu" id="headerWorkMenu">
+            <button type="button" class="submenu-btn" data-filter="all">all</button>
+            <button type="button" class="submenu-btn" data-filter="print">print</button>
+            <button type="button" class="submenu-btn" data-filter="digital">digital</button>
+            <button type="button" class="submenu-btn" data-filter="product">product design</button>
+          </div>
+          </div>
       </div>
 
-      <!-- Scrollable content -->
       <div class="content-area" id="contentArea">
         <div class="align-wrapper">
           <div class="video-wrapper">
@@ -389,7 +419,6 @@
       </div>
     </main>
 
-    <!-- Lightbox -->
     <div id="lightbox" class="lightbox" aria-hidden="true">
       <button class="lightbox-close" id="lightboxClose" aria-label="Close lightbox">
         <span class="bar"></span>
@@ -399,7 +428,6 @@
 
       <div class="lightbox-container">
         <div class="lightbox-images-container">
-          <!-- NOTE: empty container — JS will append <img> elements here -->
           <div class="lightbox-images"></div>
         </div>
 
@@ -412,10 +440,8 @@
     </div>
   </div>
 
-  <!-- images.js must exist in the same folder -->
   <script src="images.js"></script>
 
-  <!-- Main app script (menu, loading work iframe, etc.) -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const menu = document.getElementById('menu');
@@ -424,6 +450,9 @@
       const homeBtn = document.getElementById('homeBtn');
       const workBtn = document.querySelector('#workItem .menu-btn');
       const initialVideoURL = "https://framerusercontent.com/assets/CtSYQwWgD3v3HDe3HMRPnHbvGOk.mp4";
+      const sidebarWorkSubmenus = document.querySelectorAll('#workItem .submenu-btn'); // Existing sidebar buttons
+      const headerWorkSubmenus = document.querySelectorAll('#headerWorkMenu .submenu-btn'); // NEW header buttons
+
 
       function syncButton() {
         const open = !menu.classList.contains('collapsed');
@@ -561,8 +590,11 @@
       workBtn.addEventListener('click', () => {
         loadWorkContent('all');
       });
+      
+      // Bind functionality to BOTH sets of work category buttons
+      const allWorkSubmenus = [...sidebarWorkSubmenus, ...headerWorkSubmenus];
 
-      document.querySelectorAll('#workItem .submenu-btn').forEach(btn => {
+      allWorkSubmenus.forEach(btn => {
         btn.addEventListener('click', () => {
           const filter = btn.dataset.filter;
           loadWorkContent(filter);
@@ -574,7 +606,6 @@
     });
   </script>
 
-  <!-- Lightbox script (uses `images` array from images.js) -->
   <script src="lightbox.js"></script>
 </body>
 </html>
