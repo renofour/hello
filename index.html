@@ -159,15 +159,20 @@
     
     /* New menu container positioning */
     .work-category-menu {
-      display: flex;
+      display: none; /* HIDDEN BY DEFAULT */
       align-items: center;
       line-height: 1.4;
       white-space: nowrap;
       
-      /* New positioning below the logo */
+      /* Positioning below the logo */
       width: 100%;
       padding: 0 var(--page-gutter) 10px var(--page-gutter); /* Padding for the bottom and sides */
       box-sizing: border-box;
+    }
+
+    /* SHOW WHEN ACTIVE */
+    .work-category-menu.is-active {
+        display: flex;
     }
     /* --- END UPDATED HEADER CSS --- */
 
@@ -205,8 +210,9 @@
 
     /* Work iframe wrapper */
     .work-iframe-wrapper {
+      /* Height calculation adjusted since header height is now dynamic, but we keep the old logic for simplicity */
+      height: calc(100vh - 120px); /* Adjusted for assumed header height ~80px + menu padding ~40px */
       width: calc(100% + 40px);
-      height: calc(100vh - var(--header-height));
       border: none;
       overflow: hidden;
       margin-left: -20px;
@@ -246,7 +252,7 @@
       .work-gallery { column-count: 1; }
     }
 
-    /* === LIGHTBOX UPDATES (only these parts changed) === */
+    /* === LIGHTBOX UPDATES === */
 
     /* Lightbox base: allow scrolling and prevent container from forcing a new layout */
     .lightbox {
@@ -311,8 +317,6 @@
       object-fit: contain;
       box-sizing: border-box;
     }
-
-    /* Remove global portrait/landscape container rules (we handle per-image sizing now) */
 
     /* Lightbox Text (unchanged) */
     .lightbox-text {
@@ -459,6 +463,7 @@
       const workBtn = document.querySelector('#workItem .menu-btn');
       const initialVideoURL = "https://framerusercontent.com/assets/CtSYQwWgD3v3HDe3HMRPnHbvGOk.mp4";
       const sidebarWorkSubmenus = document.querySelectorAll('#workItem .submenu-btn'); // Existing sidebar buttons
+      const headerWorkMenu = document.getElementById('headerWorkMenu'); // Reference to the NEW header menu container
       const headerWorkSubmenus = document.querySelectorAll('#headerWorkMenu .submenu-btn'); // NEW header buttons
 
 
@@ -520,6 +525,7 @@
             </div>
           </div>
         `;
+        headerWorkMenu.classList.remove('is-active'); // HIDE THE HEADER MENU
       }
 
       function loadWorkContent(filter = 'all') {
@@ -586,6 +592,7 @@
             </div>
           </div>
         `;
+        headerWorkMenu.classList.add('is-active'); // SHOW THE HEADER MENU
       }
 
       // initial bindings
