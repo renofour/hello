@@ -189,6 +189,7 @@ text: "SIT is a peer-to-peer mobile application for high-density, unreserved tra
         alt: "Yaksu",
         categories: ["digital"],
         group: ["https://player.vimeo.com/video/1147226036?background=1&autoplay=1&loop=1&muted=1",
+                "https://lh3.googleusercontent.com/d/1cGf6mqDp5e4s6QV0IZwA7nvfin1FuDOi=w1200",
                 "https://player.vimeo.com/video/1147226434?background=1&autoplay=1&loop=1&muted=1",
                 "https://player.vimeo.com/video/1146963343?background=1&autoplay=1&loop=1&muted=1" ],
         text: "The New Reality: Online Life Made in a Way Offline Life Can Never Be. Create the world you want to live in, free from physical constraints. Here, you design your existence with all the comfort or discomfort you seek. Nothing is too crazy, and nothing is limited. This is your ultimate canvas: start building your life away from your daily life, and discover the true shape of your desires."
