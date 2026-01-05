@@ -34,48 +34,51 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btn === workBtn) {
       loadWorkContent('all');
       btn.closest('li').classList.add('open');
-      return;
-    }
-    if (menu.classList.contains('collapsed')) {
-      menu.classList.remove('collapsed');
-      syncButton();
+    } else {
+      document.getElementById('workItem').classList.remove('open');
     }
   });
 
-  // UPDATED: Uses iframe for Vimeo instead of <video> tag
   function loadHomeContent() {
     contentArea.innerHTML = `
       <div class="align-wrapper">
         <div class="video-wrapper">
-           <iframe 
+          <iframe 
             src="${initialVideoURL}" 
             frameborder="0" 
-            allow="autoplay; fullscreen; picture-in-picture" 
-            allowfullscreen
-            style="position:absolute; top:0; left:0; width:100%; height:100%;"
-          ></iframe>
+            allow="autoplay; fullscreen" 
+            allowfullscreen>
+          </iframe>
         </div>
-      </div>`;
+      </div>
+    `;
     headerWorkMenu.classList.remove('is-active');
+    contentArea.scrollTop = 0;
   }
 
-  // UPDATED: Handles both Images and Videos in the gallery grid
   function loadWorkContent(filter = 'all') {
     const filteredImages = getFilteredImages(filter);
 
     const imagesHTML = filteredImages.map(img => {
       const isVideo = img.src.includes("player.vimeo.com");
       
+      // TRIGGER LOGIC: Only the presence of a 'group' indicates if it's clickable
+      const hasGroup = img.group && img.group.length > 0;
+      const isClickable = hasGroup || isVideo; 
+      const clickableClass = isClickable ? 'is-clickable' : '';
+      
       if (isVideo) {
-        // Render a placeholder block for videos (Black box with "VIDEO" text)
         return `
-          <div class="video-thumb" data-src="${img.src}" style="background:#000; aspect-ratio:16/9; display:flex; align-items:center; justify-content:center; cursor:pointer; margin-bottom:5px; position:relative;">
+          <div class="video-thumb is-clickable" data-src="${img.src}" style="background:#000; aspect-ratio:16/9; display:flex; align-items:center; justify-content:center; cursor:pointer; margin-bottom:5px; position:relative;">
              <span style="color:white; font-family:'Open Sans', sans-serif; font-size:12px; letter-spacing:1px;">VIDEO</span>
           </div>
         `;
       } else {
-        // Render standard image
-        return `<img src="${img.src}" alt="${img.alt}">`;
+        return `<img src="${img.src}" 
+                     alt="${img.alt}" 
+                     class="${clickableClass}" 
+                     data-group='${JSON.stringify(img.group || [])}' 
+                     data-text='${(img.text || "").replace(/'/g, '’')}'>`;
       }
     }).join('');
 
@@ -87,26 +90,29 @@ document.addEventListener('DOMContentLoaded', () => {
           width: 100%; 
           margin-bottom: 5px; 
           display: block; 
-          cursor: pointer; 
+          cursor: default; 
           break-inside: avoid; 
         }
+        /* Pointer ONLY for images that have a 'group' */
+        .work-gallery .is-clickable { cursor: pointer !important; }
         @media (max-width: 1024px) { .work-gallery { column-count: 2; } }
         @media (max-width: 768px) { .work-gallery { column-count: 1; } }
       </style></head>
       <body>
         <div class="work-gallery">${imagesHTML}</div>
         <script>
-          // Listen for clicks on Images AND Video Thumbnails
           document.body.addEventListener('click', function(e) {
-             const target = e.target.closest('img, .video-thumb');
+             // Only allow action if the item has the is-clickable class (based on group)
+             const target = e.target.closest('.is-clickable');
              if (!target) return;
              
-             // Get src from img tag OR data-src from div
              const src = target.tagName === 'IMG' ? target.src : target.dataset.src;
              
              window.parent.postMessage({
                type: 'openLightbox',
-               src: src
+               src: src,
+               group: target.dataset.group ? JSON.parse(target.dataset.group) : [],
+               text: target.dataset.text || ""
              }, '*');
           });
         <\/script>
