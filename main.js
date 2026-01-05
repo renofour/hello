@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const sidebarWorkDropdown = workItem.querySelector('.dropdown');
 
   // The video shown on the "hello" page
-  const initialVideoURL = "https://player.vimeo.com/video/1150963952?background=1&autoplay=1&loop=1&muted=1";
+  const initialVideoURL = "https://stream.mux.com/q00jL1eCze5gsW3wRIBqDkP4x2xPGlcacZc1FUULt7Jo.m3u8";
 
   // 1. Populate the Sidebar Work Submenu
   function renderWorkSubmenus() {
