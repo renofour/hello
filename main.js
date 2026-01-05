@@ -3,127 +3,152 @@ document.addEventListener('DOMContentLoaded', () => {
   const menuToggle = document.getElementById('menuToggle');
   const contentArea = document.getElementById('contentArea');
   const homeBtn = document.getElementById('homeBtn');
-  const workBtn = document.querySelector('#workItem .menu-btn');
-  // Updated to the Vimeo URL you provided
-  const initialVideoURL = "https://player.vimeo.com/video/1150963952?background=1&autoplay=1&loop=1&muted=1";
-  const headerWorkMenu = document.getElementById('headerWorkMenu'); 
-  const aboutItem = document.getElementById('aboutItem');
-  const contactItem = document.getElementById('contactItem');
+  const workItem = document.getElementById('workItem');
+  const workBtn = workItem.querySelector('.menu-btn');
+  const headerWorkMenu = document.getElementById('headerWorkMenu');
+  const sidebarWorkDropdown = workItem.querySelector('.dropdown');
 
-  function syncButton() {
-    const open = !menu.classList.contains('collapsed');
-    menuToggle.classList.toggle('active', open);
-    if (open) {
-      aboutItem.classList.add('open');
-      contactItem.classList.add('open');
-    } else {
-      aboutItem.classList.remove('open');
-      contactItem.classList.remove('open');
-      document.getElementById('workItem').classList.remove('open');
-    }
+  // The video shown on the "hello" page
+  const initialVideoURL = "https://stream.mux.com/q00jL1eCze5gsW3wRIBqDkP4x2xPGlcacZc1FUULt7Jo.m3u8";
+
+  // 1. Populate the Sidebar Work Submenu
+  function renderWorkSubmenus() {
+    const categories = ["all", "print", "digital", "product design"];
+    sidebarWorkDropdown.innerHTML = categories.map(cat => `
+      <span class="submenu-row">
+        <button type="button" class="submenu-btn" data-filter="${cat.toLowerCase().replace(/\s/g, '')}">${cat}</button>
+      </span>
+    `).join('');
+  }
+  renderWorkSubmenus();
+
+  // 2. Sidebar Toggle Logic
+  function syncSidebar() {
+    const isOpen = !menu.classList.contains('collapsed');
+    menuToggle.classList.toggle('active', isOpen);
+    
+    // Show 'about' and 'contact' content ONLY when menu is open
+    document.getElementById('aboutItem').classList.toggle('open', isOpen);
+    document.getElementById('contactItem').classList.toggle('open', isOpen);
+    
+    // If collapsing, close the work dropdown too
+    if (!isOpen) workItem.classList.remove('open');
   }
 
   menuToggle.addEventListener('click', () => {
     menu.classList.toggle('collapsed');
-    syncButton();
+    syncSidebar();
   });
 
-  menu.addEventListener('click', (e) => {
-    const btn = e.target.closest('.menu-btn');
-    if (!btn) return;
-    if (btn === workBtn) {
-      loadWorkContent('all');
-      btn.closest('li').classList.add('open');
-      return;
-    }
-    if (menu.classList.contains('collapsed')) {
-      menu.classList.remove('collapsed');
-      syncButton();
-    }
-  });
-
-  // UPDATED: Uses iframe for Vimeo instead of <video> tag
+  // 3. Navigation Logic
   function loadHomeContent() {
     contentArea.innerHTML = `
       <div class="align-wrapper">
         <div class="video-wrapper">
-           <iframe 
-            src="${initialVideoURL}" 
-            frameborder="0" 
-            allow="autoplay; fullscreen; picture-in-picture" 
-            allowfullscreen
-            style="position:absolute; top:0; left:0; width:100%; height:100%;"
-          ></iframe>
+          <video autoplay muted loop playsinline>
+            <source src="${initialVideoURL}" type="video/mp4">
+          </video>
         </div>
-      </div>`;
+      </div>
+    `;
     headerWorkMenu.classList.remove('is-active');
+    workItem.classList.remove('open');
+    contentArea.scrollTop = 0;
   }
 
-  // UPDATED: Handles both Images and Videos in the gallery grid
   function loadWorkContent(filter = 'all') {
+    // getFilteredImages is defined in your images.js
     const filteredImages = getFilteredImages(filter);
 
     const imagesHTML = filteredImages.map(img => {
-      const isVideo = img.src.includes("player.vimeo.com");
-      
-      if (isVideo) {
-        // Render a placeholder block for videos (Black box with "VIDEO" text)
-        return `
-          <div class="video-thumb" data-src="${img.src}" style="background:#000; aspect-ratio:16/9; display:flex; align-items:center; justify-content:center; cursor:pointer; margin-bottom:5px; position:relative;">
-             <span style="color:white; font-family:'Open Sans', sans-serif; font-size:12px; letter-spacing:1px;">VIDEO</span>
-          </div>
-        `;
-      } else {
-        // Render standard image
-        return `<img src="${img.src}" alt="${img.alt}">`;
-      }
+      // NEW: Check if there is actual content for the lightbox
+      const hasGroup = img.group && img.group.length > 0;
+      const hasText = img.text && img.text.trim() !== "";
+      const isClickable = hasGroup || hasText;
+      const clickableClass = isClickable ? 'is-clickable' : '';
+
+      return `<img src="${img.src}" 
+                   alt="${img.alt}" 
+                   class="${clickableClass}" 
+                   data-group='${JSON.stringify(img.group || [])}' 
+                   data-text='${(img.text || "").replace(/'/g, '’')}' 
+                   data-src="${img.src}">`;
     }).join('');
 
+    // Internal Iframe Script
+    const iframeScript = `
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          // ONLY attach listeners to images with the is-clickable class
+          const images = document.querySelectorAll('.work-gallery img.is-clickable');
+          images.forEach((img) => {
+            img.addEventListener('click', function() {
+              window.parent.postMessage({
+                type: 'openLightbox',
+                src: this.dataset.src,
+                group: JSON.parse(this.dataset.group),
+                text: this.dataset.text
+              }, '*');
+            });
+          });
+        });
+      <\/script>
+    `;
+
     const workHTML = `
-      <html><head><style>
-        body { margin: 0; padding: 20px 20px 10px 0; background: white; font-family: 'Open Sans', sans-serif; }
-        .work-gallery { column-count: 3; column-gap: 5px; }
-        .work-gallery img, .work-gallery .video-thumb { 
-          width: 100%; 
-          margin-bottom: 5px; 
-          display: block; 
-          cursor: pointer; 
-          break-inside: avoid; 
-        }
-        @media (max-width: 1024px) { .work-gallery { column-count: 2; } }
-        @media (max-width: 768px) { .work-gallery { column-count: 1; } }
-      </style></head>
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <style>
+          body { margin: 0; padding: 20px 20px 10px 0; font-family: 'Open Sans', sans-serif; background: white; }
+          .work-gallery { column-count: 3; column-gap: 5px; }
+          .work-gallery img { width: 100%; height: auto; display: block; margin-bottom: 5px; break-inside: avoid; cursor: default; }
+          /* ONLY show pointer if it has content */
+          .work-gallery img.is-clickable { cursor: pointer; }
+          @media (max-width: 1024px) { .work-gallery { column-count: 2; } }
+          @media (max-width: 768px) { .work-gallery { column-count: 1; } }
+        </style>
+      </head>
       <body>
         <div class="work-gallery">${imagesHTML}</div>
-        <script>
-          // Listen for clicks on Images AND Video Thumbnails
-          document.body.addEventListener('click', function(e) {
-             const target = e.target.closest('img, .video-thumb');
-             if (!target) return;
-             
-             // Get src from img tag OR data-src from div
-             const src = target.tagName === 'IMG' ? target.src : target.dataset.src;
-             
-             window.parent.postMessage({
-               type: 'openLightbox',
-               src: src
-             }, '*');
-          });
-        <\/script>
-      </body></html>`;
+        ${iframeScript}
+      </body>
+      </html>
+    `;
 
     const workDataURL = "data:text/html;charset=utf-8," + encodeURIComponent(workHTML);
-    contentArea.innerHTML = `<div class="align-wrapper"><div class="work-iframe-wrapper"><iframe src="${workDataURL}"></iframe></div></div>`;
+    contentArea.innerHTML = `
+      <div class="align-wrapper">
+        <div class="work-iframe-wrapper">
+          <iframe src="${workDataURL}" frameborder="0"></iframe>
+        </div>
+      </div>
+    `;
     headerWorkMenu.classList.add('is-active');
+    contentArea.scrollTop = 0;
   }
 
-  homeBtn.onclick = loadHomeContent;
-  document.getElementById('logoLink').onclick = (e) => { e.preventDefault(); loadHomeContent(); };
-  workBtn.onclick = () => loadWorkContent('all');
+  // 4. Event Listeners
+  homeBtn.addEventListener('click', loadHomeContent);
+  document.getElementById('logoLink').addEventListener('click', (e) => { e.preventDefault(); loadHomeContent(); });
 
-  document.querySelectorAll('.submenu-btn').forEach(btn => {
-    btn.onclick = () => loadWorkContent(btn.dataset.filter);
+  // Sidebar Work Main Button
+  workBtn.addEventListener('click', () => {
+    if (menu.classList.contains('collapsed')) {
+      menu.classList.remove('collapsed');
+      syncSidebar();
+    }
+    workItem.classList.toggle('open');
+    loadWorkContent('all');
   });
 
-  loadHomeContent();
+  // Category Buttons (Sidebar & Header)
+  document.addEventListener('click', (e) => {
+    const subBtn = e.target.closest('.submenu-btn');
+    if (subBtn) {
+      loadWorkContent(subBtn.dataset.filter);
+    }
+  });
+
+  loadHomeContent(); // Default landing state
 });
