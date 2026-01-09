@@ -129,7 +129,7 @@ const images = [
     },
 
   {
-        src: "https://lh3.googleusercontent.com/d/1jt1a1GyDPq9OeYrgfxcVIXMTK3md0Sbl=w1200",
+        src: "https://lh3.googleusercontent.com/d/1arVqHfyZaU7w7PZWuI3aeUPvSJ9QNlFf=w1200",
         alt: "Next Rise",
         categories: ["digital"],
           group: [], // FIXED: Added empty group to prevent crash
